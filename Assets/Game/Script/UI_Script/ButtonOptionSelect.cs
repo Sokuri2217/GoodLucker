@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class ButtonOptionSelect : ButtonBase
 {
+    [Header("番号設定")]
+    public int selectCharacter; //使用キャラ
+    public int selectStage;     //選択ステージ
+
     [Header("スクリプト参照")]
     private UIMenu menu;   //メニュー画面
+    private GameManager gameManager;  //選択状態を保存
 
     protected override void Start()
     {
         base.Start();
         //メニュー情報を取得
         menu = GameObject.Find("MenuUI").GetComponent<UIMenu>();
+        gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
     }
 
     //キャラクター選択画面
@@ -43,5 +49,17 @@ public class ButtonOptionSelect : ButtonBase
     public void OpenButton()
     {
         menu.closeSelectPanel.SetActive(true);
+    }
+
+    //使用キャラ設定
+    public void SetCharacter()
+    {
+        gameManager.selectCharacter = selectCharacter;
+    }
+
+    //選択ステージ設定
+    public void SetStage()
+    {
+        gameManager.selectStage = selectStage;
     }
 }

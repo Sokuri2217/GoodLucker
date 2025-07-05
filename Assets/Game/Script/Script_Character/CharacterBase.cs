@@ -17,9 +17,13 @@ public class CharacterBase : MonoBehaviour
     public float addDefence; //防御力
     public float addSpeed;   //移動速度
 
+    [Header("アニメーション")]
+    public string animatorName; //BlendTree名
+
     [Header("コンポーネント参照")]
-    public Rigidbody rb;       //物理挙動
-    public NavMeshAgent agent; //経路探索
+    protected Rigidbody rb;       //物理挙動
+    protected NavMeshAgent agent; //経路探索
+    protected Animator animator;  //アニメーション
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,6 +32,7 @@ public class CharacterBase : MonoBehaviour
         //コンポーネント取得
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
 
         //初期化
         currentHp = maxHp;   //体力
