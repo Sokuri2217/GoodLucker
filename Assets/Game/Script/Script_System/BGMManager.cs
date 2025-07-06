@@ -1,12 +1,14 @@
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
+using UnityEngine.Windows;
 
-public class GameManager : MonoBehaviour
+public class BGMManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; } //インスタンス保持
+    public static BGMManager Instance { get; private set; } //インスタンス保持
 
-    [Header("セレクト状況")]
-    public int selectCharacter; //使用キャラ
-    public int selectStage;     //選択ステージ
+    [Header("コンポーネント参照")]
+    public AudioSource bgmSource; //BGM
 
     //シングルトン
     public void Awake()
@@ -25,7 +27,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        selectCharacter = 0;
-        selectStage = 0;
+        //コンポーネント取得
+        bgmSource = GetComponent<AudioSource>();
     }
 }

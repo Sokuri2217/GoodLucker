@@ -7,8 +7,8 @@ public class ButtonOptionSelect : ButtonBase
     public int selectStage;     //選択ステージ
 
     [Header("スクリプト参照")]
-    private UIMenu menu;   //メニュー画面
-    private GameManager gameManager;  //選択状態を保存
+    private UIMenu menu;             //メニュー画面
+    private GameManager gameManager; //選択状態を保存
 
     protected override void Start()
     {
@@ -43,12 +43,14 @@ public class ButtonOptionSelect : ButtonBase
             }
         }
         menu.closeSelectPanel.SetActive(false);
+        menu.explanationWindow.SetActive(false);
 
     }
-    //セレクトパネルを閉じるボタンを表示
-    public void OpenButton()
+    //セレクトパネルに共通するオブジェクトを表示
+    public void OpenSelectMenu()
     {
         menu.closeSelectPanel.SetActive(true);
+        menu.explanationWindow.SetActive(true);
     }
 
     //使用キャラ設定

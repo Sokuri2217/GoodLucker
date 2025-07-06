@@ -6,11 +6,18 @@ public class ButtonBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
     [Header("ボタンの拡大率")]
     public Vector3 originScale; //元値
-    public float zoom;            //拡大率
+    public float zoom;          //拡大率
+    [Header("SE")]
+    public AudioClip onCursor; //カーソルがボタンと重なった音
+    public AudioClip isClick; //ボタンをクリックした音
+    [Header("スクリプト参照")]
+    public SEManager seManager; //SE
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
+        //スクリプト情報を取得
+        seManager = GameObject.Find("SEManager").GetComponent<SEManager>();
         //初期値の保存
         originScale = transform.localScale;
     }
@@ -20,6 +27,8 @@ public class ButtonBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         //ボタンを拡大する
         transform.localScale = originScale * zoom;
+        //SE
+        seManager.seSource.PlayOneShot(onCursor);
     }
 
     // マウスがボタンから離れた時
@@ -34,5 +43,10 @@ public class ButtonBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         Button button = GetComponent<Button>();
         button.interactable = false;
+    }
+    public void ClickSE()
+    {
+        //SE
+        seManager.seSource.PlayOneShot(isClick);
     }
 }

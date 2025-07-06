@@ -1,12 +1,10 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class SEManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; } //インスタンス保持
-
-    [Header("セレクト状況")]
-    public int selectCharacter; //使用キャラ
-    public int selectStage;     //選択ステージ
+    public static SEManager Instance { get; private set; } //インスタンス保持
+    [Header("コンポーネント参照")]
+    public AudioSource seSource; //SE
 
     //シングルトン
     public void Awake()
@@ -25,7 +23,6 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        selectCharacter = 0;
-        selectStage = 0;
+        seSource = GetComponent<AudioSource>();
     }
 }
