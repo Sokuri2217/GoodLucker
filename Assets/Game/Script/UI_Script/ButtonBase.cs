@@ -7,6 +7,8 @@ public class ButtonBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [Header("ボタンの拡大率")]
     public Vector3 originScale; //元値
     public float zoom;          //拡大率
+    public bool isZoom;         //拡大中
+    public bool click;          //入力中
     [Header("SE")]
     public AudioClip onCursor; //カーソルがボタンと重なった音
     public AudioClip isClick; //ボタンをクリックした音
@@ -25,6 +27,8 @@ public class ButtonBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     // マウスがボタンに入った時
     public void OnPointerEnter(PointerEventData eventData)
     {
+        //拡大フラグをtrue
+        isZoom = true;
         //ボタンを拡大する
         transform.localScale = originScale * zoom;
         //SE
@@ -34,6 +38,8 @@ public class ButtonBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     // マウスがボタンから離れた時
     public void OnPointerExit(PointerEventData eventData)
     {
+        //拡大フラグをfalse;
+        isZoom = false;
         //ボタンのサイズを元に戻す
         transform.localScale = originScale;
     }
@@ -41,11 +47,15 @@ public class ButtonBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     //クリックしたときの挙動
     public void OnClick()
     {
+        //拡大フラグをfalse;
+        isZoom = false;
         Button button = GetComponent<Button>();
         button.interactable = false;
     }
     public void ClickSE()
     {
+        //クリックフラグをtrue
+        click = true;
         //SE
         seManager.seSource.PlayOneShot(isClick);
     }

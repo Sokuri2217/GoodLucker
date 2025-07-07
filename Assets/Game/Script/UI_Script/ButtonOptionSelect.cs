@@ -18,6 +18,35 @@ public class ButtonOptionSelect : ButtonBase
         gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
     }
 
+    public void Update()
+    {
+        if (isZoom && selectCharacter >= 0 && selectStage >= 0)  
+        {
+            //カーソルが重なった時に説明欄を表示する
+            menu.explanationCharacter.sprite = menu.characterExpla[(selectCharacter)];
+            menu.explanationStage.sprite = menu.stageExpla[(selectStage)];
+            StatusSetting statusSetting = GetComponent<StatusSetting>();
+            //ボタンを押したとき
+            if (click)
+            {
+                //ステータス設定
+                for (int i = 0; i < 4; i++)
+                {
+                    gameManager.status[i] = statusSetting.status[i];
+                }
+                click = false;
+            }
+            else
+            {
+                //ステータスバー反映
+                for (int i = 0; i < 4; i++)
+                {
+                    menu.statusBar[i].fillAmount = statusSetting.status[i] / gameManager.maxStatus;
+                }
+            }
+        }
+    }
+
     //キャラクター選択画面
     public void CharacterSelect()
     {

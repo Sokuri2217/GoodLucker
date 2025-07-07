@@ -6,14 +6,19 @@ public class UIMenu : UIBase
     [Header("ステージ名")]
     public string[] sceneName;
     [Header("選択中")]
-    public Image selectedCharacter; //キャラクター
-    public Image selectedStage;     //ステージ
-    public Sprite[] characterIcon;  //キャラアイコン
-    public Sprite[] stageIcon;      //ステージアイコン
+    public Image selectedCharacter;    //キャラクター
+    public Image selectedStage;        //ステージ
+    public Sprite[] characterIcon;     //キャラアイコン
+    public Sprite[] stageIcon;         //ステージアイコン
+    public Image explanationCharacter; //キャラクター説明
+    public Image explanationStage;     //ステージ説明
+    public Sprite[] characterExpla;    //キャラSprite
+    public Sprite[] stageExpla;        //ステージSprite
     [Header("セレクトパネル")]
     public GameObject[] selectPanel = new GameObject[2];
     [Header("説明欄")]
-    public GameObject explanationWindow;
+    public GameObject explanationWindow; //枠
+    public Image[] statusBar;            //ステータスを棒の長短で表現(STR,DEF,AGI,LUK)
     [Header("ボタン")]
     public GameObject closeSelectPanel;
     [Header("スクリプト参照")]
@@ -30,7 +35,7 @@ public class UIMenu : UIBase
         //スクリプト取得
         buttonScene = GameObject.Find("StartButton").GetComponent<ButtonScene>();
         //セレクトパネルを非表示
-        for (int i=0;i<2;i++)
+        for (int i = 0; i < 2; i++) 
         {
             selectPanel[i].SetActive(false);
         }
@@ -55,12 +60,12 @@ public class UIMenu : UIBase
     void ChangeSprite()
     {
         //GamaManagerから選択状態を取得しSpriteに反映
-        selectedCharacter.sprite = characterIcon[gameManager.selectCharacter];
-        selectedStage.sprite = stageIcon[gameManager.selectStage];
+        selectedCharacter.sprite = characterIcon[(gameManager.selectCharacter)];
+        selectedStage.sprite = stageIcon[(gameManager.selectStage)];
     }
     //シーン設定
     void SceneSetting()
     {
-        buttonScene.sceneName = sceneName[gameManager.selectStage];
+        buttonScene.sceneName = sceneName[(gameManager.selectStage)];
     }
 }
