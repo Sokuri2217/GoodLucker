@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // マウスカーソルを画面中央に固定
+
     }
 
     // Update is called once per frame

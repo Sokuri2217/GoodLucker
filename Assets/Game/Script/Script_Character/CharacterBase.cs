@@ -3,13 +3,11 @@ using UnityEngine.AI;
 
 public class CharacterBase : MonoBehaviour
 {
-    [Header("ステータス")]
-    public int maxHp;     //最大体力
-    public int currentHp; //現在の体力
-    public int attack;    //攻撃力
-    public int defence;   //防御力
-    public int speed;     //移動速度
-    public int luck;      //運
+    [Header("体力")]
+    public float maxHp;      //最大体力
+    public float currentHp;  //現在の体力
+    [Header("ステータス(攻撃・防御・速度・運)")]
+    public float[] status; //ステータス
 
     [Header("上昇率")]
     public float addHp;      //体力
@@ -32,11 +30,7 @@ public class CharacterBase : MonoBehaviour
         //コンポーネント取得
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-
-        //初期化
-        currentHp = maxHp;   //体力
-        agent.speed = speed; //移動速度
+        animator = GetComponent<Animator>(); 
     }
 
     // Update is called once per frame

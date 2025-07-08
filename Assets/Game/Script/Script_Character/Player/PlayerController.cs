@@ -3,24 +3,52 @@ using UnityEngine;
 public class PlayerController : CharacterBase
 {
     [Header("ステータス")]
-    public float dashSpeed;  //ダッシュ倍率
-    public float upperForce; //ジャンプ力
+    public float dashSpeed;         //ダッシュ倍率
+    public float upperForce;        //ジャンプ力
+    public float baAtIntervalLimit; //通常攻撃インターバル
+    public float spSkIntervalLimit; //特殊攻撃インターバル
+    public float baAtIntervalTimer; //通常計測用
+    public float spSkIntervalTimer; //特殊計測用
 
     [Header("フラグ")]
-    public bool isJump;      //ジャンプ中フラグ
-    public bool onGround;    //設置フラグ
+    public bool isJump;        //ジャンプ中
+    public bool onGround;      //接地
+    public bool basicAttack;   //通常攻撃
+    public bool spSkill;       //特殊攻撃
+    public bool[] attackInput; //各攻撃入力中
 
     [Header("コンポーネント参照")]
     public Transform cameraTransform;          //カメラのTransform
 
     [Header("スクリプト参照")]
     protected CameraController cameraController; //カメラ
+    protected GameManager gameManager;
+
+    protected enum StatusName
+    {
+        STR,
+        DEF,
+        AGI,
+        LUK,
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         base.Start();
 
+        //ステータス設定
+        //体力
+        currentHp = maxHp;
+        //その他
+        gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
+        for (int i = 0; i < ((int)StatusName.LUK + 1); i++) 
+        {
+            status[i] = gameManager.status[i];
+            //移動速度
+            if (i == (int)StatusName.AGI) 
+                agent.speed = status[i];
+        }
         //カメラの情報を取得
         GameObject cameraObj = GameObject.Find("Main Camera");
         cameraTransform = cameraObj.GetComponent<Transform>();
@@ -32,10 +60,19 @@ public class PlayerController : CharacterBase
     {
         base.Update();
 
-        //移動
+        //移動(攻撃中は移動不可)
         {
-            Move3D(addSpeed); //水平方向
-            Jump3D();         //ジャンプ
+            if (!basicAttack && !spSkill) 
+            {
+                Move3D(addSpeed); //水平方向
+                Jump3D();         //ジャンプ
+            }
+            
+        }
+        //攻撃
+        {
+            UseBasicAttack();  //通常
+            UseSpSkill();      //特殊
         }
     }
 
@@ -61,7 +98,7 @@ public class PlayerController : CharacterBase
         //カメラの向きに合わせて、ベクトルを設定
         Vector3 vec = cameraController.transform.forward * vertical + cameraController.transform.right * horizontal;
         vec.y = 0.0f;
-        transform.position += vec * speed * dashSpeed * add * Time.deltaTime;
+        transform.position += vec * status[(int)StatusName.AGI] / 5 * dashSpeed * add * Time.deltaTime;
         //アニメーション再生
         animator.SetFloat(animatorName, animaSetNum);
     }
@@ -75,6 +112,82 @@ public class PlayerController : CharacterBase
             isJump = true;
             agent.enabled = false;
             rb.AddForce(Vector3.up * upperForce, ForceMode.Impulse);
+        }
+    }
+
+    //通常攻撃
+    protected virtual void UseBasicAttack()
+    {
+        if (!basicAttack)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                basicAttack = true;
+            }
+        }
+        else
+        {
+            //インターバル設定
+            if (baAtIntervalTimer >= baAtIntervalLimit) 
+            {
+                if(!Input.GetMouseButtonDown(0))
+                {
+                    basicAttack = false;
+                    baAtIntervalTimer = 0;
+                }
+            }
+            else
+            {
+                //次の攻撃までのインターバルを計測
+                baAtIntervalTimer += Time.deltaTime;
+            }
+        }
+    }
+
+    //特殊攻撃使用
+    protected virtual void UseSpSkill()
+    {
+        if (!attackInput[1])
+        {
+            if (!spSkill)
+            {
+                //特殊攻撃使用
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    spSkill = true;
+                    attackInput[1] = true;
+                }
+            }
+            else
+            {
+                //インターバル設定
+                if (spSkIntervalTimer >= spSkIntervalLimit)
+                {
+                    if (!Input.GetKeyDown(KeyCode.R))
+                    {
+                        spSkill = false;
+                        spSkIntervalTimer = 0;
+                    }
+                }
+                else
+                {
+                    //次の攻撃までのインターバルを計測
+                    spSkIntervalTimer += Time.deltaTime;
+                }
+
+                //使用中にもう一度入力すると中止
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    spSkill = false;
+                    spSkIntervalTimer = 0;
+                    attackInput[1] = true;
+                }
+            }
+        }
+        //再入力可能
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            attackInput[1] = false;
         }
     }
 }

@@ -7,8 +7,8 @@ public class ButtonOptionSelect : ButtonBase
     public int selectStage;     //選択ステージ
 
     [Header("スクリプト参照")]
-    private UIMenu menu;             //メニュー画面
-    private GameManager gameManager; //選択状態を保存
+    private UIMenu menu;                 //メニュー画面
+    private GameManager gameManager;     //選択状態を保存
 
     protected override void Start()
     {
@@ -20,29 +20,43 @@ public class ButtonOptionSelect : ButtonBase
 
     public void Update()
     {
-        if (isZoom && selectCharacter >= 0 && selectStage >= 0)  
+        if (isZoom && (selectCharacter >= 0 || selectStage >= 0))  
         {
-            //カーソルが重なった時に説明欄を表示する
-            menu.explanationCharacter.sprite = menu.characterExpla[(selectCharacter)];
-            menu.explanationStage.sprite = menu.stageExpla[(selectStage)];
-            StatusSetting statusSetting = GetComponent<StatusSetting>();
-            //ボタンを押したとき
-            if (click)
+            //キャラクター選択
+            if(selectCharacter>=0)
             {
-                //ステータス設定
-                for (int i = 0; i < 4; i++)
-                {
-                    gameManager.status[i] = statusSetting.status[i];
-                }
-                click = false;
+                //カーソルが重なった時に説明欄を表示する
+                menu.explanationCharacter.sprite = menu.characterExpla[(selectCharacter)];
+                ChangeStatusSprite();
             }
-            else
+            //ステージ選択
+            else if(selectStage>=0)
             {
-                //ステータスバー反映
-                for (int i = 0; i < 4; i++)
-                {
-                    menu.statusBar[i].fillAmount = statusSetting.status[i] / gameManager.maxStatus;
-                }
+                //カーソルが重なった時に説明欄を表示する
+                menu.explanationStage.sprite = menu.stageExpla[(selectStage)];
+            }
+        }
+    }
+
+    public void ChangeStatusSprite()
+    {
+        StatusSetting statusSetting = GetComponent<StatusSetting>();
+        //ボタンを押したとき
+        if (click)
+        {
+            //ステータス設定
+            for (int i = 0; i < 4; i++)
+            {
+                gameManager.status[i] = statusSetting.status[i];
+            }
+            click = false;
+        }
+        else
+        {
+            //ステータスバー反映
+            for (int i = 0; i < 4; i++)
+            {
+                menu.statusBar[i].fillAmount = statusSetting.status[i] / gameManager.maxStatus;
             }
         }
     }

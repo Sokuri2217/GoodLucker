@@ -472,7 +472,7 @@ MonoBehaviour:
   isClick: {fileID: 8300000, guid: da34e3d001f03ab4db2e97c78ad46882, type: 3}
   seManager: {fileID: 0}
   selectCharacter: 0
-  selectStage: 0
+  selectStage: -1
 --- !u!114 &285236227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1398,7 +1398,7 @@ MonoBehaviour:
   isClick: {fileID: 8300000, guid: da34e3d001f03ab4db2e97c78ad46882, type: 3}
   seManager: {fileID: 0}
   selectCharacter: 1
-  selectStage: 0
+  selectStage: -1
 --- !u!114 &569891242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1474,7 +1474,7 @@ MonoBehaviour:
   onCursor: {fileID: 8300000, guid: 615fbffd831a89b41801f55de7e8a3d7, type: 3}
   isClick: {fileID: 8300000, guid: da34e3d001f03ab4db2e97c78ad46882, type: 3}
   seManager: {fileID: 0}
-  selectCharacter: 0
+  selectCharacter: -1
   selectStage: 1
 --- !u!114 &825251723
 MonoBehaviour:
@@ -2964,7 +2964,7 @@ MonoBehaviour:
   isClick: {fileID: 8300000, guid: da34e3d001f03ab4db2e97c78ad46882, type: 3}
   seManager: {fileID: 0}
   selectCharacter: 2
-  selectStage: 0
+  selectStage: -1
 --- !u!114 &1800083118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3223,7 +3223,7 @@ MonoBehaviour:
   isClick: {fileID: 8300000, guid: da34e3d001f03ab4db2e97c78ad46882, type: 3}
   seManager: {fileID: 0}
   selectCharacter: 3
-  selectStage: 0
+  selectStage: -1
 --- !u!114 &1843036516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3299,7 +3299,7 @@ MonoBehaviour:
   onCursor: {fileID: 8300000, guid: 615fbffd831a89b41801f55de7e8a3d7, type: 3}
   isClick: {fileID: 8300000, guid: da34e3d001f03ab4db2e97c78ad46882, type: 3}
   seManager: {fileID: 0}
-  selectCharacter: 0
+  selectCharacter: -1
   selectStage: 2
 --- !u!114 &1878115122
 MonoBehaviour:
@@ -3724,7 +3724,7 @@ MonoBehaviour:
   onCursor: {fileID: 8300000, guid: 615fbffd831a89b41801f55de7e8a3d7, type: 3}
   isClick: {fileID: 8300000, guid: da34e3d001f03ab4db2e97c78ad46882, type: 3}
   seManager: {fileID: 0}
-  selectCharacter: 0
+  selectCharacter: -1
   selectStage: 0
 --- !u!114 &2085093337
 MonoBehaviour:

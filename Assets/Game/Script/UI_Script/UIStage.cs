@@ -60,6 +60,7 @@ public class UIStage : UIBase
             case true:
                 isStop = false;
                 gameStopPanel.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked; // マウスカーソルを画面中央に固定
                 //時間を通常に戻す
                 Time.timeScale = 1.0f;
                 break;
@@ -67,6 +68,7 @@ public class UIStage : UIBase
             case false:
                 isStop = true;
                 gameStopPanel.SetActive(true);
+                Cursor.lockState = CursorLockMode.None; // マウスカーソルの固定を外す
                 //時間を止める
                 Time.timeScale = 0.0f;
                 break;
