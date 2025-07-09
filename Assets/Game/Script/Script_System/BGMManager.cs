@@ -24,10 +24,9 @@ public class BGMManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); // シーンをまたいでオブジェクトを保持
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void PlayBGM(AudioClip bgmClip)
     {
-        //コンポーネント取得
-        bgmSource = GetComponent<AudioSource>();
+        bgmSource.clip = bgmClip;
+        bgmSource.Play();
     }
 }

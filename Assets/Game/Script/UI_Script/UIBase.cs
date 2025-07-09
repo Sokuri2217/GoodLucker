@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.InputSystem;
 
 public class UIBase : MonoBehaviour
 {
@@ -27,9 +26,8 @@ public class UIBase : MonoBehaviour
         //スクリプト取得
         gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
         bgmManager = GameObject.Find("BGMManager").GetComponent<BGMManager>();
-        ////BGM再生
-        //bgmManager.bgmSource.clip = bgm;
-        //bgmManager.bgmSource.Play();
+        //BGM再生
+        bgmManager.PlayBGM(bgm);
         //フェードイン
         StartCoroutine(StartGame());
 
