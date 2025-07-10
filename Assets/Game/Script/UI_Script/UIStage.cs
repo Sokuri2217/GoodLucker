@@ -26,6 +26,8 @@ public class UIStage : UIBase
         reallyPanel.SetActive(false);
         //現在のシーン名を取得
         currentSceneName = SceneManager.GetActiveScene().name;
+        // マウスカーソルを画面中央に固定
+        Cursor.lockState = CursorLockMode.Locked; 
     }
 
     // Update is called once per frame

@@ -11,14 +11,17 @@ public class PlayerController : CharacterBase
     public float spSkIntervalTimer; //特殊計測用
 
     [Header("フラグ")]
-    public bool isJump;        //ジャンプ中
-    public bool onGround;      //接地
-    public bool basicAttack;   //通常攻撃
-    public bool spSkill;       //特殊攻撃
-    public bool[] attackInput; //各攻撃入力中
+    public bool isJump;                      //ジャンプ中
+    public bool onGround;                    //接地
+    public bool basicAttack;                 //通常攻撃
+    public bool spSkill;                     //特殊攻撃
+    public bool[] attackInput = new bool[2]; //各攻撃入力中
 
-    [Header("コンポーネント参照")]
+    [Header("カメラ参照")]
+    public string cameraName;
     public Transform cameraTransform;          //カメラのTransform
+    [Header("回転")]
+    public float rotationSpeed; //速度
 
     [Header("スクリプト参照")]
     protected CameraController cameraController; //カメラ
@@ -50,7 +53,7 @@ public class PlayerController : CharacterBase
                 agent.speed = status[i];
         }
         //カメラの情報を取得
-        GameObject cameraObj = GameObject.Find("Main Camera");
+        GameObject cameraObj = GameObject.Find(cameraName);
         cameraTransform = cameraObj.GetComponent<Transform>();
         cameraController = cameraObj.GetComponent<CameraController>();
     }
@@ -86,19 +89,36 @@ public class PlayerController : CharacterBase
         //ダッシュ入力(左Shift)
         dashSpeed = Input.GetKey(KeyCode.LeftShift) ? 1.2f : 1.0f;
 
+        Vector3 vec = new Vector3(horizontal, 0.0f, vertical).normalized;
+
         //移動アニメーション設定
         //基本的に停止アニメーションを設定
-        float animaSetNum = 0; 
-        if (horizontal != 0 || vertical != 0)
-        {   
+        float animaSetNum = 0;
+        if (vec.magnitude > 0.1f) 
+        {
+            //カメラの向きから移動方向を設定
+            Vector3 cameraForward = cameraController.transform.forward;
+            Vector3 cameraRight = cameraController.transform.right;
+            cameraForward.y = 0.0f;
+            cameraRight.y = 0.0f;
+            cameraForward.Normalize();
+            cameraRight.Normalize();
+
+            //カメラに合わせてベクトルを設定
+            Vector3 setVec = cameraForward * vec.z + cameraRight * vec.x;
+
+            //プレイヤーの移動
+            transform.position += setVec * status[(int)StatusName.AGI] / 5 * dashSpeed * add * Time.deltaTime;
+
+            //プレイヤーを進行方向に合わせて回転させる
+            Quaternion playerRotation = Quaternion.LookRotation(setVec);
+            Quaternion setRotation = Quaternion.Slerp(transform.rotation, playerRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation = setRotation;
+
             //歩行か走行のときはアニメーションを変更
             animaSetNum = Input.GetKey(KeyCode.LeftShift) ? 1.0f : 0.5f;
         }
 
-        //カメラの向きに合わせて、ベクトルを設定
-        Vector3 vec = cameraController.transform.forward * vertical + cameraController.transform.right * horizontal;
-        vec.y = 0.0f;
-        transform.position += vec * status[(int)StatusName.AGI] / 5 * dashSpeed * add * Time.deltaTime;
         //アニメーション再生
         animator.SetFloat(animatorName, animaSetNum);
     }

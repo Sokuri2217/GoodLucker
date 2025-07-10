@@ -3,14 +3,18 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [Header("カメラ移動")]
-    public float mouseSpeed; //マウス感度
+    public float mouseSpeed;         //マウス感度
     public Transform playerTransfom; //プレイヤーのTransform
-    public float rotation;   //回転速度
+    public Vector3 offset;           //カメラのオフセット(プレイヤーとカメラの相対位置)
+    public float minYAngle;          //カメラが下を向ける限界値
+    public float maxYAngle;          //カメラが上を向ける限界値
+    public float horizontalRotation; //水平方向の回転
+    public float verticalRotation;   //垂直方向の回転
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        playerTransfom = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -21,14 +25,19 @@ public class CameraController : MonoBehaviour
 
     public void CameraMove()
     {
-        //カメラ移動(マウス)
-        float mouseX = Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
+        if (Time.timeScale == 0) return;
 
-        rotation -= mouseY;
-        rotation = Mathf.Clamp(rotation, -90f, 30f); // 上下の角度制限
+        // マウス入力
+        horizontalRotation += Input.GetAxis("Mouse X") * mouseSpeed;
+        verticalRotation -= Input.GetAxis("Mouse Y") * mouseSpeed;
+        verticalRotation = Mathf.Clamp(verticalRotation, minYAngle, maxYAngle);
 
-        transform.localRotation = Quaternion.Euler(rotation, 0f, 0f); // 上下（X軸）
-        playerTransfom.Rotate(Vector3.up * mouseX); // 左右（Y軸）
+        // 回転計算
+        Quaternion rotation = Quaternion.Euler(verticalRotation, horizontalRotation, 0);
+        Vector3 desiredPosition = playerTransfom.position + rotation * offset;
+
+        // カメラの位置と回転を設定
+        transform.position = desiredPosition;
+        transform.LookAt(playerTransfom.position + Vector3.up * 1.5f);
     }
 }
