@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c7a0eaddf710ca046a1abf426b351382
+guid: 6fa9e502d1f65e541824158267516842
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,23 +97,67 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button_Sound_0
+      name: Sound_UI_Image_0
       rect:
         serializedVersion: 2
-        x: 444
-        y: 999
-        width: 1023
-        height: 879
+        x: 123
+        y: 1199
+        width: 791
+        height: 300
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d92739c5438a2946bc18ea07d359017
-      internalID: 482367017
+      spriteID: d6f5ce6c354939549893f159ef825c6d
+      internalID: -2020596959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sound_UI_Image_1
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 783
+        width: 484
+        height: 319
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cc0ae3ec224b5b48b4b91454a2e263c
+      internalID: -1838426599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sound_UI_Image_2
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 22
+        width: 952
+        height: 1898
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2e8071ea3a0d0b459b6efdf8ade9ea4
+      internalID: 259732252
       vertices: []
       indices: 
       edges: []
@@ -122,7 +166,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 955616302af4e6b4cba28bf5bb34776f
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +176,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Button_Sound_0: 482367017
+      Sound_UI_Image_0: -2020596959
+      Sound_UI_Image_1: -1838426599
+      Sound_UI_Image_2: 259732252
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

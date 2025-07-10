@@ -100,10 +100,10 @@ TextureImporter:
       name: ButtonBase_Image_4_0
       rect:
         serializedVersion: 2
-        x: 153
-        y: 2949
-        width: 1681
-        height: 833
+        x: 129
+        y: 2930
+        width: 1721
+        height: 875
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -122,10 +122,10 @@ TextureImporter:
       name: ButtonBase_Image_4_1
       rect:
         serializedVersion: 2
-        x: 149
-        y: 2035
-        width: 1678
-        height: 828
+        x: 129
+        y: 2011
+        width: 1725
+        height: 877
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,12 +144,12 @@ TextureImporter:
       name: ButtonBase_Image_4_2
       rect:
         serializedVersion: 2
-        x: 152
-        y: 1078
-        width: 1676
-        height: 826
+        x: 125
+        y: 1051
+        width: 1725
+        height: 872
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []

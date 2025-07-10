@@ -100,12 +100,12 @@ TextureImporter:
       name: Button_Image_2_0
       rect:
         serializedVersion: 2
-        x: 141
-        y: 1040
-        width: 1677
-        height: 835
+        x: 109
+        y: 1013
+        width: 1739
+        height: 883
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -122,12 +122,12 @@ TextureImporter:
       name: Button_Image_2_1
       rect:
         serializedVersion: 2
-        x: 150
-        y: 45
-        width: 1686
-        height: 837
+        x: 127
+        y: 22
+        width: 1732
+        height: 883
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
