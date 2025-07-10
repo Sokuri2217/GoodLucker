@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class AssassinController : PlayerController
@@ -7,12 +8,16 @@ public class AssassinController : PlayerController
 
     [Header("カメラ参照")]
     public GameObject topViewCamera; //見下ろすカメラ
-    public GameObject fpsCamera;     //通常視点カメラ
+    public GameObject tpsCamera;     //通常視点カメラ
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         base.Start();
+
+        //コンポーネント取得
+        topViewCamera = GameObject.Find("TopViewCamera");
+        tpsCamera = GameObject.Find("Camera");
 
         //最初はFPS視点でスタート
         topViewCamera.SetActive(false);
@@ -36,7 +41,7 @@ public class AssassinController : PlayerController
 
         if(spSkill)
         {
-            fpsCamera.SetActive(false);
+            tpsCamera.SetActive(false);
             topViewCamera.SetActive(true);
 
             //入力(WASD)
@@ -51,7 +56,7 @@ public class AssassinController : PlayerController
             topViewPos.position = new Vector3(this.transform.position.x, topViewPos.position.y, this.transform.position.z);
 
             topViewCamera.SetActive(false);
-            fpsCamera.SetActive(true);
+            tpsCamera.SetActive(true);
         }
     }
 }
