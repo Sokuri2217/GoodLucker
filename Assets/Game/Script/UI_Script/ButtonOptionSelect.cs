@@ -96,6 +96,19 @@ public class ButtonOptionSelect : ButtonBase
         menu.explanationWindow.SetActive(true);
     }
 
+    //音量調整パネルを表示（非表示）
+    public void SoundPanel()
+    {
+        if(!menu.soundPanel.activeSelf)
+        {
+            menu.soundPanel.SetActive(true);
+        }
+        else
+        {
+            menu.soundPanel.SetActive(false);
+        }
+    }
+
     //使用キャラ設定
     public void SetCharacter()
     {

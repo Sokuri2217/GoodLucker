@@ -16,6 +16,8 @@ public class UIMenu : UIBase
     public Sprite[] stageExpla;        //ステージSprite
     [Header("セレクトパネル")]
     public GameObject[] selectPanel = new GameObject[2];
+    [Header("音量パネル")]
+    public GameObject soundPanel;
     [Header("説明欄")]
     public GameObject explanationWindow; //枠
     public Image[] statusBar;            //ステータスを棒の長短で表現(STR,DEF,AGI,LUK)
@@ -41,6 +43,8 @@ public class UIMenu : UIBase
         }
         //セレクトパネルを閉じるボタンを非表示
         closeSelectPanel.SetActive(false);
+        //音量調整パネルを非表示
+        soundPanel.SetActive(false);
         //選択内容の説明欄を非表示
         explanationWindow.SetActive(false);
     }
