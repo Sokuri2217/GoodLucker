@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     [Header("ステータス")]
     public float maxStatus; //各ステータスの最大値
-    public float[] status;  //STR,DEF,AGI,LUK
+    public float[] status = new float[4];  //STR,DEF,AGI,LUK
 
     //シングルトン
     public void Awake()

@@ -158,22 +158,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   currentHp: 0
+  originStatus:
+  - 0
+  - 0
+  - 0
+  - 0
   status:
   - 0
   - 0
   - 0
   - 0
-  addHp: 1
-  addAttack: 1
-  addDefence: 1
-  addSpeed: 1
+  addStatus:
+  - 1
+  - 1
+  - 1
+  - 1
+  addStatusLimit:
+  - 20
+  - 20
+  - 20
+  - 20
+  addStatusTimer:
+  - 0
+  - 0
+  - 0
+  - 0
   animatorName: KnightMove
   dashSpeed: 1.2
   upperForce: 10
-  baAtIntervalLimit: 0.5
-  spSkIntervalLimit: 30
-  baAtIntervalTimer: 0
-  spSkIntervalTimer: 0
+  IntervalLimit:
+  - 1
+  - 20
+  IntervalTimer:
+  - 0
+  - 0
+  changerLayerName: 
+  rayRange: 2
+  layerMasks:
+    serializedVersion: 2
+    m_Bits: 960
   isJump: 0
   onGround: 0
   basicAttack: 0
@@ -191,7 +214,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2935217623910909302}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 50

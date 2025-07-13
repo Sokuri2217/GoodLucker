@@ -5,10 +5,13 @@ public class PlayerController : CharacterBase
     [Header("ステータス")]
     public float dashSpeed;         //ダッシュ倍率
     public float upperForce;        //ジャンプ力
-    public float baAtIntervalLimit; //通常攻撃インターバル
-    public float spSkIntervalLimit; //特殊攻撃インターバル
-    public float baAtIntervalTimer; //通常計測用
-    public float spSkIntervalTimer; //特殊計測用
+    public float[] IntervalLimit = new float[2]; //各攻撃のクールダウン(通常・特殊)
+    public float[] IntervalTimer = new float[2]; //計測用(通常・特殊)
+
+    [Header("アイテム取得")]
+    public string changerLayerName;                    //Layer名
+    public float rayRange;                             //Rayの距離
+    public LayerMask layerMasks;  //レイヤー指定
 
     [Header("フラグ")]
     public bool isJump;                      //ジャンプ中
@@ -18,40 +21,20 @@ public class PlayerController : CharacterBase
     public bool[] attackInput = new bool[2]; //各攻撃入力中
 
     [Header("カメラ参照")]
-    public string cameraName;
-    public Transform cameraTransform;          //カメラのTransform
+    public string cameraName;         //参照先の名前
+    public Transform cameraTransform; //カメラのTransform
+
     [Header("回転")]
     public float rotationSpeed; //速度
 
     [Header("スクリプト参照")]
     protected CameraController cameraController; //カメラ
-    protected GameManager gameManager;
-
-    protected enum StatusName
-    {
-        STR,
-        DEF,
-        AGI,
-        LUK,
-    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         base.Start();
 
-        //ステータス設定
-        //体力
-        currentHp = maxHp;
-        //その他
-        gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
-        for (int i = 0; i < ((int)StatusName.LUK + 1); i++) 
-        {
-            status[i] = gameManager.status[i];
-            //移動速度
-            if (i == (int)StatusName.AGI) 
-                agent.speed = status[i];
-        }
         //カメラの情報を取得
         GameObject cameraObj = GameObject.Find(cameraName);
         cameraTransform = cameraObj.GetComponent<Transform>();
@@ -67,10 +50,16 @@ public class PlayerController : CharacterBase
         {
             if (!basicAttack && !spSkill) 
             {
-                Move3D(addSpeed); //水平方向
-                Jump3D();         //ジャンプ
+                //水平方向
+                Move3D();
+                //ジャンプ
+                Jump3D();
             }
             
+        }
+        //ステータス
+        {
+            GetStatusChanger();
         }
         //攻撃
         {
@@ -80,7 +69,7 @@ public class PlayerController : CharacterBase
     }
 
     //水平方向の移動
-    public void Move3D(float add)
+    public void Move3D()
     {
         //入力(WASD)
         float horizontal = Input.GetAxis("Horizontal");
@@ -108,7 +97,7 @@ public class PlayerController : CharacterBase
             Vector3 setVec = cameraForward * vec.z + cameraRight * vec.x;
 
             //プレイヤーの移動
-            transform.position += setVec * status[(int)StatusName.AGI] / 5 * dashSpeed * add * Time.deltaTime;
+            transform.position += setVec * status[(int)StatusName.AGI] / 5 * dashSpeed * Time.deltaTime;
 
             //プレイヤーを進行方向に合わせて回転させる
             Quaternion playerRotation = Quaternion.LookRotation(setVec);
@@ -148,18 +137,18 @@ public class PlayerController : CharacterBase
         else
         {
             //インターバル設定
-            if (baAtIntervalTimer >= baAtIntervalLimit) 
+            if (IntervalTimer[0] >= IntervalLimit[0]) 
             {
                 if(!Input.GetMouseButtonDown(0))
                 {
                     basicAttack = false;
-                    baAtIntervalTimer = 0;
+                    IntervalTimer[0] = 0;
                 }
             }
             else
             {
                 //次の攻撃までのインターバルを計測
-                baAtIntervalTimer += Time.deltaTime;
+                IntervalTimer[0] += Time.deltaTime;
             }
         }
     }
@@ -181,25 +170,25 @@ public class PlayerController : CharacterBase
             else
             {
                 //インターバル設定
-                if (spSkIntervalTimer >= spSkIntervalLimit)
+                if (IntervalTimer[1] >= IntervalLimit[1])
                 {
                     if (!Input.GetKeyDown(KeyCode.R))
                     {
                         spSkill = false;
-                        spSkIntervalTimer = 0;
+                        IntervalTimer[1] = 0;
                     }
                 }
                 else
                 {
                     //次の攻撃までのインターバルを計測
-                    spSkIntervalTimer += Time.deltaTime;
+                    IntervalTimer[1] += Time.deltaTime;
                 }
 
                 //使用中にもう一度入力すると中止
                 if (Input.GetKeyDown(KeyCode.R))
                 {
                     spSkill = false;
-                    spSkIntervalTimer = 0;
+                    IntervalTimer[1] = 0;
                     attackInput[1] = true;
                 }
             }
@@ -208,6 +197,50 @@ public class PlayerController : CharacterBase
         if (Input.GetKeyUp(KeyCode.R))
         {
             attackInput[1] = false;
+        }
+    }
+
+    //ステータス変化アイテム取得
+    public void GetStatusChanger()
+    {
+        //目の前にあるオブジェクトのLayer名を取得
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, rayRange, layerMasks))
+        {
+            //Rayがオブジェクトに当たったとき
+            //layer名を保存
+            changerLayerName = LayerMask.LayerToName(hit.collider.gameObject.layer);
+            //ステータスを変化させる処理
+            if(changerLayerName != null)
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    switch (changerLayerName)
+                    {
+                        case "Attack":
+                            break;
+                        case "Defence":
+                            break;
+                        case "Speed":
+                            break;
+                        case "Luck":
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            
+        }
+        else
+        {
+            // Ray が何にも当たっていない or 離れた
+            if (!string.IsNullOrEmpty(changerLayerName))
+            {
+                changerLayerName = "";
+
+            }
         }
     }
 }

@@ -12,6 +12,9 @@ public class UIStage : UIBase
     public GameObject reallyPanel;   //最終確認
     [Header("離脱理由(リタイア・リトライ)")]
     public bool[] exit = new bool[2];
+    [Header("オブジェクト生成上限")]
+    public int[] createLimit=new int[4]; //StatusChanger(STR,DEF,AGI,LUK)
+    public int[] createCount=new int[4]; //集計用
 
     //長押し防止用
     private bool isInput; 

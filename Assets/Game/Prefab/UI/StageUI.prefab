@@ -194,11 +194,15 @@ MonoBehaviour:
   fadeImage: {fileID: 5747444776296130589, guid: 89cb79703ca2a24418b5377055a701f1, type: 3}
   fadeColor: {fileID: 0}
   startCount: 1
+  bgm: {fileID: 0}
+  bgmManager: {fileID: 0}
   currentSceneName: 
   isStop: 0
   gameStopPanel: {fileID: 1330532310745673004}
   reallyPanel: {fileID: 6287170119185318701}
   exit: 0000
+  createLimit: 03000000030000000300000003000000
+  createCount: 00000000000000000000000000000000
 --- !u!1 &1330532310745673004
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,6 +528,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originScale: {x: 0, y: 0, z: 0}
   zoom: 1.2
+  isZoom: 0
+  click: 0
   onCursor: {fileID: 8300000, guid: 615fbffd831a89b41801f55de7e8a3d7, type: 3}
   isClick: {fileID: 8300000, guid: ec78c20426aa8be4fa02de847b3910d2, type: 3}
   seManager: {fileID: 0}
@@ -701,6 +707,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originScale: {x: 0, y: 0, z: 0}
   zoom: 1.2
+  isZoom: 0
+  click: 0
   onCursor: {fileID: 8300000, guid: 615fbffd831a89b41801f55de7e8a3d7, type: 3}
   isClick: {fileID: 8300000, guid: ec78c20426aa8be4fa02de847b3910d2, type: 3}
   seManager: {fileID: 0}
@@ -890,6 +898,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originScale: {x: 0, y: 0, z: 0}
   zoom: 1.2
+  isZoom: 0
+  click: 0
   onCursor: {fileID: 8300000, guid: 615fbffd831a89b41801f55de7e8a3d7, type: 3}
   isClick: {fileID: 8300000, guid: ec78c20426aa8be4fa02de847b3910d2, type: 3}
   seManager: {fileID: 0}
@@ -1160,6 +1170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originScale: {x: 0, y: 0, z: 0}
   zoom: 1.2
+  isZoom: 0
+  click: 0
   onCursor: {fileID: 8300000, guid: 615fbffd831a89b41801f55de7e8a3d7, type: 3}
   isClick: {fileID: 8300000, guid: ec78c20426aa8be4fa02de847b3910d2, type: 3}
   seManager: {fileID: 0}
