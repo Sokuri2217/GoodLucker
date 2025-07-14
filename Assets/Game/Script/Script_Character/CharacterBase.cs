@@ -74,6 +74,9 @@ public class CharacterBase : MonoBehaviour
         for (int i = (int)StatusName.STR; i <= (int)StatusName.LUK; i++) 
         {
             status[i] = originStatus[i] * addStatus[i];
+            //ステータス上限(基本最大値の1.5倍)
+            if (status[i] >= (gameManager.maxStatus * 1.5f))
+                status[i] = (gameManager.maxStatus * 1.5f);
         }
 
         //ステータス関係

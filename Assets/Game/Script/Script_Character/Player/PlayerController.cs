@@ -211,20 +211,26 @@ public class PlayerController : CharacterBase
             //Rayがオブジェクトに当たったとき
             //layer名を保存
             changerLayerName = LayerMask.LayerToName(hit.collider.gameObject.layer);
+            //スクリプト情報を取得
+            StatusChangerManager statusChangerManager = hit.collider.gameObject.GetComponent<StatusChangerManager>();
             //ステータスを変化させる処理
-            if(changerLayerName != null)
+            if (changerLayerName != null && !statusChangerManager.isActive) 
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     switch (changerLayerName)
                     {
                         case "Attack":
+                            addStatus[(int)StatusName.STR] = statusChangerManager.RandomStatusChange(addStatus[(int)StatusName.STR], (int)StatusName.STR);
                             break;
                         case "Defence":
+                            addStatus[(int)StatusName.DEF] = statusChangerManager.RandomStatusChange(addStatus[(int)StatusName.DEF], (int)StatusName.DEF);
                             break;
                         case "Speed":
+                            addStatus[(int)StatusName.AGI] = statusChangerManager.RandomStatusChange(addStatus[(int)StatusName.AGI], (int)StatusName.AGI);
                             break;
                         case "Luck":
+                            addStatus[(int)StatusName.LUK] = statusChangerManager.RandomStatusChange(addStatus[(int)StatusName.LUK], (int)StatusName.LUK);
                             break;
                         default:
                             break;
