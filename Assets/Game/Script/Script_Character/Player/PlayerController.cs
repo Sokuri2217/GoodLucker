@@ -1,21 +1,24 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : CharacterBase
 {
     [Header("ステータス")]
-    public float dashSpeed;         //ダッシュ倍率
-    public float upperForce;        //ジャンプ力
+    public float dashSpeed;                      //ダッシュ倍率
+    public float avoidDistance;                  //回避処理
+    public float avoidSecond;                    //回避時に何秒かけて移動するか
+
+    [Header("攻撃")]
     public float[] IntervalLimit = new float[2]; //各攻撃のクールダウン(通常・特殊)
     public float[] IntervalTimer = new float[2]; //計測用(通常・特殊)
 
     [Header("アイテム取得")]
-    public string changerLayerName;                    //Layer名
-    public float rayRange;                             //Rayの距離
-    public LayerMask layerMasks;  //レイヤー指定
+    public string changerLayerName; //Layer名
+    public float rayRange;          //Rayの距離
+    public LayerMask layerMasks;    //レイヤー指定
 
     [Header("フラグ")]
-    public bool isJump;                      //ジャンプ中
-    public bool onGround;                    //接地
+    public bool isAvoid;                     //回避中
     public bool basicAttack;                 //通常攻撃
     public bool spSkill;                     //特殊攻撃
     public bool[] attackInput = new bool[2]; //各攻撃入力中
@@ -50,12 +53,19 @@ public class PlayerController : CharacterBase
         {
             if (!basicAttack && !spSkill) 
             {
-                //水平方向
-                Move3D();
-                //ジャンプ
-                Jump3D();
+                if(!isAvoid)
+                {
+                    //水平方向
+                    Move3D();
+                }
+                //回避
+                Avoid3D();
             }
-            
+            //プレイヤーが浮くのを防止
+            Vector3 playerPos = transform.position;
+            playerPos.y = 0.0f;
+            transform.position = playerPos;
+
         }
         //ステータス
         {
@@ -113,14 +123,15 @@ public class PlayerController : CharacterBase
     }
 
     //ジャンプ
-    public void Jump3D()
+    public void Avoid3D()
     {
         //Spaceを押したときにジャンプする
-        if (Input.GetKeyDown(KeyCode.Space) && !isJump) 
+        if (Input.GetKeyDown(KeyCode.Space) && !isAvoid) 
         {
-            isJump = true;
-            agent.enabled = false;
-            rb.AddForce(Vector3.up * upperForce, ForceMode.Impulse);
+            //アニメーション再生
+            animator.SetTrigger("Avoid");
+            //移動させる
+            StartCoroutine(AvoidMove());
         }
     }
 
@@ -132,6 +143,7 @@ public class PlayerController : CharacterBase
             if (Input.GetMouseButtonDown(0))
             {
                 basicAttack = true;
+                animator.SetTrigger("NormalAttack");
             }
         }
         else
@@ -248,5 +260,37 @@ public class PlayerController : CharacterBase
 
             }
         }
+    }
+
+    //回避処理
+    private IEnumerator AvoidMove()
+    {
+        //回避中フラグを立てる
+        isAvoid = true;
+        //NavMeshAgentを無効化
+        agent.enabled = false;
+
+        //初期座標と回避後の最終座標を設定
+        Vector3 startPos = transform.position;
+        Vector3 targetPos = startPos + transform.forward * avoidDistance;
+
+        //計測用
+        float avoidTimer = 0.0f;
+
+        //移動処理
+        while (avoidTimer < avoidSecond) 
+        {
+            //avoidSecond分の時間をかけて移動
+            transform.position = Vector3.Lerp(startPos, targetPos, avoidTimer / avoidSecond);
+            avoidTimer += Time.deltaTime;
+            yield return null;
+        }
+
+        //最終地点をtargetPosにする
+        transform.position = targetPos;
+        //再入力可能
+        isAvoid = false;
+        //NavMeshAgentを有効化
+        agent.enabled = true;
     }
 }
