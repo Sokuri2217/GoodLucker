@@ -204,8 +204,54 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5798838124004721675, guid: d920d816769630a46aa765cd1c1db2f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8588180804728103074}
+    - targetCorrespondingSourceObject: {fileID: 5798838124004721675, guid: d920d816769630a46aa765cd1c1db2f8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8221104659524968751}
   m_SourcePrefab: {fileID: 100100000, guid: d920d816769630a46aa765cd1c1db2f8, type: 3}
+--- !u!1 &1587754147506561482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5798838124004721675, guid: d920d816769630a46aa765cd1c1db2f8, type: 3}
+  m_PrefabInstance: {fileID: 5075919004628116929}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8588180804728103074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587754147506561482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d59adfc24531643be1aac10108ede1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAttack: 0
+  collider: {fileID: 0}
+--- !u!65 &8221104659524968751
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587754147506561482}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0073136357, y: 0.104968324, z: 0.012359061}
+  m_Center: {x: 0.00018663133, y: 0.035985027, z: 0.000090866684}
 --- !u!4 &2108534894823504752 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6571398507716615857, guid: d920d816769630a46aa765cd1c1db2f8, type: 3}
@@ -473,16 +519,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   currentHp: 0
-  originStatus:
-  - 0
-  - 0
-  - 0
-  - 0
-  status:
-  - 0
-  - 0
-  - 0
-  - 0
+  originStatus: 00000000000000000000000000000000
+  status: 00000000000000000000000000000000
   addStatus:
   - 1
   - 1
@@ -498,6 +536,9 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  invincible: 0
+  inviLimit: 1
+  inviTimer: 0
   animatorName: AssassinMove
   dashSpeed: 1.2
   avoidDistance: 5
@@ -520,6 +561,7 @@ MonoBehaviour:
   cameraName: Camera
   cameraTransform: {fileID: 0}
   rotationSpeed: 50
+  weapon: {fileID: 8588180804728103074}
   topViewCamera: {fileID: 0}
   tpsCamera: {fileID: 0}
 --- !u!195 &-2479914721611796433

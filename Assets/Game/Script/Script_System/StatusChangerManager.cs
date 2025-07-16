@@ -36,12 +36,12 @@ public class StatusChangerManager : MonoBehaviour
         //上昇
         if (random < 70) 
         {
-            add += character.status[statusName] / 100;
+            add += (float)character.status[statusName] / 100;
         }
         //減少
         else
         {
-            add = character.status[statusName] / 100;
+            add = (float)character.status[statusName] / 100;
         }
         //クールタイムに入る
         isActive = true;

@@ -9,8 +9,8 @@ public class GameManager : MonoBehaviour
     public int selectStage;     //選択ステージ
 
     [Header("ステータス")]
-    public float maxStatus; //各ステータスの最大値
-    public float[] status = new float[4];  //STR,DEF,AGI,LUK
+    public int maxStatus; //各ステータスの最大値
+    public int[] status = new int[4];  //STR,DEF,AGI,LUK
 
     //シングルトン
     public void Awake()

@@ -39,21 +39,24 @@ public class UIStage : UIBase
         base.Update();
 
         //Escapeを押したとき
-        if (Input.GetKeyDown(KeyCode.Escape) && !isInput)  
         {
-            isInput = true;
-            //確認画面が出ているときは動かさない
-            if (!reallyPanel.activeSelf) 
+            if (Input.GetKeyDown(KeyCode.Escape) && !isInput)
             {
-                CheckGameState();
+                isInput = true;
+                //確認画面が出ているときは動かさない
+                if (!reallyPanel.activeSelf)
+                {
+                    CheckGameState();
+                }
+            }
+
+            //再入力出来るようにする
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                isInput = false;
             }
         }
-
-        //再入力出来るようにする
-        if(Input.GetKeyUp(KeyCode.Escape))
-        {
-            isInput = false;
-        }
+       
     }
 
     //ゲームの状態をチェック

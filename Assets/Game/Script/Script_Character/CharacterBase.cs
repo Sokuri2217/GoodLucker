@@ -4,11 +4,11 @@ using UnityEngine.AI;
 public class CharacterBase : MonoBehaviour
 {
     [Header("体力")]
-    public float maxHp;      //最大体力
-    public float currentHp;  //現在の体力
+    public int maxHp;      //最大体力
+    public int currentHp;  //現在の体力
     [Header("ステータス(攻撃・防御・速度・運)")]
-    public float[] originStatus = new float[4]; //初期ステータス
-    public float[] status = new float[4];       //ステータス
+    public int[] originStatus = new int[4]; //初期ステータス
+    public int[] status = new int[4];       //ステータス
 
     [Header("上昇率(攻撃・防御・速度・運)")]
     public float[] addStatus = new float[4];
@@ -16,6 +16,11 @@ public class CharacterBase : MonoBehaviour
     [Header("ステータス変化の持続時間(攻撃・防御・速度・運)")]
     public float[] addStatusLimit = new float[4]; //制限時間
     public float[] addStatusTimer = new float[4]; //計測用
+
+    [Header("無敵判定")]
+    public bool invincible; //無敵中かどうか
+    public float inviLimit; //無敵時間
+    public float inviTimer; //計測用
 
     [Header("アニメーション")]
     public string animatorName; //BlendTree名
@@ -43,22 +48,12 @@ public class CharacterBase : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        //スクリプト取得
+        gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
 
         //ステータス設定
         //体力
         currentHp = maxHp;
-        //その他
-        gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
-        for (int i = (int)StatusName.STR; i <= ((int)StatusName.LUK); i++) 
-        {
-            //選んだキャラクターに応じて、ステータスを設定
-            status[i] = gameManager.status[i];
-            //初期値を保存
-            originStatus[i] = status[i];
-            //NavMeshAgentの設定
-            if (i == (int)StatusName.AGI)
-                agent.speed = status[i];
-        }
 
         //タイマー設定
         for (int i = (int)StatusName.STR; i <= (int)StatusName.LUK; i++)
@@ -73,10 +68,21 @@ public class CharacterBase : MonoBehaviour
         //ステータス更新
         for (int i = (int)StatusName.STR; i <= (int)StatusName.LUK; i++) 
         {
-            status[i] = originStatus[i] * addStatus[i];
+            status[i] = (int)(originStatus[i] * addStatus[i]);
             //ステータス上限(基本最大値の1.5倍)
             if (status[i] >= (gameManager.maxStatus * 1.5f))
-                status[i] = (gameManager.maxStatus * 1.5f);
+                status[i] = (int)(gameManager.maxStatus * 1.5f);
+        }
+        //無敵状態の解除
+        if(invincible)
+        {
+            //一定時間経過で解除
+            inviTimer += Time.deltaTime;
+            if (inviTimer >= inviLimit) 
+            {
+                invincible = false;
+                inviTimer = 0.0f;
+            }
         }
 
         //ステータス関係
@@ -104,5 +110,21 @@ public class CharacterBase : MonoBehaviour
                 }
             }
         }
+    }
+
+    //ダメージ処理
+    public int TakeDamage(int damage)
+    {
+        //無敵ではないときにダメージを通す
+        if(!invincible)
+        {
+            //防御力を基にダメージ量を計算
+            float defence = ((float)status[(int)StatusName.DEF] / 200.0f);
+            int acitveDamage = (int)(damage * (1.0f - defence));
+            currentHp -= acitveDamage;
+            invincible = true;
+        }
+
+        return currentHp;
     }
 }

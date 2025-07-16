@@ -145,16 +145,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHp: 100
   currentHp: 0
-  originStatus:
-  - 0
-  - 0
-  - 0
-  - 0
-  status:
-  - 0
-  - 0
-  - 0
-  - 0
+  originStatus: 00000000000000000000000000000000
+  status: 00000000000000000000000000000000
   addStatus:
   - 1
   - 1
@@ -170,6 +162,9 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  invincible: 0
+  inviLimit: 1
+  inviTimer: 0
   animatorName: WarriorMove
   dashSpeed: 1.2
   avoidDistance: 5
@@ -192,6 +187,7 @@ MonoBehaviour:
   cameraName: Camera
   cameraTransform: {fileID: 0}
   rotationSpeed: 50
+  weapon: {fileID: 8292056354211725749}
 --- !u!195 &6617696746502988326
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -442,8 +438,54 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 526679472078241733, guid: 1a354383e393b0f4d9a99975e0efe772, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8292056354211725749}
+    - targetCorrespondingSourceObject: {fileID: 526679472078241733, guid: 1a354383e393b0f4d9a99975e0efe772, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4056017098475983007}
   m_SourcePrefab: {fileID: 100100000, guid: 1a354383e393b0f4d9a99975e0efe772, type: 3}
+--- !u!1 &1538974464883682086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 526679472078241733, guid: 1a354383e393b0f4d9a99975e0efe772, type: 3}
+  m_PrefabInstance: {fileID: 1302856610707625187}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8292056354211725749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538974464883682086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d59adfc24531643be1aac10108ede1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAttack: 0
+  collider: {fileID: 0}
+--- !u!65 &4056017098475983007
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538974464883682086}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.52041554, y: 0.9893946, z: 0.16117948}
+  m_Center: {x: -0.014738469, y: 0.51379454, z: 0.0021273794}
 --- !u!4 &1538974464883682087 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 526679472078241732, guid: 1a354383e393b0f4d9a99975e0efe772, type: 3}

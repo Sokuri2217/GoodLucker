@@ -31,6 +31,7 @@ public class PlayerController : CharacterBase
     public float rotationSpeed; //速度
 
     [Header("スクリプト参照")]
+    public WeaponBase weapon;                    //武器
     protected CameraController cameraController; //カメラ
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -42,6 +43,18 @@ public class PlayerController : CharacterBase
         GameObject cameraObj = GameObject.Find(cameraName);
         cameraTransform = cameraObj.GetComponent<Transform>();
         cameraController = cameraObj.GetComponent<CameraController>();
+
+        //ステータス設定
+        for (int i = (int)StatusName.STR; i <= ((int)StatusName.LUK); i++)
+        {
+            //選んだキャラクターに応じて、ステータスを設定
+            status[i] = gameManager.status[i];
+            //初期値を保存
+            originStatus[i] = status[i];
+            //NavMeshAgentの設定
+            if (i == (int)StatusName.AGI)
+                agent.speed = status[i];
+        }
     }
 
     // Update is called once per frame
@@ -142,25 +155,8 @@ public class PlayerController : CharacterBase
         {
             if (Input.GetMouseButtonDown(0))
             {
-                basicAttack = true;
+                weapon.currentAttack = status[(int)StatusName.STR];
                 animator.SetTrigger("NormalAttack");
-            }
-        }
-        else
-        {
-            //インターバル設定
-            if (IntervalTimer[0] >= IntervalLimit[0]) 
-            {
-                if(!Input.GetMouseButtonDown(0))
-                {
-                    basicAttack = false;
-                    IntervalTimer[0] = 0;
-                }
-            }
-            else
-            {
-                //次の攻撃までのインターバルを計測
-                IntervalTimer[0] += Time.deltaTime;
             }
         }
     }
@@ -292,5 +288,17 @@ public class PlayerController : CharacterBase
         isAvoid = false;
         //NavMeshAgentを有効化
         agent.enabled = true;
+    }
+
+    //攻撃判定の有効化
+    public void ActiveAttack()
+    {
+        weapon.HitActive();
+    }
+
+    //攻撃判定の無効化
+    public void InactiveAttack()
+    {
+        weapon.HitInactive();
     }
 }

@@ -3,5 +3,5 @@ using UnityEngine;
 public class StatusSetting : MonoBehaviour
 {
     [Header("ステータス")]
-    public float[] status = new float[4];
+    public int[] status = new int[4];
 }

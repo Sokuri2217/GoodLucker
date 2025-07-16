@@ -23,14 +23,14 @@ public class ButtonOptionSelect : ButtonBase
         if (isZoom && (selectCharacter >= 0 || selectStage >= 0))  
         {
             //キャラクター選択
-            if(selectCharacter>=0)
+            if (selectCharacter >= 0)
             {
                 //カーソルが重なった時に説明欄を表示する
                 menu.explanationCharacter.sprite = menu.characterExpla[(selectCharacter)];
                 ChangeStatusSprite();
             }
             //ステージ選択
-            else if(selectStage>=0)
+            else if (selectStage >= 0) 
             {
                 //カーソルが重なった時に説明欄を表示する
                 menu.explanationStage.sprite = menu.stageExpla[(selectStage)];
@@ -56,7 +56,7 @@ public class ButtonOptionSelect : ButtonBase
             //ステータスバー反映
             for (int i = 0; i < 4; i++)
             {
-                menu.statusBar[i].fillAmount = statusSetting.status[i] / gameManager.maxStatus;
+                menu.statusBar[i].fillAmount = (float)statusSetting.status[i] / (float)gameManager.maxStatus;
             }
         }
     }

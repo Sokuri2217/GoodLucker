@@ -25,6 +25,7 @@ public class UIMenu : UIBase
     public GameObject closeSelectPanel;
     [Header("スクリプト参照")]
     public ButtonScene buttonScene;
+    public StatusSetting statusSetting;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -36,6 +37,7 @@ public class UIMenu : UIBase
         selectedStage = GameObject.Find("SelectedStage").GetComponent<Image>();
         //スクリプト取得
         buttonScene = GameObject.Find("StartButton").GetComponent<ButtonScene>();
+        statusSetting = GameObject.Find("Warrior").GetComponent<StatusSetting>();
         //セレクトパネルを非表示
         for (int i = 0; i < 2; i++) 
         {
@@ -47,6 +49,11 @@ public class UIMenu : UIBase
         soundPanel.SetActive(false);
         //選択内容の説明欄を非表示
         explanationWindow.SetActive(false);
+        //ステータスをWarriorに設定
+        for (int i = 0; i < 4; i++) 
+        {
+            gameManager.status[i] = statusSetting.status[i];
+        }
     }
 
     // Update is called once per frame
