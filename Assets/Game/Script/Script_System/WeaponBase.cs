@@ -45,7 +45,6 @@ public class WeaponBase : MonoBehaviour
         character = other.GetComponent<CharacterBase>();
         if (other.gameObject.CompareTag("Enemy") && !character.invincible) 
         {
-            Debug.Log("“–‚½‚Á‚½‚æ");
             character.currentHp = character.TakeDamage(currentAttack);
         }
     }

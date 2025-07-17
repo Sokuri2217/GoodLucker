@@ -122,4 +122,7 @@ MonoBehaviour:
   isActive: 0
   reActiveLimit: 30
   reActiveTimer: 0
+  defaultTexture: {fileID: 2377376760783321371, guid: c6de1ba654950984dbaf34e5471d9ee2, type: 3}
+  coolDownTexture: {fileID: -876546973899608171, guid: 57b83fc616f8f554ab73ed311a28fe6c, type: 3}
+  meshRenderer: {fileID: 0}
   character: {fileID: 0}

@@ -22,6 +22,7 @@ public class PlayerController : CharacterBase
     public bool basicAttack;                 //通常攻撃
     public bool spSkill;                     //特殊攻撃
     public bool[] attackInput = new bool[2]; //各攻撃入力中
+    public bool useChanger;                  //使用可能
 
     [Header("カメラ参照")]
     public string cameraName;         //参照先の名前
@@ -224,6 +225,7 @@ public class PlayerController : CharacterBase
             //ステータスを変化させる処理
             if (changerLayerName != null && !statusChangerManager.isActive) 
             {
+                useChanger = true;
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     switch (changerLayerName)
@@ -245,16 +247,11 @@ public class PlayerController : CharacterBase
                     }
                 }
             }
-            
         }
         else
         {
-            // Ray が何にも当たっていない or 離れた
-            if (!string.IsNullOrEmpty(changerLayerName))
-            {
-                changerLayerName = "";
-
-            }
+            changerLayerName = "";
+            useChanger = false;
         }
     }
 
@@ -300,5 +297,13 @@ public class PlayerController : CharacterBase
     public void InactiveAttack()
     {
         weapon.HitInactive();
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            currentHp -= maxHp / 10;
+        }
     }
 }

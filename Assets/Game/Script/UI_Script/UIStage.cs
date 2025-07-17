@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class UIStage : UIBase
 {
@@ -8,13 +9,23 @@ public class UIStage : UIBase
     [Header("ゲーム状態")]
     public bool isStop;
     [Header("パネル")]
+    public GameObject mainPanel;     //基本UI
     public GameObject gameStopPanel; //一時停止
     public GameObject reallyPanel;   //最終確認
+    [Header("GUI")]
+    public GameObject[] status = new GameObject[4];   //ステータス変化の制限時間
+    public GameObject changeInput;                    //入力キー
     [Header("離脱理由(リタイア・リトライ)")]
     public bool[] exit = new bool[2];
     [Header("オブジェクト生成上限")]
     public int[] createLimit=new int[4]; //StatusChanger(STR,DEF,AGI,LUK)
     public int[] createCount=new int[4]; //集計用
+    [Header("コンポーネント参照")]
+    public Image hp;                        //体力ゲージ
+    public Image[] change = new Image[4];             //ステータスの変化状態
+    public Sprite[] upDown = new Sprite[3]; //増減
+    [Header("スクリプト参照")]
+    public PlayerController playerController;
 
     //長押し防止用
     private bool isInput; 
@@ -24,13 +35,18 @@ public class UIStage : UIBase
     {
         base.Start();
 
-        //全てのパネルを非表示
+        //オブジェクトを非表示
+        for (int i = 0; i < 4; i++) 
+        {
+            status[i].SetActive(false);
+        }
+        //パネルを非表示
         gameStopPanel.SetActive(false);
         reallyPanel.SetActive(false);
         //現在のシーン名を取得
         currentSceneName = SceneManager.GetActiveScene().name;
         // マウスカーソルを画面中央に固定
-        Cursor.lockState = CursorLockMode.Locked; 
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -38,6 +54,20 @@ public class UIStage : UIBase
     {
         base.Update();
 
+        //スクリプト取得
+        if (playerController == null)
+        {
+            playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        }
+
+        //HPゲージ
+        {
+            CheckHpState();
+        }
+        //ステータス
+        {
+            CheckStatusState();
+        }
         //Escapeを押したとき
         {
             if (Input.GetKeyDown(KeyCode.Escape) && !isInput)
@@ -59,6 +89,70 @@ public class UIStage : UIBase
        
     }
 
+    //HP
+    public void CheckHpState()
+    {
+        //プレイヤーの残り体力に応じて描画
+        hp.fillAmount = (float)playerController.currentHp / (float)playerController.maxHp;
+        //残り割合に応じて、色を変化
+        Color color = hp.color;
+        //赤
+        if (hp.fillAmount <= 0.2f)
+        {
+            color = new Color32(255, 0, 0, 255);
+        }
+        //黄
+        else if (hp.fillAmount <= 0.6f)
+        {
+            color = new Color32(255, 255, 0, 255);
+        }
+        //白
+        else
+        {
+            color = new Color32(229, 229, 229, 255);
+        }
+        hp.color = color;
+    }
+
+    //ステータス
+    public void CheckStatusState()
+    {
+        for (int i = 0; i < 4; i++) 
+        {
+            if (playerController.addStatus[i] > 1.0f || playerController.addStatus[i] < 1.0f)
+            {
+                //対象のオブジェクトを表示
+                status[i].SetActive(true);
+                //コンポーネントを取得
+                Image statusImage = status[i].GetComponent<Image>();
+                //制限時間に応じて、ゲージを描画
+                statusImage.fillAmount = playerController.addStatusTimer[i] / playerController.addStatusLimit[i];
+                //時間切れでオブジェクトを非表示
+                if (statusImage.fillAmount <= 0.001f)
+                {
+                    status[i].SetActive(false);
+                }
+
+                //増減アイコンを表示
+                if(playerController.addStatus[i] < 1.0f)
+                {
+                    change[i].sprite = upDown[1];
+                }
+                else if (playerController.addStatus[i] > 1.0f)
+                {
+                    change[i].sprite = upDown[0];
+                }
+                else
+                {
+                    change[i].sprite = upDown[2];
+                }
+            }
+        }
+
+        //入力キーの表示
+        changeInput.SetActive(playerController.useChanger);
+    }
+
     //ゲームの状態をチェック
     public void CheckGameState()
     {
@@ -67,16 +161,22 @@ public class UIStage : UIBase
             //停止中
             case true:
                 isStop = false;
+                //表示パネルの切り替え
                 gameStopPanel.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked; // マウスカーソルを画面中央に固定
+                mainPanel.SetActive(true);
+                // マウスカーソルを画面中央に固定
+                Cursor.lockState = CursorLockMode.Locked; 
                 //時間を通常に戻す
                 Time.timeScale = 1.0f;
                 break;
             //プレイ中
             case false:
                 isStop = true;
+                //表示パネルの切り替え
+                mainPanel.SetActive(false);
                 gameStopPanel.SetActive(true);
-                Cursor.lockState = CursorLockMode.None; // マウスカーソルの固定を外す
+                // マウスカーソルの固定を外す
+                Cursor.lockState = CursorLockMode.None;
                 //時間を止める
                 Time.timeScale = 0.0f;
                 break;
