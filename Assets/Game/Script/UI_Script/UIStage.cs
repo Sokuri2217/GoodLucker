@@ -26,6 +26,10 @@ public class UIStage : UIBase
     public Sprite[] upDown = new Sprite[3]; //増減
     [Header("スクリプト参照")]
     public PlayerController playerController;
+    [Header("ゲーム状態")]
+    public bool isGame;    //プレイ可能
+    public bool gameClear; //ゲームクリア
+    public bool gameOver;  //ゲームオーバー
 
     //長押し防止用
     private bool isInput; 
@@ -47,6 +51,10 @@ public class UIStage : UIBase
         currentSceneName = SceneManager.GetActiveScene().name;
         // マウスカーソルを画面中央に固定
         Cursor.lockState = CursorLockMode.Locked;
+        //ゲーム状態の設定
+        isGame = true;
+        gameClear = false;
+        gameOver = false;
     }
 
     // Update is called once per frame
@@ -85,6 +93,10 @@ public class UIStage : UIBase
             {
                 isInput = false;
             }
+        }
+        //プレイ結果
+        {
+            CheckResultState();
         }
        
     }
@@ -168,10 +180,14 @@ public class UIStage : UIBase
                 Cursor.lockState = CursorLockMode.Locked; 
                 //時間を通常に戻す
                 Time.timeScale = 1.0f;
+                //ゲーム状態をプレイ可能にする
+                isGame = true;
                 break;
             //プレイ中
             case false:
                 isStop = true;
+                //ゲーム状態をプレイ不可にする
+                isGame = false;
                 //表示パネルの切り替え
                 mainPanel.SetActive(false);
                 gameStopPanel.SetActive(true);
@@ -181,5 +197,25 @@ public class UIStage : UIBase
                 Time.timeScale = 0.0f;
                 break;
         }
+    }
+
+    //プレイ結果
+    public void CheckResultState()
+    {
+        //体力が0以下になったらゲームオーバー
+        if (playerController.currentHp <= 0.0f) 
+        {
+            isGame = false;
+            gameOver = true;
+            Time.timeScale = 0.0f;
+        }
+
+        //ゲームクリア
+        //if ()
+        //{
+        //    isGame = false;
+        //    gameClear = true;
+        //    Time.timeScale = 0.0f;
+        //}
     }
 }

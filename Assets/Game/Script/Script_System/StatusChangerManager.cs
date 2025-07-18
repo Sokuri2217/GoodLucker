@@ -43,6 +43,8 @@ public class StatusChangerManager : MonoBehaviour
 
     public float RandomStatusChange(float add, int statusName)
     {
+        //倍率をリセット(実装は未確定)
+        add = 1.0f;
         //ステータス倍率の抽選(7割:上昇,3割:減少)
         int random = Random.Range(0,100);
         //上昇

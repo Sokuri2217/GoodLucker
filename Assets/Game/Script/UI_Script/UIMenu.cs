@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,8 +17,12 @@ public class UIMenu : UIBase
     public Sprite[] stageExpla;        //ステージSprite
     [Header("セレクトパネル")]
     public GameObject[] selectPanel = new GameObject[2];
-    [Header("音量パネル")]
-    public GameObject soundPanel;
+    [Header("オプションパネル")]
+    public GameObject optionPanel;      //本体
+    public GameObject systemPanel;      //ゲームシステム
+    public GameObject controlPanel;     //操作方法
+    public GameObject soundPanel;       //音量
+    public GameObject currentOpenPanel; //表示中のパネル
     [Header("説明欄")]
     public GameObject explanationWindow; //枠
     public Image[] statusBar;            //ステータスを棒の長短で表現(STR,DEF,AGI,LUK)
@@ -47,6 +52,10 @@ public class UIMenu : UIBase
         closeSelectPanel.SetActive(false);
         //音量調整パネルを非表示
         soundPanel.SetActive(false);
+        //オプション関連を非表示
+        optionPanel.SetActive(false);
+        systemPanel.SetActive(false);
+        controlPanel.SetActive(false);
         //選択内容の説明欄を非表示
         explanationWindow.SetActive(false);
         //ステータスをWarriorに設定
@@ -65,6 +74,10 @@ public class UIMenu : UIBase
         ChangeSprite();
         //シーン設定
         SceneSetting();
+        //オプション画面を表示
+        OpenOption();
+        //オプション画面を非表示
+        CloseOption();
     }
 
     //選択状態を可視化
@@ -79,4 +92,49 @@ public class UIMenu : UIBase
     {
         buttonScene.sceneName = sceneName[(gameManager.selectStage)];
     }
+    //オプション画面を表示
+    void OpenOption()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (currentOpenPanel == optionPanel ||
+                currentOpenPanel == null)  
+            {
+                if (!optionPanel.activeSelf)
+                {
+                    //非表示中なら開く
+                    optionPanel.SetActive(true);
+                    currentOpenPanel = optionPanel;
+                }
+                else
+                {
+                    //表示中なら閉じる
+                    optionPanel.SetActive(false);
+                    currentOpenPanel = null;
+                }
+            }
+        }
+    }
+
+    //オプション画面を非表示
+    void CloseOption()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (currentOpenPanel != null && currentOpenPanel != optionPanel)
+            {
+                //表示中のパネルを非表示にし、オプション画面を開く
+                currentOpenPanel.SetActive(false);
+                optionPanel.SetActive(true);
+                //表示中パネルの設定
+                currentOpenPanel = optionPanel;
+            }
+            else if (currentOpenPanel == optionPanel)
+            {
+                optionPanel.SetActive(false);
+                currentOpenPanel = null;
+            }
+        }
+    }
+
 }

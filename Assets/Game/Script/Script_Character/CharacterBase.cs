@@ -65,6 +65,12 @@ public class CharacterBase : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
+        //HP管理
+        if (currentHp <= 0)
+        {
+            //HPが0未満にならないようにする
+            currentHp = 0;
+        }
         //ステータス更新
         for (int i = (int)StatusName.STR; i <= (int)StatusName.LUK; i++) 
         {
@@ -122,6 +128,7 @@ public class CharacterBase : MonoBehaviour
             float defence = ((float)status[(int)StatusName.DEF] / 200.0f);
             int acitveDamage = (int)(damage * (1.0f - defence));
             currentHp -= acitveDamage;
+            //無敵状態にする
             invincible = true;
         }
 

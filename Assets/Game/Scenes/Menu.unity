@@ -464,6 +464,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 949586366832132636, guid: a0d079da5f814934e87a2341f7fea7cf, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1115012580101132525, guid: a0d079da5f814934e87a2341f7fea7cf, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -560,10 +564,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3538101755192303190, guid: a0d079da5f814934e87a2341f7fea7cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4372496376790932954, guid: a0d079da5f814934e87a2341f7fea7cf, type: 3}
       propertyPath: m_Name
       value: MenuUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4680396310191494283, guid: a0d079da5f814934e87a2341f7fea7cf, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5404925845264451268, guid: a0d079da5f814934e87a2341f7fea7cf, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -576,6 +588,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6597007832780389145, guid: a0d079da5f814934e87a2341f7fea7cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7024751540861149949, guid: a0d079da5f814934e87a2341f7fea7cf, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -587,6 +603,10 @@ PrefabInstance:
     - target: {fileID: 7024751540861149949, guid: a0d079da5f814934e87a2341f7fea7cf, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8986193724798859107, guid: a0d079da5f814934e87a2341f7fea7cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

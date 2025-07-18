@@ -96,19 +96,6 @@ public class ButtonOptionSelect : ButtonBase
         menu.explanationWindow.SetActive(true);
     }
 
-    //音量調整パネルを表示（非表示）
-    public void SoundPanel()
-    {
-        if(!menu.soundPanel.activeSelf)
-        {
-            menu.soundPanel.SetActive(true);
-        }
-        else
-        {
-            menu.soundPanel.SetActive(false);
-        }
-    }
-
     //使用キャラ設定
     public void SetCharacter()
     {
@@ -119,5 +106,35 @@ public class ButtonOptionSelect : ButtonBase
     public void SetStage()
     {
         gameManager.selectStage = selectStage;
+    }
+
+    //システムパネルの表示
+    public void OpenSystem()
+    {
+        //直前に表示しているパネルを非表示にし、新しいパネルを表示
+        menu.systemPanel.SetActive(true);
+        menu.currentOpenPanel.SetActive(false);
+        //表示中パネルの設定
+        menu.currentOpenPanel = menu.systemPanel;
+    }
+
+    //音量パネルの表示
+    public void OpenSound()
+    {
+        //直前に表示しているパネルを非表示にし、新しいパネルを表示
+        menu.soundPanel.SetActive(true);
+        menu.currentOpenPanel.SetActive(false);
+        //表示中パネルの設定
+        menu.currentOpenPanel = menu.soundPanel;
+    }
+
+    //操作説明パネルを表示
+    public void OpenControl()
+    {
+        //直前に表示しているパネルを非表示にし、新しいパネルを表示
+        menu.controlPanel.SetActive(true);
+        menu.currentOpenPanel.SetActive(false);
+        //表示中パネルの設定
+        menu.currentOpenPanel = menu.controlPanel;
     }
 }

@@ -34,6 +34,7 @@ public class PlayerController : CharacterBase
     [Header("スクリプト参照")]
     public WeaponBase weapon;                    //武器
     protected CameraController cameraController; //カメラ
+    protected UIStage uiStage;                   //ステージUI
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -44,6 +45,9 @@ public class PlayerController : CharacterBase
         GameObject cameraObj = GameObject.Find(cameraName);
         cameraTransform = cameraObj.GetComponent<Transform>();
         cameraController = cameraObj.GetComponent<CameraController>();
+
+        //スクリプト取得
+        uiStage = GameObject.Find("StageUI").GetComponent<UIStage>();
 
         //ステータス設定
         for (int i = (int)StatusName.STR; i <= ((int)StatusName.LUK); i++)
@@ -87,8 +91,11 @@ public class PlayerController : CharacterBase
         }
         //攻撃
         {
-            UseBasicAttack();  //通常
-            UseSpSkill();      //特殊
+            if(uiStage.isGame)
+            {
+                UseBasicAttack();  //通常
+                UseSpSkill();      //特殊
+            }
         }
     }
 
@@ -301,9 +308,6 @@ public class PlayerController : CharacterBase
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            currentHp -= maxHp / 10;
-        }
+
     }
 }
