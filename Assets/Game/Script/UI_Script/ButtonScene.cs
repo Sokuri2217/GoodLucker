@@ -16,6 +16,8 @@ public class ButtonScene : ButtonBase
 
     public void ButtonClick()
     {
+        //ŠÔ‚ğ’Êí‚É‚·‚é
+        Time.timeScale = 1.0f;
         //fadeImage‚ğæ“¾
         fadeImage = GameObject.Find("FadeImage(Clone)").GetComponent<Image>();
         //ˆ—Às

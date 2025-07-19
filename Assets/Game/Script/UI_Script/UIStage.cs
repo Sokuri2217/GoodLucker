@@ -12,6 +12,8 @@ public class UIStage : UIBase
     public GameObject mainPanel;     //基本UI
     public GameObject gameStopPanel; //一時停止
     public GameObject reallyPanel;   //最終確認
+    public GameObject clearPanel;   //ゲームクリア
+    public GameObject overPanel;   //ゲームオーバー
     [Header("GUI")]
     public GameObject[] status = new GameObject[4];   //ステータス変化の制限時間
     public GameObject changeInput;                    //入力キー
@@ -47,6 +49,8 @@ public class UIStage : UIBase
         //パネルを非表示
         gameStopPanel.SetActive(false);
         reallyPanel.SetActive(false);
+        clearPanel.SetActive(false);
+        overPanel.SetActive(false);
         //現在のシーン名を取得
         currentSceneName = SceneManager.GetActiveScene().name;
         // マウスカーソルを画面中央に固定
@@ -78,25 +82,32 @@ public class UIStage : UIBase
         }
         //Escapeを押したとき
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && !isInput)
+            if (!gameClear && !gameOver) 
             {
-                isInput = true;
-                //確認画面が出ているときは動かさない
-                if (!reallyPanel.activeSelf)
+                if (Input.GetKeyDown(KeyCode.Escape) && !isInput)
                 {
-                    CheckGameState();
+                    isInput = true;
+                    //確認画面が出ているときは動かさない
+                    if (!reallyPanel.activeSelf)
+                    {
+                        CheckGameState();
+                    }
                 }
-            }
 
-            //再入力出来るようにする
-            if (Input.GetKeyUp(KeyCode.Escape))
-            {
-                isInput = false;
+                //再入力出来るようにする
+                if (Input.GetKeyUp(KeyCode.Escape))
+                {
+                    isInput = false;
+                }
             }
         }
         //プレイ結果
         {
-            CheckResultState();
+            if(isGame)
+            {
+                CheckResultState();
+            }
+            
         }
        
     }
@@ -203,10 +214,14 @@ public class UIStage : UIBase
     public void CheckResultState()
     {
         //体力が0以下になったらゲームオーバー
-        if (playerController.currentHp <= 0.0f) 
+        if (playerController.currentHp <= 0.0f && !gameOver)  
         {
             isGame = false;
             gameOver = true;
+            overPanel.SetActive(true);
+            mainPanel.SetActive(false);
+            // マウスカーソルの固定を外す
+            Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0.0f;
         }
 
@@ -215,6 +230,10 @@ public class UIStage : UIBase
         //{
         //    isGame = false;
         //    gameClear = true;
+        //    clearPanel.SetActive(true);
+        //    mainPanel.SetActive(false);
+        //    //マウスカーソルの固定を外す
+        //    Cursor.lockState = CursorLockMode.None; 
         //    Time.timeScale = 0.0f;
         //}
     }

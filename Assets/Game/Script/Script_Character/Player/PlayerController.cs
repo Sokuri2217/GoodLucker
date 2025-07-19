@@ -308,6 +308,9 @@ public class PlayerController : CharacterBase
 
     public void OnTriggerEnter(Collider other)
     {
-
+        if(other.gameObject.CompareTag("Enemy"))
+        {
+            currentHp -= 10;
+        }
     }
 }

@@ -14,6 +14,13 @@ public class ButtonStage : MonoBehaviour
         stage = GameObject.Find("StageUI").GetComponent<UIStage>();
         gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
     }
+    //現在のシーン名を取得
+    public void GetSceneName()
+    {
+        //シーン移動用ボタンスクリプトを取得
+        ButtonScene buttonScene = GetComponent<ButtonScene>();
+        buttonScene.sceneName = stage.currentSceneName;
+    }
 
     //現在のステージから離れる
     public void ExitStage()
