@@ -214,27 +214,24 @@ public class UIStage : UIBase
     public void CheckResultState()
     {
         //体力が0以下になったらゲームオーバー
-        if (playerController.currentHp <= 0.0f && !gameOver)  
+        if (gameOver)  
         {
             isGame = false;
-            gameOver = true;
             overPanel.SetActive(true);
             mainPanel.SetActive(false);
             // マウスカーソルの固定を外す
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0.0f;
         }
-
         //ゲームクリア
-        //if ()
-        //{
-        //    isGame = false;
-        //    gameClear = true;
-        //    clearPanel.SetActive(true);
-        //    mainPanel.SetActive(false);
-        //    //マウスカーソルの固定を外す
-        //    Cursor.lockState = CursorLockMode.None; 
-        //    Time.timeScale = 0.0f;
-        //}
+        else if (gameClear)
+        {
+            isGame = false;
+            clearPanel.SetActive(true);
+            mainPanel.SetActive(false);
+            //マウスカーソルの固定を外す
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0.0f;
+        }
     }
 }

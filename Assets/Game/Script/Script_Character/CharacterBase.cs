@@ -9,6 +9,7 @@ public class CharacterBase : MonoBehaviour
     [Header("ステータス(攻撃・防御・速度・運)")]
     public int[] originStatus = new int[4]; //初期ステータス
     public int[] status = new int[4];       //ステータス
+    public bool critical;     //クリティカル判定
 
     [Header("上昇率(攻撃・防御・速度・運)")]
     public float[] addStatus = new float[4];
@@ -124,12 +125,26 @@ public class CharacterBase : MonoBehaviour
         //無敵ではないときにダメージを通す
         if(!invincible)
         {
-            //防御力を基にダメージ量を計算
-            float defence = ((float)status[(int)StatusName.DEF] / 200.0f);
-            int acitveDamage = (int)(damage * (1.0f - defence));
-            currentHp -= acitveDamage;
+            if(!critical)
+            {
+                //防御力を基にダメージ量を計算
+                float defence = ((float)status[(int)StatusName.DEF] / 200.0f);
+                int acitveDamage = (int)(damage * (1.0f - defence));
+                currentHp -= acitveDamage;
+                
+            }
+            else
+            {
+                //相手の防御力を無視し、さらに攻撃力を上げる
+                //キャラクターのAGIの値に応じて倍率を変える
+                float criticalDamage = (1.0f + ((float)status[(int)StatusName.AGI] / 200.0f));
+                int activeDamage = (int)(damage * criticalDamage);
+                currentHp -= activeDamage;
+            }
             //無敵状態にする
             invincible = true;
+            //クリティカル判定をリセット
+            critical = false;
         }
 
         return currentHp;

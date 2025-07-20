@@ -25,5 +25,13 @@ public class EnemyBase : CharacterBase
     protected override void Update()
     {
         base.Update();
+
+        //‘Ì—Í
+        {
+            if (currentHp <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }

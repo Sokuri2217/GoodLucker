@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class WeaponBase : MonoBehaviour
 {
-    [Header("攻撃力")]
-    public int currentAttack;
+    [Header("攻撃")]
+    public int currentAttack; //攻撃力
     [Header("コライダー")]
-    public new Collider collider;
-
-    public CharacterBase character;
+    public new Collider collider; //当たり判定
+    [Header("スクリプト参照")]
+    public CharacterBase character; //ゲーム内のキャラクター全般
 
     //ステータス識別用
     protected enum StatusName
