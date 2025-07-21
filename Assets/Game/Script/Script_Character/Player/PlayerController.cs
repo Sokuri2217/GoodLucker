@@ -292,6 +292,8 @@ public class PlayerController : CharacterBase
         isAvoid = true;
         //NavMeshAgentを無効化
         agent.enabled = false;
+        //Kinematicを無効化
+        rb.isKinematic = false;
 
         //初期座標と回避後の最終座標を設定
         Vector3 startPos = transform.position;
@@ -315,6 +317,8 @@ public class PlayerController : CharacterBase
         isAvoid = false;
         //NavMeshAgentを有効化
         agent.enabled = true;
+        //Kinematicを有効化
+        rb.isKinematic = true;
     }
 
     //攻撃判定の有効化
@@ -327,10 +331,5 @@ public class PlayerController : CharacterBase
     public void InactiveAttack()
     {
         weapon.HitInactive();
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-
     }
 }

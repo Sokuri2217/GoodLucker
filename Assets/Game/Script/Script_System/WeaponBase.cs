@@ -5,6 +5,7 @@ public class WeaponBase : MonoBehaviour
 {
     [Header("攻撃")]
     public int currentAttack; //攻撃力
+    public string enemyTag;  //攻撃対象のタグ
     [Header("コライダー")]
     public new Collider collider; //当たり判定
     [Header("スクリプト参照")]
@@ -43,7 +44,7 @@ public class WeaponBase : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         character = other.GetComponent<CharacterBase>();
-        if (other.gameObject.CompareTag("Enemy") && !character.invincible) 
+        if (other.gameObject.CompareTag(enemyTag) && !character.invincible) 
         {
             character.currentHp = character.TakeDamage(currentAttack);
         }

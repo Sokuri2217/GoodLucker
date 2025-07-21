@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class EnemyBase : CharacterBase
 {
-    //[Header("攻撃")]
-    //public float
+    [Header("プレイヤー参照")]
+    public Transform playerPos;
+    public PlayerController playerController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -25,13 +26,5 @@ public class EnemyBase : CharacterBase
     protected override void Update()
     {
         base.Update();
-
-        //体力
-        {
-            if (currentHp <= 0)
-            {
-                Destroy(gameObject);
-            }
-        }
     }
 }
