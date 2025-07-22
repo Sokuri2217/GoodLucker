@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttackStateBehaviour : StateMachineBehaviour
+public class PlayerStateBehaviour : StateMachineBehaviour
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

@@ -32,6 +32,9 @@ public class UIStage : UIBase
     public bool isGame;    //プレイ可能
     public bool gameClear; //ゲームクリア
     public bool gameOver;  //ゲームオーバー
+    [Header("クリア条件")]
+    public int clearkillCount; //クリアに必要なボスの討伐数
+    public int killBossCount;  //倒したボスの数
 
     //長押し防止用
     private bool isInput; 
@@ -103,11 +106,21 @@ public class UIStage : UIBase
         }
         //プレイ結果
         {
+            //ゲームクリア条件
+            if(killBossCount>=clearkillCount)
+            {
+                gameClear = true;
+            }
+            //ゲームオーバー条件
+            if (playerController.currentHp <= 0) 
+            {
+                gameOver = true;
+            }
+
             if(isGame)
             {
                 CheckResultState();
             }
-            
         }
        
     }
@@ -223,7 +236,7 @@ public class UIStage : UIBase
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0.0f;
         }
-        //ゲームクリア
+        //ステージ上の全てのボスを倒すとクリア
         else if (gameClear)
         {
             isGame = false;

@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - CameraTarget
   - Enemy
+  - Boss
+  - EWeapon
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Speed
   - Luck
   - Player
-  - 
+  - OtherObj
   - 
   - 
   - 

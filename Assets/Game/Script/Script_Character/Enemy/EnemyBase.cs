@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class EnemyBase : CharacterBase
 {
+    [Header("攻撃")]
+    public bool isAttack; //攻撃中
     [Header("プレイヤー参照")]
     public Transform playerPos;
     public PlayerController playerController;
+    [Header("スクリプト参照")]
+    public WeaponBase weapon; //攻撃判定
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -26,5 +30,26 @@ public class EnemyBase : CharacterBase
     protected override void Update()
     {
         base.Update();
+
+        if( playerController==null)
+        {
+            playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        }
+        if (playerPos == null)
+        {
+            playerPos = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        }
+    }
+
+    //攻撃判定の有効化
+    public void ActiveAttack()
+    {
+        weapon.HitActive();
+    }
+
+    //攻撃判定の無効化
+    public void InactiveAttack()
+    {
+        weapon.HitInactive();
     }
 }

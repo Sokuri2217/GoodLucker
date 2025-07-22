@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class BossController : EnemyBase
 {
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
@@ -22,8 +23,9 @@ public class BossController : EnemyBase
     }
 
     //íœˆ—
-    public void DeleteOnRenderObject()
+    public void DeleteObject()
     {
+        uiStage.killBossCount++;
         Destroy(gameObject);
     }
 }

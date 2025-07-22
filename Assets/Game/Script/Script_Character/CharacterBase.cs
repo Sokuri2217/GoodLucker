@@ -33,6 +33,7 @@ public class CharacterBase : MonoBehaviour
 
     [Header("スクリプト参照")]
     protected GameManager gameManager; //ゲーム基盤
+    protected UIStage uiStage;         //ステージUI
 
     protected enum StatusName
     {
@@ -51,6 +52,7 @@ public class CharacterBase : MonoBehaviour
         animator = GetComponent<Animator>();
         //スクリプト取得
         gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
+        uiStage = GameObject.Find("StageUI").GetComponent<UIStage>();
 
         //ステータス設定
         //体力

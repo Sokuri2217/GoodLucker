@@ -60,11 +60,75 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7657966619581158213, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -6445187959029219910, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -6370085079684087283, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -5195048882033904264, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -3542885339558904099, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -3086436065929644917, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -1781356600409242780, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -203856693384778745, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171100556185337, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_Name
       value: Boss_Wolf
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1082271958561512970, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3135921509060577837, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956882556502346796, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7070422839399690976, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8125573954171918538, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655780843288868794, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911611570971537578, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -273,6 +337,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af38f667bb485dc46b01b57f767c9890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 0
+  currentHp: 0
+  originStatus: 00000000000000000000000000000000
+  status: 00000000000000000000000000000000
+  critical: 0
+  addStatus:
+  - 0
+  - 0
+  - 0
+  - 0
+  addStatusLimit:
+  - 0
+  - 0
+  - 0
+  - 0
+  addStatusTimer:
+  - 0
+  - 0
+  - 0
+  - 0
+  invincible: 0
+  inviLimit: 0
+  inviTimer: 0
+  animatorName: 
+  isAttack: 0
+  playerPos: {fileID: 0}
+  playerController: {fileID: 0}
+  weapon: {fileID: 0}
 --- !u!54 &5088025458911602440
 Rigidbody:
   m_ObjectHideFlags: 0

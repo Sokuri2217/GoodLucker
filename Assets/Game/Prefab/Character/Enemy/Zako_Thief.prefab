@@ -1,5 +1,103 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4853472529609387765
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9002851028568005260}
+  - component: {fileID: 4973673724407562715}
+  - component: {fileID: 589177282192246170}
+  - component: {fileID: 1956943501010975590}
+  m_Layer: 0
+  m_Name: AttackCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9002851028568005260
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853472529609387765}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5117105256361979712}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4973673724407562715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853472529609387765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6d59adfc24531643be1aac10108ede1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAttack: 0
+  enemyTag: Player
+  collider: {fileID: 0}
+  character: {fileID: 0}
+--- !u!65 &589177282192246170
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853472529609387765}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.2561027, z: 0.3075059}
+  m_Center: {x: -0.000000019367732, y: 0.26333845, z: -0.020713978}
+--- !u!54 &1956943501010975590
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853472529609387765}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &7246506166729906920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8,6 +106,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9123978852490959672, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -9070493210130169274, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -52,6 +158,66 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7760786952023322420, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -7657966619581158213, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -6370085079684087283, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -5711465929836668559, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -5195048882033904264, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -3944456689697044043, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -3542885339558904099, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -3086436065929644917, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -2937149141965382543, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -1462064639112088997, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -567240014926860372, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -290750445479886849, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -203856693384778745, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171100556185337, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 390961419295672086, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
       propertyPath: m_Name
       value: Zako_Thief
@@ -64,6 +230,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1082271958561512970, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715566404302941441, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3135921509060577837, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
       propertyPath: m_Controller
       value: 
@@ -72,9 +250,20 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6641415023961179947, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8714665655525456601, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2563496969622287784, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9002851028568005260}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
       insertIndex: -1
@@ -208,6 +397,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5198959, y: 0.6193759, z: 0.47655886}
   m_Center: {x: 0.022652656, y: -0.19031294, z: 0.05574228}
+--- !u!4 &5117105256361979712 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2563496969622287784, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
+  m_PrefabInstance: {fileID: 7246506166729906920}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5678278060459530472 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6170625038081293824, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
@@ -326,16 +520,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6edaf5fd77a224f875e2353a40b977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 0
+  maxHp: 100
   currentHp: 0
   originStatus: 00000000000000000000000000000000
-  status: 00000000000000000000000000000000
+  status: 32000000320000003200000032000000
   critical: 0
   addStatus:
-  - 0
-  - 0
-  - 0
-  - 0
+  - 1
+  - 1
+  - 1
+  - 1
   addStatusLimit:
   - 0
   - 0
@@ -347,8 +541,22 @@ MonoBehaviour:
   - 0
   - 0
   invincible: 0
-  inviLimit: 0
+  inviLimit: 1
   inviTimer: 0
-  animatorName: 
+  animatorName: ThiefMove
+  isAttack: 0
   playerPos: {fileID: 0}
   playerController: {fileID: 0}
+  weapon: {fileID: 4973673724407562715}
+  dashSpeed: 1
+  viewAngle: 120
+  chaseRange: 50
+  moveRadius: 50
+  moveLimit: 5
+  moveTimer: 0
+  isChase: 0
+  otherLayerMasks:
+    serializedVersion: 2
+    m_Bits: 2048
+  animaSetNum: 0
+  attackDistance: 5

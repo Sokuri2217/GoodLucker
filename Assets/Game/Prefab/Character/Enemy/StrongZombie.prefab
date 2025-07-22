@@ -60,15 +60,39 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7657966619581158213, guid: 908820f464b326e4c92bc617d8b80b5a, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -6445187959029219910, guid: 908820f464b326e4c92bc617d8b80b5a, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -3086436065929644917, guid: 908820f464b326e4c92bc617d8b80b5a, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: -1956081490175951257, guid: 908820f464b326e4c92bc617d8b80b5a, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 908820f464b326e4c92bc617d8b80b5a, type: 3}
       propertyPath: m_Name
-      value: Zako_StrongZombie
+      value: StrongZombie
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 908820f464b326e4c92bc617d8b80b5a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 908820f464b326e4c92bc617d8b80b5a, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1082271958561512970, guid: 908820f464b326e4c92bc617d8b80b5a, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3135921509060577837, guid: 908820f464b326e4c92bc617d8b80b5a, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -79,6 +103,10 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 908820f464b326e4c92bc617d8b80b5a, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8911611570971537578, guid: 908820f464b326e4c92bc617d8b80b5a, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -358,5 +386,19 @@ MonoBehaviour:
   inviLimit: 0
   inviTimer: 0
   animatorName: 
+  isAttack: 0
   playerPos: {fileID: 0}
   playerController: {fileID: 0}
+  weapon: {fileID: 0}
+  dashSpeed: 0
+  viewAngle: 0
+  chaseRange: 0
+  moveRadius: 0
+  moveLimit: 0
+  moveTimer: 0
+  isChase: 0
+  otherLayerMasks:
+    serializedVersion: 2
+    m_Bits: 0
+  animaSetNum: 0
+  attackDistance: 0

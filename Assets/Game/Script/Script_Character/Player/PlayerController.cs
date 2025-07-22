@@ -34,7 +34,6 @@ public class PlayerController : CharacterBase
     [Header("スクリプト参照")]
     public WeaponBase weapon;                    //武器
     protected CameraController cameraController; //カメラ
-    protected UIStage uiStage;                   //ステージUI
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -95,13 +94,6 @@ public class PlayerController : CharacterBase
             {
                 UseBasicAttack();  //通常
                 UseSpSkill();      //特殊
-            }
-        }
-        //体力
-        {
-            if (currentHp <= 0)
-            {
-                uiStage.gameOver = true;
             }
         }
     }
