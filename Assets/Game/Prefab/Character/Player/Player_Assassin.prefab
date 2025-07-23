@@ -240,7 +240,10 @@ MonoBehaviour:
   currentAttack: 0
   enemyTag: Enemy
   collider: {fileID: 0}
+  basicDamage: {fileID: 8300000, guid: c893178e7322d774ea292aca6b952b79, type: 3}
+  criticalDamage: {fileID: 8300000, guid: 144df697ad6a21b44be35886ed734944, type: 3}
   character: {fileID: 0}
+  se: {fileID: 0}
 --- !u!65 &8221104659524968751
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -987,6 +990,7 @@ MonoBehaviour:
   inviLimit: 1
   inviTimer: 0
   animatorName: AssassinMove
+  se: {fileID: 0}
   dashSpeed: 1.2
   avoidDistance: 5
   avoidSecond: 1

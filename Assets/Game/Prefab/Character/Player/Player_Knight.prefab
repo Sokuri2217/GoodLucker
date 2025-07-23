@@ -702,6 +702,7 @@ MonoBehaviour:
   inviLimit: 1
   inviTimer: 0
   animatorName: KnightMove
+  se: {fileID: 0}
   dashSpeed: 1.2
   avoidDistance: 5
   avoidSecond: 1
@@ -961,7 +962,10 @@ MonoBehaviour:
   currentAttack: 0
   enemyTag: Enemy
   collider: {fileID: 0}
+  basicDamage: {fileID: 8300000, guid: 0a72129f821dc7044a253f9c9e269217, type: 3}
+  criticalDamage: {fileID: 8300000, guid: 144df697ad6a21b44be35886ed734944, type: 3}
   character: {fileID: 0}
+  se: {fileID: 0}
 --- !u!65 &2901205364119706195
 BoxCollider:
   m_ObjectHideFlags: 0

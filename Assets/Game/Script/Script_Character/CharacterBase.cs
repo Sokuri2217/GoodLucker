@@ -27,13 +27,14 @@ public class CharacterBase : MonoBehaviour
     public string animatorName; //BlendTree名
 
     [Header("コンポーネント参照")]
-    protected Rigidbody rb;       //物理挙動
-    protected NavMeshAgent agent; //経路探索
-    protected Animator animator;  //アニメーション
+    protected Rigidbody rb;          //物理挙動
+    protected NavMeshAgent agent;    //経路探索
+    protected Animator animator;     //アニメーション
 
     [Header("スクリプト参照")]
     protected GameManager gameManager; //ゲーム基盤
     protected UIStage uiStage;         //ステージUI
+    public SEManager se;               //効果音
 
     protected enum StatusName
     {
@@ -133,14 +134,13 @@ public class CharacterBase : MonoBehaviour
                 float defence = ((float)status[(int)StatusName.DEF] / 200.0f);
                 int acitveDamage = (int)(damage * (1.0f - defence));
                 currentHp -= acitveDamage;
-                
             }
             else
             {
                 //相手の防御力を無視し、さらに攻撃力を上げる
                 //キャラクターのAGIの値に応じて倍率を変える
-                float criticalDamage = (1.0f + ((float)status[(int)StatusName.AGI] / 200.0f));
-                int activeDamage = (int)(damage * criticalDamage);
+                float addCritical = (1.0f + ((float)status[(int)StatusName.AGI] / 200.0f));
+                int activeDamage = (int)(damage * addCritical);
                 currentHp -= activeDamage;
             }
             //無敵状態にする

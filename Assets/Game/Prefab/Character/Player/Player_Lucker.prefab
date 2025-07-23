@@ -91,7 +91,10 @@ MonoBehaviour:
   currentAttack: 0
   enemyTag: Enemy
   collider: {fileID: 0}
+  basicDamage: {fileID: 8300000, guid: 7e2632f03689e9e449e7f762f6fdac79, type: 3}
+  criticalDamage: {fileID: 8300000, guid: 144df697ad6a21b44be35886ed734944, type: 3}
   character: {fileID: 0}
+  se: {fileID: 0}
 --- !u!65 &1260032433135175706
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -833,6 +836,7 @@ MonoBehaviour:
   inviLimit: 1
   inviTimer: 0
   animatorName: LuckerMove
+  se: {fileID: 0}
   dashSpeed: 1.2
   avoidDistance: 5
   avoidSecond: 1

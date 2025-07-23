@@ -522,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 943350b307caa2b4c9c225be7081a5e1, type: 2}
     - target: {fileID: 5866666021909216657, guid: 77c41038a3eeb0444af71f86d4b02368, type: 3}
       propertyPath: m_ApplyRootMotion
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6081355108740403386, guid: 77c41038a3eeb0444af71f86d4b02368, type: 3}
       propertyPath: m_Layer
@@ -719,8 +719,9 @@ MonoBehaviour:
   inviLimit: 1
   inviTimer: 0
   animatorName: WarriorMove
+  se: {fileID: 0}
   dashSpeed: 1.2
-  avoidDistance: 5
+  avoidDistance: 4
   avoidSecond: 1
   IntervalLimit:
   - 1.3
@@ -1032,7 +1033,10 @@ MonoBehaviour:
   currentAttack: 0
   enemyTag: Enemy
   collider: {fileID: 0}
+  basicDamage: {fileID: 8300000, guid: d40ea2f545c08d54b98cd726d2cbadd8, type: 3}
+  criticalDamage: {fileID: 8300000, guid: 144df697ad6a21b44be35886ed734944, type: 3}
   character: {fileID: 0}
+  se: {fileID: 0}
 --- !u!65 &4056017098475983007
 BoxCollider:
   m_ObjectHideFlags: 0

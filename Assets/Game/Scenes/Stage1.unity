@@ -1132,10 +1132,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAttack: 50
-  weaponMaster: 
   enemyTag: Player
   collider: {fileID: 0}
+  basicDamage: {fileID: 0}
+  criticalDamage: {fileID: 0}
   character: {fileID: 0}
+  se: {fileID: 0}
 --- !u!4 &1172635609 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2311582603390867632, guid: 8be88f05304cfe442b88dbc39b4837e5, type: 3}
@@ -1486,89 +1488,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7873127201371255783, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: clearkillCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5335011829208722702}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 5335011829208722703}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 5335011829208722703}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GetSceneName
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: ClickSE
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: ButtonClick
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: ButtonStage, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: ButtonBase, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: ButtonScene, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659742082489823917, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
---- !u!114 &5335011829208722702 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2087928722673122906, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-  m_PrefabInstance: {fileID: 5335011829208722701}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0909cad17bb0c44ea0e36cd6fdfeb95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5335011829208722703 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9217128377243279925, guid: 04a80e8ec023627489f53ad51f01b8c7, type: 3}
-  m_PrefabInstance: {fileID: 5335011829208722701}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89859a4c2bd731548b8c1c8760081f99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

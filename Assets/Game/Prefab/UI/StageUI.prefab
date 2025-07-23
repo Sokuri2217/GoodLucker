@@ -220,6 +220,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6239703677513474562}
+        m_TargetAssemblyTypeName: ButtonBase, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6239703677513474562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,10 +554,14 @@ MonoBehaviour:
   - {fileID: 1102680249, guid: 49eda5a560c615a4db3ac83decf1b112, type: 3}
   - {fileID: -1114702177, guid: 49eda5a560c615a4db3ac83decf1b112, type: 3}
   - {fileID: -682561714, guid: 8be10a0b9a411f645a4b2f2c810bf914, type: 3}
+  clearBGM: {fileID: 8300000, guid: 910abdf69cf69df4383cf727d0ac1741, type: 3}
+  overBGM: {fileID: 8300000, guid: 3d13bd819b84d0c4b9870542617de445, type: 3}
   playerController: {fileID: 0}
   isGame: 0
   gameClear: 0
   gameOver: 0
+  clearkillCount: 1
+  killBossCount: 0
 --- !u!1 &1330532310745673004
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,19 +993,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2087928722673122906}
         m_TargetAssemblyTypeName: ButtonStage, Assembly-CSharp
-        m_MethodName: Retry
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2087928722673122906}
-        m_TargetAssemblyTypeName: ButtonStage, Assembly-CSharp
-        m_MethodName: YesExit
+        m_MethodName: GetSceneName
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1014,6 +1018,18 @@ MonoBehaviour:
       - m_Target: {fileID: 9217128377243279925}
         m_TargetAssemblyTypeName: ButtonScene, Assembly-CSharp
         m_MethodName: ButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9217128377243279925}
+        m_TargetAssemblyTypeName: ButtonBase, Assembly-CSharp
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2038,6 +2054,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 945098575161814215}
+        m_TargetAssemblyTypeName: ButtonBase, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &945098575161814215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3017,6 +3045,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4628950020485921778}
+        m_TargetAssemblyTypeName: ButtonBase, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4628950020485921778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3972,6 +4012,18 @@ MonoBehaviour:
       - m_Target: {fileID: 7031532547218857514}
         m_TargetAssemblyTypeName: ButtonScene, Assembly-CSharp
         m_MethodName: ButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7031532547218857514}
+        m_TargetAssemblyTypeName: ButtonBase, Assembly-CSharp
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

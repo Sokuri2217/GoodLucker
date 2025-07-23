@@ -24,8 +24,10 @@ public class UIStage : UIBase
     public int[] createCount=new int[4]; //集計用
     [Header("コンポーネント参照")]
     public Image hp;                        //体力ゲージ
-    public Image[] change = new Image[4];             //ステータスの変化状態
+    public Image[] change = new Image[4];   //ステータスの変化状態
     public Sprite[] upDown = new Sprite[3]; //増減
+    public AudioClip clearBGM;              //クリアBGM
+    public AudioClip overBGM;               //ゲームオーバーBGM
     [Header("スクリプト参照")]
     public PlayerController playerController;
     [Header("ゲーム状態")]
@@ -44,6 +46,10 @@ public class UIStage : UIBase
     {
         base.Start();
 
+        //ゲーム状態の設定
+        gameClear = false;
+        gameOver = false;
+        isGame = true;
         //オブジェクトを非表示
         for (int i = 0; i < 4; i++) 
         {
@@ -58,10 +64,6 @@ public class UIStage : UIBase
         currentSceneName = SceneManager.GetActiveScene().name;
         // マウスカーソルを画面中央に固定
         Cursor.lockState = CursorLockMode.Locked;
-        //ゲーム状態の設定
-        isGame = true;
-        gameClear = false;
-        gameOver = false;
     }
 
     // Update is called once per frame
@@ -107,11 +109,15 @@ public class UIStage : UIBase
         //プレイ結果
         {
             //ゲームクリア条件
-            if(killBossCount>=clearkillCount)
+            if (killBossCount >= clearkillCount) 
             {
                 gameClear = true;
             }
-            //ゲームオーバー条件はPlayerControllerに記入
+            //ゲームオーバー条件
+            if (playerController.currentHp <= 0 && !gameOver)   
+            {
+                gameOver = true;
+            }
 
             if(isGame)
             {
@@ -218,11 +224,6 @@ public class UIStage : UIBase
                 break;
         }
     }
-    //死亡処理
-    public void GameOver()
-    {
-        gameOver = true;
-    }
 
     //プレイ結果
     public void CheckResultState()
@@ -233,6 +234,8 @@ public class UIStage : UIBase
             isGame = false;
             overPanel.SetActive(true);
             mainPanel.SetActive(false);
+            //BGM
+            bgmManager.PlayBGM(overBGM);
             // マウスカーソルの固定を外す
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0.0f;
@@ -243,6 +246,8 @@ public class UIStage : UIBase
             isGame = false;
             clearPanel.SetActive(true);
             mainPanel.SetActive(false);
+            //BGM
+            bgmManager.PlayBGM(clearBGM);
             //マウスカーソルの固定を外す
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0.0f;

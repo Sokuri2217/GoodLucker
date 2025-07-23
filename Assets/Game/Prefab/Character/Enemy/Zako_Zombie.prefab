@@ -69,7 +69,10 @@ MonoBehaviour:
   currentAttack: 0
   enemyTag: Player
   collider: {fileID: 0}
+  basicDamage: {fileID: 8300000, guid: c43887dc7123bbd48b61d44cefebda8d, type: 3}
+  criticalDamage: {fileID: 8300000, guid: 144df697ad6a21b44be35886ed734944, type: 3}
   character: {fileID: 0}
+  se: {fileID: 0}
 --- !u!1001 &2854962601386360667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -404,6 +407,7 @@ MonoBehaviour:
   inviLimit: 1
   inviTimer: 0
   animatorName: ZombieMove
+  se: {fileID: 0}
   isAttack: 0
   playerPos: {fileID: 0}
   playerController: {fileID: 0}

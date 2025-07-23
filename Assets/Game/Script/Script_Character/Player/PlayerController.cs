@@ -100,14 +100,6 @@ public class PlayerController : CharacterBase
                 UseSpSkill();      //特殊
             }
         }
-        //死亡処理
-        {
-            if (currentHp <= 0 && uiStage.isGame) 
-            {
-                uiStage.isGame = false;
-                animator.SetTrigger("Die");
-            }
-        }
     }
 
     //水平方向の移動

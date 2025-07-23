@@ -8,8 +8,12 @@ public class WeaponBase : MonoBehaviour
     public string enemyTag;     //攻撃対象のタグ
     [Header("コライダー")]
     public new Collider collider; //当たり判定
+    [Header("SE")]
+    public AudioClip basicDamage;    //通常被弾
+    public AudioClip criticalDamage; //クリティカル被弾
     [Header("スクリプト参照")]
     public CharacterBase character; //ゲーム内のキャラクター全般
+    public SEManager se;            //効果音
 
     //ステータス識別用
     protected enum StatusName
@@ -24,6 +28,8 @@ public class WeaponBase : MonoBehaviour
     {
         //コンポーネント取得
         collider = GetComponent<Collider>();
+        //スクリプト取得
+        se = GameObject.Find("SEManager").GetComponent<SEManager>();
         //当たり判定を無効化
         collider.enabled = false;
     }
@@ -46,9 +52,14 @@ public class WeaponBase : MonoBehaviour
         character = other.GetComponentInParent<CharacterBase>();
         if (other.gameObject.CompareTag("Player") && !character.invincible) 
         {
-            Debug.Log("被弾した");
+            if(character.critical)
+            {
+                //クリティカル音
+                se.seSource.PlayOneShot(criticalDamage);
+            }
+            //攻撃音
+            se.seSource.PlayOneShot(basicDamage);
             character.currentHp = character.TakeDamage(currentAttack);
-            
         }
     }
 }

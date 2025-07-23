@@ -24,6 +24,7 @@ public class BGMManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); // シーンをまたいでオブジェクトを保持
     }
 
+    //BGM再生
     public void PlayBGM(AudioClip bgmClip)
     {
         bgmSource.clip = bgmClip;
