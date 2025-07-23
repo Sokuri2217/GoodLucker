@@ -24,6 +24,9 @@ public class EnemyBase : CharacterBase
             if (i == (int)StatusName.AGI)
                 agent.speed = status[i];
         }
+
+        //UŒ‚‘ÎÛ‚ğPlayer‚Éİ’è
+        weapon.enemyTag = "Player";
     }
 
     // Update is called once per frame

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : CharacterBase
@@ -59,6 +60,9 @@ public class PlayerController : CharacterBase
             if (i == (int)StatusName.AGI)
                 agent.speed = status[i];
         }
+
+        //攻撃対象をEnemyに設定
+        weapon.enemyTag = "Enemy";
     }
 
     // Update is called once per frame
@@ -94,6 +98,14 @@ public class PlayerController : CharacterBase
             {
                 UseBasicAttack();  //通常
                 UseSpSkill();      //特殊
+            }
+        }
+        //死亡処理
+        {
+            if (currentHp <= 0 && uiStage.isGame) 
+            {
+                uiStage.isGame = false;
+                animator.SetTrigger("Die");
             }
         }
     }

@@ -12,6 +12,6 @@ public class GameStart : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
-        Instantiate(playerPrefab[gameManager.selectCharacter], this.transform);
+        Instantiate(playerPrefab[gameManager.selectCharacter], this.transform.position, this.transform.rotation, null);
     }
 }

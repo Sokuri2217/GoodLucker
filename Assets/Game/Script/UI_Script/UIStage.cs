@@ -111,11 +111,7 @@ public class UIStage : UIBase
             {
                 gameClear = true;
             }
-            //ゲームオーバー条件
-            if (playerController.currentHp <= 0) 
-            {
-                gameOver = true;
-            }
+            //ゲームオーバー条件はPlayerControllerに記入
 
             if(isGame)
             {
@@ -221,6 +217,11 @@ public class UIStage : UIBase
                 Time.timeScale = 0.0f;
                 break;
         }
+    }
+    //死亡処理
+    public void GameOver()
+    {
+        gameOver = true;
     }
 
     //プレイ結果

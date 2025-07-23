@@ -4,8 +4,8 @@ using UnityEngine;
 public class WeaponBase : MonoBehaviour
 {
     [Header("攻撃")]
-    public int currentAttack; //攻撃力
-    public string enemyTag;  //攻撃対象のタグ
+    public int currentAttack;   //攻撃力
+    public string enemyTag;     //攻撃対象のタグ
     [Header("コライダー")]
     public new Collider collider; //当たり判定
     [Header("スクリプト参照")]
@@ -43,11 +43,12 @@ public class WeaponBase : MonoBehaviour
     //ダメージ処理
     public void OnTriggerEnter(Collider other)
     {
-        character = other.GetComponent<CharacterBase>();
-        if (other.gameObject.CompareTag(enemyTag) && !character.invincible) 
+        character = other.GetComponentInParent<CharacterBase>();
+        if (other.gameObject.CompareTag("Player") && !character.invincible) 
         {
             Debug.Log("被弾した");
             character.currentHp = character.TakeDamage(currentAttack);
+            
         }
     }
 }
