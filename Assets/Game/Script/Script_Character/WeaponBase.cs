@@ -9,6 +9,7 @@ public class WeaponBase : MonoBehaviour
     [Header("コライダー")]
     public new Collider collider; //当たり判定
     [Header("SE")]
+    public AudioSource seSource;     //コンポーネント
     public AudioClip basicDamage;    //通常被弾
     public AudioClip criticalDamage; //クリティカル被弾
     [Header("スクリプト参照")]
@@ -28,10 +29,13 @@ public class WeaponBase : MonoBehaviour
     {
         //コンポーネント取得
         collider = GetComponent<Collider>();
+        seSource = GetComponent<AudioSource>();
         //スクリプト取得
         se = GameObject.Find("SEManager").GetComponent<SEManager>();
         //当たり判定を無効化
         collider.enabled = false;
+        //SEManagerから音量を取得
+        seSource.volume = se.seSource.volume;
     }
 
     //当たり判定を有効化
@@ -50,15 +54,15 @@ public class WeaponBase : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         character = other.GetComponentInParent<CharacterBase>();
-        if (other.gameObject.CompareTag("Player") && !character.invincible) 
+        if (other.gameObject.CompareTag(enemyTag) && !character.invincible) 
         {
             if(character.critical)
             {
                 //クリティカル音
-                se.seSource.PlayOneShot(criticalDamage);
+                seSource.PlayOneShot(criticalDamage);
             }
             //攻撃音
-            se.seSource.PlayOneShot(basicDamage);
+            seSource.PlayOneShot(basicDamage);
             character.currentHp = character.TakeDamage(currentAttack);
         }
     }

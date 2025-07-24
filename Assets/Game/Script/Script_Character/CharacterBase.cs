@@ -9,32 +9,25 @@ public class CharacterBase : MonoBehaviour
     [Header("ステータス(攻撃・防御・速度・運)")]
     public int[] originStatus = new int[4]; //初期ステータス
     public int[] status = new int[4];       //ステータス
-    public bool critical;     //クリティカル判定
-
+    public bool critical;                   //クリティカル判定
     [Header("上昇率(攻撃・防御・速度・運)")]
     public float[] addStatus = new float[4];
-
     [Header("ステータス変化の持続時間(攻撃・防御・速度・運)")]
     public float[] addStatusLimit = new float[4]; //制限時間
     public float[] addStatusTimer = new float[4]; //計測用
-
     [Header("無敵判定")]
     public bool invincible; //無敵中かどうか
     public float inviLimit; //無敵時間
     public float inviTimer; //計測用
-
     [Header("アニメーション")]
     public string animatorName; //BlendTree名
-
     [Header("コンポーネント参照")]
-    protected Rigidbody rb;          //物理挙動
-    protected NavMeshAgent agent;    //経路探索
-    protected Animator animator;     //アニメーション
-
+    protected Rigidbody rb;       //物理挙動
+    protected NavMeshAgent agent; //経路探索
+    protected Animator animator;  //アニメーション
     [Header("スクリプト参照")]
     protected GameManager gameManager; //ゲーム基盤
     protected UIStage uiStage;         //ステージUI
-    public SEManager se;               //効果音
 
     protected enum StatusName
     {
@@ -74,6 +67,11 @@ public class CharacterBase : MonoBehaviour
         {
             //HPが0未満にならないようにする
             currentHp = 0;
+        }
+        if(currentHp >= maxHp)
+        {
+            //現在のHPが最大Hpを超えないようにする
+            currentHp = maxHp;
         }
         //ステータス更新
         for (int i = (int)StatusName.STR; i <= (int)StatusName.LUK; i++) 

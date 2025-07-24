@@ -15,5 +15,18 @@ public class NecromancerController : BossController
     protected override void Update()
     {
         base.Update();
+
+        //能力
+        {
+            PowerUpEnemy();
+        }
+    }
+    public void PowerUpEnemy()
+    {
+        for (int i = 0; i <= (int)StatusName.LUK; i++) 
+        {
+            //自身のステータスの3割を設定
+            addEnemyStatus[i] = status[i] * 0.3f;
+        }
     }
 }
