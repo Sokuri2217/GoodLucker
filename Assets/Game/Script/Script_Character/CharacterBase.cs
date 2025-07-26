@@ -15,6 +15,7 @@ public class CharacterBase : MonoBehaviour
     [Header("ステータス変化の持続時間(攻撃・防御・速度・運)")]
     public float[] addStatusLimit = new float[4]; //制限時間
     public float[] addStatusTimer = new float[4]; //計測用
+    public bool[]  isAdd = new bool[4];           //変化中
     [Header("無敵判定")]
     public bool invincible; //無敵中かどうか
     public float inviLimit; //無敵時間
@@ -76,10 +77,13 @@ public class CharacterBase : MonoBehaviour
         //ステータス更新
         for (int i = (int)StatusName.STR; i <= (int)StatusName.LUK; i++) 
         {
-            status[i] = (int)(originStatus[i] * addStatus[i]);
-            //ステータス上限(基本最大値の1.5倍)
-            if (status[i] >= (gameManager.maxStatus * 1.5f))
-                status[i] = (int)(gameManager.maxStatus * 1.5f);
+            if (isAdd[i]) 
+            {
+                status[i] = (int)(originStatus[i] * addStatus[i]);
+                //ステータス上限(基本最大値の1.5倍)
+                if (status[i] >= (gameManager.maxStatus * 1.5f))
+                    status[i] = (int)(gameManager.maxStatus * 1.5f);
+            }
         }
         //無敵状態の解除
         if(invincible)
@@ -106,6 +110,8 @@ public class CharacterBase : MonoBehaviour
             //いずれかのステータスに倍率がかかったとき
             if (addStatus[i] > 1.0f || addStatus[i] < 1.0f) 
             {
+                //変化フラグをtrueにする
+                isAdd[i] = true;
                 //時間計測
                 addStatusTimer[i] -= Time.deltaTime;
                 //一定時間経過で、元のステータスに戻る
@@ -113,6 +119,10 @@ public class CharacterBase : MonoBehaviour
                 {
                     //倍率を元に戻す
                     addStatus[i] = 1.0f;
+                    //ステータスを元にも戻す
+                    status[i] = originStatus[i];
+                    //変化フラグをfalseにする
+                    isAdd[i] = false;
                     //タイマーを再設定
                     addStatusTimer[i] = addStatusLimit[i];
                 }

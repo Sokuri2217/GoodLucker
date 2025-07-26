@@ -471,6 +471,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss_Necromancer
       objectReference: {fileID: 0}
+    - target: {fileID: 8156264903143787200, guid: 7b30349bcc60a6344a2a4171483798ca, type: 3}
+      propertyPath: dashSpeed
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156264903143787200, guid: 7b30349bcc60a6344a2a4171483798ca, type: 3}
+      propertyPath: moveLimit
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156264903143787200, guid: 7b30349bcc60a6344a2a4171483798ca, type: 3}
+      propertyPath: viewAngle
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156264903143787200, guid: 7b30349bcc60a6344a2a4171483798ca, type: 3}
+      propertyPath: awayRadius
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156264903143787200, guid: 7b30349bcc60a6344a2a4171483798ca, type: 3}
+      propertyPath: moveRadius
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156264903143787200, guid: 7b30349bcc60a6344a2a4171483798ca, type: 3}
+      propertyPath: searchRange
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156264903143787200, guid: 7b30349bcc60a6344a2a4171483798ca, type: 3}
+      propertyPath: awayDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8156264903143787200, guid: 7b30349bcc60a6344a2a4171483798ca, type: 3}
+      propertyPath: otherLayerMasks.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -760,6 +792,12 @@ MonoBehaviour:
   maxYAngle: 60
   horizontalRotation: 0
   verticalRotation: 10
+  originDistance: 5
+  objLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  moveVec: {x: 0, y: 0, z: 0}
+  moveSpeed: 5
 --- !u!1001 &684074681
 PrefabInstance:
   m_ObjectHideFlags: 0

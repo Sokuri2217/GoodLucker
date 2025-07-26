@@ -3111,7 +3111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1764858018046881205
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3962,7 +3962,7 @@ MonoBehaviour:
   fadeImage: {fileID: 5747444776296130589, guid: 89cb79703ca2a24418b5377055a701f1, type: 3}
   fadeColor: {fileID: 0}
   startCount: 1
-  bgm: {fileID: 8300000, guid: 3d52d0e34e5f9a143bbc39ddf6953c94, type: 3}
+  bgm: {fileID: 8300000, guid: dee8c982d5a9a444e83690c6d022f558, type: 3}
   bgmManager: {fileID: 0}
   sceneName:
   - Stage1
@@ -4581,7 +4581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5829797983860880254
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7032,7 +7032,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1539647334758701509
 RectTransform:
   m_ObjectHideFlags: 0

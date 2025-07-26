@@ -25,7 +25,6 @@ public class ZombieController : ZakoController
     protected override void Update()
     {
         base.Update();
-
         //‹­‰»ˆ—
         PowerUpEnemy();
         //EŠQˆ—

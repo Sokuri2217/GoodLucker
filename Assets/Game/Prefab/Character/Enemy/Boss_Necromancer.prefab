@@ -530,15 +530,28 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  isAdd: 00000000
   invincible: 0
   inviLimit: 1
   inviTimer: 0
   animatorName: NecromancerMove
-  se: {fileID: 0}
   isAttack: 0
   playerPos: {fileID: 0}
   playerController: {fileID: 0}
   weapon: {fileID: 8153813678296478730}
+  dashSpeed: 0
+  viewAngle: 120
+  searchRange: 50
+  moveRadius: 50
+  moveLimit: 5
+  moveTimer: 0
+  isAway: 0
+  otherLayerMasks:
+    serializedVersion: 2
+    m_Bits: 2048
+  animaSetNum: 0
+  awayDistance: 50
+  awayRadius: 50
   addEnemyStatus:
   - 0
   - 0

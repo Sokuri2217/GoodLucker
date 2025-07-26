@@ -554,8 +554,8 @@ MonoBehaviour:
   - {fileID: 1102680249, guid: 49eda5a560c615a4db3ac83decf1b112, type: 3}
   - {fileID: -1114702177, guid: 49eda5a560c615a4db3ac83decf1b112, type: 3}
   - {fileID: -682561714, guid: 8be10a0b9a411f645a4b2f2c810bf914, type: 3}
-  clearBGM: {fileID: 8300000, guid: 910abdf69cf69df4383cf727d0ac1741, type: 3}
-  overBGM: {fileID: 8300000, guid: 3d13bd819b84d0c4b9870542617de445, type: 3}
+  clearBGM: {fileID: 8300000, guid: 1f77a77532caea846917eb89a3c3e98d, type: 3}
+  overBGM: {fileID: 8300000, guid: 4336e4f57466e62439797d7ad040d13f, type: 3}
   playerController: {fileID: 0}
   isGame: 0
   gameClear: 0
