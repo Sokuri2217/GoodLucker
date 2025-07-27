@@ -715,11 +715,11 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  isAdd: 00000000
   invincible: 0
   inviLimit: 1
   inviTimer: 0
   animatorName: WarriorMove
-  se: {fileID: 0}
   dashSpeed: 1.2
   avoidDistance: 4
   avoidSecond: 1
@@ -730,7 +730,7 @@ MonoBehaviour:
   - 0
   - 0
   changerLayerName: 
-  rayRange: 2
+  rayRange: 3
   layerMasks:
     serializedVersion: 2
     m_Bits: 960
@@ -1060,8 +1060,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.52041554, y: 0.9893946, z: 0.16117948}
-  m_Center: {x: -0.014738469, y: 0.51379454, z: 0.0021273794}
+  m_Size: {x: 0.52041554, y: 1.3971392, z: 0.16117948}
+  m_Center: {x: -0.014738481, y: 0.71766603, z: 0.0021270744}
 --- !u!82 &8749112385828452348
 AudioSource:
   m_ObjectHideFlags: 0

@@ -47,7 +47,7 @@ public class CharacterBase : MonoBehaviour
         animator = GetComponent<Animator>();
         //スクリプト取得
         gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
-        uiStage = GameObject.Find("StageUI").GetComponent<UIStage>();
+        uiStage = GameObject.FindWithTag("UI").GetComponent<UIStage>();
 
         //ステータス設定
         //体力

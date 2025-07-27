@@ -8,7 +8,8 @@ public class ZombieController : ZakoController
     [Header("強化間隔")]
     public float powerUpLimit; //強化されるまでの時間
     public float powerUpTimer; //計測用
-
+    [Header("敵種判別用")]
+    public int enemyNum;       //敵数の増減処理に使用
     [Header("スクリプト参照")]
     private NecromancerController necromancer; //ボス
 
@@ -55,9 +56,10 @@ public class ZombieController : ZakoController
         //体力が0になったら
         if (currentHp <= 0)
         {
-            //ボスの最大HPの1割を減らす
+            //自身の最大HPの半分をボスにダメージとして与える
             float reflectionDamage = necromancer.maxHp * 0.1f;
             necromancer.currentHp -= (int)reflectionDamage;
+            necromancer.createEnemyCount[enemyNum]--;
         }
     }
 

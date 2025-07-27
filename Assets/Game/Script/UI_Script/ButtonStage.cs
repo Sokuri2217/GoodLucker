@@ -11,7 +11,7 @@ public class ButtonStage : MonoBehaviour
     public void Start()
     {
         //メニュー情報を取得
-        stage = GameObject.Find("StageUI").GetComponent<UIStage>();
+        stage = GameObject.FindWithTag("UI").GetComponent<UIStage>();
         gameManager = GameObject.Find("SelectManager").GetComponent<GameManager>();
     }
     //現在のシーン名を取得

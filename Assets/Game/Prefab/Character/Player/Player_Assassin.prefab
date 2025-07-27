@@ -267,8 +267,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0073136357, y: 0.104968324, z: 0.012359061}
-  m_Center: {x: 0.00018663133, y: 0.035985027, z: 0.000090866684}
+  m_Size: {x: 0.007313636, y: 0.15169896, z: 0.012359062}
+  m_Center: {x: 0.00018663943, y: 0.059350085, z: 0.00009086741}
 --- !u!82 &5009425136985567898
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1087,11 +1087,11 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  isAdd: 00000000
   invincible: 0
   inviLimit: 1
   inviTimer: 0
   animatorName: AssassinMove
-  se: {fileID: 0}
   dashSpeed: 1.2
   avoidDistance: 5
   avoidSecond: 1
@@ -1102,7 +1102,7 @@ MonoBehaviour:
   - 0
   - 0
   changerLayerName: 
-  rayRange: 2
+  rayRange: 3
   layerMasks:
     serializedVersion: 2
     m_Bits: 960

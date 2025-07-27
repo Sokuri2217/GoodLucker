@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.46
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -38,15 +38,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -99,6 +99,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_Name
       value: Boss_Wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b5a130fa6d18043418151be16680ece7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b5a130fa6d18043418151be16680ece7, type: 3}
       propertyPath: m_TagString
@@ -357,6 +361,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  isAdd: 00000000
   invincible: 0
   inviLimit: 0
   inviTimer: 0

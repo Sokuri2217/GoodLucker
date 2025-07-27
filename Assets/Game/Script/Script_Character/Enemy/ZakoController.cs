@@ -15,12 +15,18 @@ public class ZakoController : EnemyBase
     public float animaSetNum;          //アニメーション制御
     [Header("攻撃")]
     public float attackDistance; //攻撃可能になる距離
+    [Header("ボス")]
+    public string bossName;
+    [Header("スクリプト参照")]
+    public BossController boss; //ステージボス
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         base.Start();
 
+        //スクリプト取得
+        boss = GameObject.Find(bossName).GetComponent<BossController>();
         //初期設定
         moveTimer = moveLimit; //徘徊先の設定
     }
@@ -46,41 +52,10 @@ public class ZakoController : EnemyBase
     //移動処理
     public void Move3D()
     {
-        //徘徊
-        if(!isChase)
-        {
-            Vector3 movePos;
-            if (moveTimer >= moveLimit) 
-            {
-                //自身を中心とした一定範囲内の全てのNavMeshを検索対象にする
-                int moveLayerMask = -1;
-                //ランダムな方向を取得
-                Vector3 randomDirection = Random.insideUnitSphere * moveRadius;
-                randomDirection.y = 0;
-                //目的地までのオフセットを取得
-                randomDirection += transform.position;
-                NavMeshHit navhit;
-                //NavMesh上のみを移動するように調整
-                NavMesh.SamplePosition(randomDirection, out navhit, moveRadius, moveLayerMask);
-                //目的地を設定
-                movePos = navhit.position;
-                //目的地の方に向く(水平回転のみ)
-                transform.forward = randomDirection;
-                //目的地へ移動
-                agent.SetDestination(movePos);
-                //タイマーをリセット
-                moveTimer = 0.0f;
-            }
-            else
-            {
-                //徘徊先の変更までの時間を計測
-                moveTimer += Time.deltaTime;
-            }
-        }
         //追跡
-        else
+        if (isChase || boss.invincible || invincible)  
         {
-            if(!isAttack)
+            if (!isAttack)
             {
                 //プレイヤーの方に向く(水平回転のみ)
                 Vector3 chaseForward = (playerPos.position - transform.position).normalized;
@@ -110,6 +85,37 @@ public class ZakoController : EnemyBase
                 }
                 weapon.currentAttack = status[(int)StatusName.STR];
                 animator.SetTrigger("Attack");
+            }
+        }
+        //徘徊
+        else
+        {
+            Vector3 movePos;
+            if (moveTimer >= moveLimit)
+            {
+                //自身を中心とした一定範囲内の全てのNavMeshを検索対象にする
+                int moveLayerMask = -1;
+                //ランダムな方向を取得
+                Vector3 randomDirection = Random.insideUnitSphere * moveRadius;
+                randomDirection.y = 0;
+                //目的地までのオフセットを取得
+                randomDirection += transform.position;
+                NavMeshHit navhit;
+                //NavMesh上のみを移動するように調整
+                NavMesh.SamplePosition(randomDirection, out navhit, moveRadius, moveLayerMask);
+                //目的地を設定
+                movePos = navhit.position;
+                //目的地の方に向く(水平回転のみ)
+                transform.forward = randomDirection;
+                //目的地へ移動
+                agent.SetDestination(movePos);
+                //タイマーをリセット
+                moveTimer = 0.0f;
+            }
+            else
+            {
+                //徘徊先の変更までの時間を計測
+                moveTimer += Time.deltaTime;
             }
         }
 

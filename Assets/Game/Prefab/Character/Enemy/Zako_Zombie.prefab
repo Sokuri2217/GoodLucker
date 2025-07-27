@@ -198,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89eb002ad14fcee429b0171e84470d21, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89eb002ad14fcee429b0171e84470d21, type: 3}
       propertyPath: m_LocalPosition.y
@@ -214,15 +214,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89eb002ad14fcee429b0171e84470d21, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89eb002ad14fcee429b0171e84470d21, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89eb002ad14fcee429b0171e84470d21, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89eb002ad14fcee429b0171e84470d21, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -339,7 +339,7 @@ PrefabInstance:
       addedObject: {fileID: 5054049630447271172}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89eb002ad14fcee429b0171e84470d21, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4088661209391771944}
+      addedObject: {fileID: -2060880475565233719}
     - targetCorrespondingSourceObject: {fileID: -6170625038081293824, guid: 89eb002ad14fcee429b0171e84470d21, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6697789287390838927}
@@ -470,7 +470,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4088661209391771944
+--- !u!114 &-2060880475565233719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -479,13 +479,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3125415188172734986}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e6edaf5fd77a224f875e2353a40b977, type: 3}
+  m_Script: {fileID: 11500000, guid: f536fd4898f81734ca5cf7445841a783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 200
   currentHp: 0
   originStatus: 00000000000000000000000000000000
-  status: f4010000320000003200000032000000
+  status: 1e0000001e000000140000000a000000
   critical: 0
   addStatus:
   - 1
@@ -502,16 +502,16 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  isAdd: 00000000
   invincible: 0
   inviLimit: 1
   inviTimer: 0
   animatorName: ZombieMove
-  se: {fileID: 0}
   isAttack: 0
   playerPos: {fileID: 0}
   playerController: {fileID: 0}
   weapon: {fileID: 4555688137806611472}
-  dashSpeed: 1
+  dashSpeed: 0
   viewAngle: 120
   chaseRange: 30
   moveRadius: 50
@@ -522,7 +522,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   animaSetNum: 0
-  attackDistance: 5
+  attackDistance: 3
+  bossName: Boss_Necromancer
+  boss: {fileID: 0}
+  deleteLimit: 60
+  deleteTimer: 0
+  powerUpLimit: 30
+  powerUpTimer: 0
+  enemyNum: 0
 --- !u!1 &4672912049362697279 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1781356600409242780, guid: 89eb002ad14fcee429b0171e84470d21, type: 3}

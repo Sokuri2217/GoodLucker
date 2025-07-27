@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 7873127201371255783}
   m_Layer: 5
   m_Name: StageUI
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -529,6 +529,7 @@ MonoBehaviour:
   bgm: {fileID: 8300000, guid: 08b01026b58681e42a40f23ac3fbc646, type: 3}
   bgmManager: {fileID: 0}
   currentSceneName: 
+  uiName: StageUI
   isStop: 0
   mainPanel: {fileID: 3577786780076222815}
   gameStopPanel: {fileID: 1330532310745673004}

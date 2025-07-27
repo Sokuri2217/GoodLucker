@@ -14,7 +14,7 @@ public class CreateStatusChanger : MonoBehaviour
     void Start()
     {
         //コンポーネント取得
-        uiStage = GameObject.Find("StageUI").GetComponent<UIStage>();
+        uiStage = GameObject.FindWithTag("UI").GetComponent<UIStage>();
         //オブジェクト生成
         while(true)
         {

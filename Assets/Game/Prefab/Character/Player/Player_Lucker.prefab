@@ -118,8 +118,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.017238053, y: 0.08733572, z: 0.01492859}
-  m_Center: {x: -0.0000021718977, y: 0.026196845, z: 0.00003489218}
+  m_Size: {x: 0.017238053, y: 0.12498559, z: 0.01492859}
+  m_Center: {x: -0.0000021700819, y: 0.04502193, z: 0.000034900382}
 --- !u!82 &1603375144993372173
 AudioSource:
   m_ObjectHideFlags: 0
@@ -933,11 +933,11 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  isAdd: 00000000
   invincible: 0
   inviLimit: 1
   inviTimer: 0
   animatorName: LuckerMove
-  se: {fileID: 0}
   dashSpeed: 1.2
   avoidDistance: 5
   avoidSecond: 1
@@ -948,7 +948,7 @@ MonoBehaviour:
   - 0
   - 0
   changerLayerName: 
-  rayRange: 2
+  rayRange: 3
   layerMasks:
     serializedVersion: 2
     m_Bits: 960

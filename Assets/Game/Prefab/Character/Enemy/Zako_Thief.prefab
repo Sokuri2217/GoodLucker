@@ -210,15 +210,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8042ed9356042e345a090f77d0dda898, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -614,11 +614,11 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  isAdd: 00000000
   invincible: 0
   inviLimit: 1
   inviTimer: 0
   animatorName: ThiefMove
-  se: {fileID: 0}
   isAttack: 0
   playerPos: {fileID: 0}
   playerController: {fileID: 0}
@@ -634,4 +634,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   animaSetNum: 0
-  attackDistance: 5
+  attackDistance: 3
+  bossName: Boss_Wolf
+  boss: {fileID: 0}

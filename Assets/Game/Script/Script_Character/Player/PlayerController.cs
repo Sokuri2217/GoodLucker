@@ -47,7 +47,7 @@ public class PlayerController : CharacterBase
         cameraController = cameraObj.GetComponent<CameraController>();
 
         //スクリプト取得
-        uiStage = GameObject.Find("StageUI").GetComponent<UIStage>();
+        uiStage = GameObject.FindWithTag("UI").GetComponent<UIStage>();
 
         //ステータス設定
         for (int i = (int)StatusName.STR; i <= ((int)StatusName.LUK); i++)

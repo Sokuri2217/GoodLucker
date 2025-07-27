@@ -539,10 +539,10 @@ MonoBehaviour:
   playerPos: {fileID: 0}
   playerController: {fileID: 0}
   weapon: {fileID: 8153813678296478730}
-  dashSpeed: 0
+  dashSpeed: 1.2
   viewAngle: 120
   searchRange: 50
-  moveRadius: 50
+  moveRadius: 30
   moveLimit: 5
   moveTimer: 0
   isAway: 0
@@ -552,6 +552,19 @@ MonoBehaviour:
   animaSetNum: 0
   awayDistance: 50
   awayRadius: 50
+  zombie:
+  - {fileID: 3125415188172734986, guid: 8be88f05304cfe442b88dbc39b4837e5, type: 3}
+  - {fileID: 7644358245823269913, guid: fb4fc2dca0cba64478d4eca1a0d89ca3, type: 3}
+  createLimit:
+  - 10
+  - 40
+  createTimer:
+  - 0
+  - 0
+  createEnemyLimit: 1400000005000000
+  createEnemyCount: 0000000000000000
+  createRadius: 5
+  createStrong: 0
   addEnemyStatus:
   - 0
   - 0
