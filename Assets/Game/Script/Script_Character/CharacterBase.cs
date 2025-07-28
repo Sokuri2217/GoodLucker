@@ -80,9 +80,6 @@ public class CharacterBase : MonoBehaviour
             if (isAdd[i]) 
             {
                 status[i] = (int)(originStatus[i] * addStatus[i]);
-                //ステータス上限(基本最大値の1.5倍)
-                if (status[i] >= (gameManager.maxStatus * 1.5f))
-                    status[i] = (int)(gameManager.maxStatus * 1.5f);
             }
         }
         //無敵状態の解除
@@ -128,6 +125,26 @@ public class CharacterBase : MonoBehaviour
                 }
             }
         }
+    }
+
+    //クリティカル
+    public bool ActiveCritical()
+    {
+        //乱数
+        int criticalNum = Random.Range(0, 100);
+        //発生確率
+        int activeCritical = (status[(int)StatusName.LUK] / 2);
+        //クリティカル倍率に用いるLUKが1未満にならないようにする
+        if (activeCritical < 1)
+        {
+            activeCritical = 1;
+        }
+        //criticalNumが一定の値以下だとクリティカルになる
+        if (criticalNum <= activeCritical)
+        {
+            return true;
+        }
+        return false;
     }
 
     //ダメージ処理

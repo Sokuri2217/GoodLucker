@@ -594,10 +594,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6edaf5fd77a224f875e2353a40b977, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
+  maxHp: 150
   currentHp: 0
   originStatus: 00000000000000000000000000000000
-  status: f4010000320000003200000032000000
+  status: 3c00000028000000460000003c000000
   critical: 0
   addStatus:
   - 1
@@ -619,21 +619,22 @@ MonoBehaviour:
   inviLimit: 1
   inviTimer: 0
   animatorName: ThiefMove
-  isAttack: 0
-  playerPos: {fileID: 0}
-  playerController: {fileID: 0}
-  weapon: {fileID: 4973673724407562715}
   dashSpeed: 1
   viewAngle: 120
-  chaseRange: 50
+  searchRange: 30
   moveRadius: 50
   moveLimit: 5
   moveTimer: 0
-  isChase: 0
   otherLayerMasks:
     serializedVersion: 2
     m_Bits: 2048
   animaSetNum: 0
+  isWalk: 0
+  isAttack: 0
+  playerPos: {fileID: 0}
+  playerController: {fileID: 0}
+  weapon: {fileID: 4973673724407562715}
+  isChase: 0
   attackDistance: 3
   bossName: Boss_Wolf
   boss: {fileID: 0}

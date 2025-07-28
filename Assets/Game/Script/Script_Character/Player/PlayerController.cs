@@ -166,20 +166,7 @@ public class PlayerController : CharacterBase
         {
             if (Input.GetMouseButtonDown(0))
             {
-                //乱数
-                int criticalNum = Random.Range(0, 100);
-                //発生確率
-                int activeCritical = (status[(int)StatusName.LUK] / 2);
-                //クリティカル倍率に用いるLUKが1未満にならないようにする
-                if (activeCritical < 1) 
-                {
-                    activeCritical = 1;
-                }
-                //criticalNumが一定の値以下だとクリティカルになる
-                if (criticalNum <= activeCritical) 
-                {
-                    critical = true;
-                }
+                critical = ActiveCritical();
                 //武器に自身の攻撃力を渡す
                 weapon.currentAttack = status[(int)StatusName.STR];
                 //アニメーションを再生

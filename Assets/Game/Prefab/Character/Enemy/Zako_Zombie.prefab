@@ -482,10 +482,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f536fd4898f81734ca5cf7445841a783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 200
+  maxHp: 250
   currentHp: 0
   originStatus: 00000000000000000000000000000000
-  status: 1e0000001e000000140000000a000000
+  status: 28000000280000001e0000000a000000
   critical: 0
   addStatus:
   - 1
@@ -507,21 +507,22 @@ MonoBehaviour:
   inviLimit: 1
   inviTimer: 0
   animatorName: ZombieMove
-  isAttack: 0
-  playerPos: {fileID: 0}
-  playerController: {fileID: 0}
-  weapon: {fileID: 4555688137806611472}
   dashSpeed: 0
   viewAngle: 120
-  chaseRange: 30
+  searchRange: 0
   moveRadius: 50
   moveLimit: 5
   moveTimer: 0
-  isChase: 0
   otherLayerMasks:
     serializedVersion: 2
     m_Bits: 2048
   animaSetNum: 0
+  isWalk: 0
+  isAttack: 0
+  playerPos: {fileID: 0}
+  playerController: {fileID: 0}
+  weapon: {fileID: 4555688137806611472}
+  isChase: 0
   attackDistance: 3
   bossName: Boss_Necromancer
   boss: {fileID: 0}

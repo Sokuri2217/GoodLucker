@@ -57,7 +57,7 @@ public class ZombieController : ZakoController
         if (currentHp <= 0)
         {
             //自身の最大HPの半分をボスにダメージとして与える
-            float reflectionDamage = necromancer.maxHp * 0.1f;
+            float reflectionDamage = (maxHp / 2);
             necromancer.currentHp -= (int)reflectionDamage;
             necromancer.createEnemyCount[enemyNum]--;
         }
