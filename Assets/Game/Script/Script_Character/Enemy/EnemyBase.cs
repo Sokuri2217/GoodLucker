@@ -14,7 +14,10 @@ public class EnemyBase : CharacterBase
     public float animaSetNum;          //アニメーション制御
     public bool isWalk;                //徘徊フラグ
     [Header("攻撃")]
-    public bool isAttack; //攻撃中
+    public bool isAttack;         //攻撃中
+    public bool readyAttack;      //攻撃可能
+    public float attackCoolLimit; //クールタイム
+    public float attackCoolTimer; //計測用
     [Header("プレイヤー参照")]
     public Transform playerPos;
     public PlayerController playerController;
@@ -59,6 +62,17 @@ public class EnemyBase : CharacterBase
 
         //移動状態
         isWalk = SearchPlayer();
+
+        //攻撃のクールタイム
+        if (!readyAttack) 
+        {
+            attackCoolTimer += Time.deltaTime;
+            if (attackCoolTimer >= attackCoolLimit) 
+            {
+                readyAttack = true;
+                attackCoolTimer = 0;
+            }
+        }
 
         //徘徊中
         if (isWalk)

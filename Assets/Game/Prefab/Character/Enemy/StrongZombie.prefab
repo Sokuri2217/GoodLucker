@@ -835,21 +835,25 @@ MonoBehaviour:
   inviLimit: 1
   inviTimer: 0
   animatorName: StrongZombieMove
-  isAttack: 0
-  playerPos: {fileID: 0}
-  playerController: {fileID: 0}
-  weapon: {fileID: 6096521014216935637}
   dashSpeed: 1.2
   viewAngle: 120
-  chaseRange: 75
+  searchRange: 0
   moveRadius: 100
   moveLimit: 5
   moveTimer: 0
-  isChase: 0
   otherLayerMasks:
     serializedVersion: 2
     m_Bits: 2048
   animaSetNum: 0
+  isWalk: 0
+  isAttack: 0
+  readyAttack: 0
+  attackCoolLimit: 5
+  attackCoolTimer: 0
+  playerPos: {fileID: 0}
+  playerController: {fileID: 0}
+  weapon: {fileID: 6096521014216935637}
+  isChase: 0
   attackDistance: 5
   bossName: Boss_Necromancer
   boss: {fileID: 0}

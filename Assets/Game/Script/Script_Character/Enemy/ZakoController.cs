@@ -69,8 +69,9 @@ public class ZakoController : EnemyBase
             //ƒvƒŒƒCƒ„[‚Æ‚Ì‹——£
             float playerDistance = Vector3.Distance(transform.position, playerPos.position);
             //ˆê’è‹——£‹ß‚Ã‚­‚ÆUŒ‚‚·‚é
-            if (playerDistance <= attackDistance && !isAttack)
+            if (playerDistance <= attackDistance && !isAttack && readyAttack)
             {
+                readyAttack = false;
                 critical = ActiveCritical();
                 weapon.currentAttack = status[(int)StatusName.STR];
                 animator.SetTrigger("Attack");

@@ -631,6 +631,9 @@ MonoBehaviour:
   animaSetNum: 0
   isWalk: 0
   isAttack: 0
+  readyAttack: 0
+  attackCoolLimit: 3
+  attackCoolTimer: 0
   playerPos: {fileID: 0}
   playerController: {fileID: 0}
   weapon: {fileID: 4973673724407562715}
