@@ -23,14 +23,5 @@ public class WarriorController : PlayerController
     protected override void UseSpSkill()
     {
         base.UseSpSkill();
-
-        if (spSkill)
-        {
-            
-        }
-        else
-        {
-            
-        }
     }
 }

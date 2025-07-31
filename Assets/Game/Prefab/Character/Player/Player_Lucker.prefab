@@ -897,7 +897,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
@@ -913,8 +913,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a43b282f184dd18478550ef8542e993c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 1000
-  currentHp: 0
+  maxHp: 0
+  currentHp: 1000
   originStatus: 00000000000000000000000000000000
   status: 00000000000000000000000000000000
   critical: 0
@@ -924,10 +924,10 @@ MonoBehaviour:
   - 1
   - 1
   addStatusLimit:
-  - 20
-  - 20
-  - 20
-  - 20
+  - 40
+  - 40
+  - 40
+  - 40
   addStatusTimer:
   - 0
   - 0
@@ -947,6 +947,20 @@ MonoBehaviour:
   IntervalTimer:
   - 0
   - 0
+  selectSkill: 0
+  reSelectSkillLimit: 1
+  reSelectSkillTimer: 0
+  reUseSkillLimit:
+  - 30
+  - 30
+  - 30
+  - 30
+  reUseSkillTimer:
+  - 0
+  - 0
+  - 0
+  - 0
+  isUseSkill: 00000000
   changerLayerName: 
   rayRange: 3
   layerMasks:
@@ -960,6 +974,7 @@ MonoBehaviour:
   cameraName: Camera
   cameraTransform: {fileID: 0}
   rotationSpeed: 50
+  useSkillSE: {fileID: 8300000, guid: 59d9d3a2f4cf948438c54a642b40a413, type: 3}
   weapon: {fileID: 8537837829154903164}
 --- !u!195 &-2285894242941894712
 NavMeshAgent:

@@ -369,7 +369,7 @@ TextureImporter:
         width: 291
         height: 101
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -378,6 +378,50 @@ TextureImporter:
       bones: []
       spriteID: c0ea6b0a935f2ba499a3aaf05849ebe8
       internalID: -8716131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Option_Image_2_13
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 799
+        width: 93
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25a088f50127efc48b279ad95217990f
+      internalID: -1847902745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Option_Image_2_14
+      rect:
+        serializedVersion: 2
+        x: 745
+        y: 528
+        width: 93
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce58aefbc1af59b4f8526d0baea02104
+      internalID: 1849486921
       vertices: []
       indices: 
       edges: []
@@ -401,6 +445,8 @@ TextureImporter:
       Option_Image_2_10: 1503273230
       Option_Image_2_11: 1082328376
       Option_Image_2_12: -8716131
+      Option_Image_2_13: -1847902745
+      Option_Image_2_14: 1849486921
       Option_Image_2_2: -1797991651
       Option_Image_2_3: 1225782293
       Option_Image_2_4: 898797181

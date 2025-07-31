@@ -18,7 +18,7 @@ public class WolfController : BossController
     {
         base.Update();
 
-        if (!uiStage.gameClear && !uiStage.gameOver)
+        if (!uiStage.gameClear && !uiStage.gameOver) 
         {
             //移動
             UniqueEnemyMove();

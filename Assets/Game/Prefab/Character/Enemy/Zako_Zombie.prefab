@@ -482,10 +482,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f536fd4898f81734ca5cf7445841a783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 250
-  currentHp: 0
+  maxHp: 0
+  currentHp: 350
   originStatus: 00000000000000000000000000000000
-  status: 28000000280000001e0000000a000000
+  status: 5a0000001e000000280000000a000000
   critical: 0
   addStatus:
   - 1
@@ -509,7 +509,7 @@ MonoBehaviour:
   animatorName: ZombieMove
   dashSpeed: 0
   viewAngle: 120
-  searchRange: 0
+  searchRange: 30
   moveRadius: 50
   moveLimit: 5
   moveTimer: 0

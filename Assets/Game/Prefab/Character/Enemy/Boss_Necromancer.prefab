@@ -510,10 +510,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af3376002ba51224c97faed5b4db9997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 10000
-  currentHp: 0
+  maxHp: 0
+  currentHp: 3500
   originStatus: 00000000000000000000000000000000
-  status: 14000000640000003c00000050000000
+  status: 320000002c0100003c00000050000000
   critical: 0
   addStatus:
   - 1
@@ -535,21 +535,32 @@ MonoBehaviour:
   inviLimit: 1
   inviTimer: 0
   animatorName: NecromancerMove
-  isAttack: 0
-  playerPos: {fileID: 0}
-  playerController: {fileID: 0}
-  weapon: {fileID: 8153813678296478730}
   dashSpeed: 1.2
   viewAngle: 120
   searchRange: 50
   moveRadius: 30
   moveLimit: 5
   moveTimer: 0
-  isAway: 0
   otherLayerMasks:
     serializedVersion: 2
     m_Bits: 2048
   animaSetNum: 0
+  isWalk: 0
+  isAttack: 0
+  readyAttack: 0
+  attackCoolLimit: 0
+  attackCoolTimer: 0
+  playerPos: {fileID: 0}
+  playerController: {fileID: 0}
+  weapon: {fileID: 8153813678296478730}
+  changerLayerName: 
+  rayRange: 0
+  changerlayerMasks:
+    serializedVersion: 2
+    m_Bits: 0
+  searchChanger: 0
+  isDie: 0
+  isAway: 0
   awayDistance: 50
   awayRadius: 50
   zombie:

@@ -10,8 +10,15 @@ public class PlayerController : CharacterBase
     public float avoidSecond;                    //回避時に何秒かけて移動するか
 
     [Header("攻撃")]
-    public float[] IntervalLimit = new float[2]; //各攻撃のクールダウン(通常・特殊)
-    public float[] IntervalTimer = new float[2]; //計測用(通常・特殊)
+    public float[] IntervalLimit = new float[2];   //各攻撃のクールダウン(通常・特殊)
+    public float[] IntervalTimer = new float[2];   //計測用(通常・特殊)
+    public int selectSkill;                        //使用中のスキル
+    public float reSelectSkillLimit;               //使用後、次にスキルを選択できるまでの時間
+    public float reSelectSkillTimer;               //計測用
+    public float[] reUseSkillLimit = new float[4]; //スキルのクールタイム
+    public float[] reUseSkillTimer = new float[4]; //計測用
+    public bool[] isUseSkill = new bool[4];        //使用中のスキル
+
 
     [Header("アイテム取得")]
     public string changerLayerName; //Layer名
@@ -31,10 +38,12 @@ public class PlayerController : CharacterBase
 
     [Header("回転")]
     public float rotationSpeed; //速度
-
+    [Header("音")]
+    public AudioClip useSkillSE; //スキル使用SE
     [Header("スクリプト参照")]
     public WeaponBase weapon;                    //武器
     protected CameraController cameraController; //カメラ
+    protected SEManager seManager;               //SE
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -48,6 +57,7 @@ public class PlayerController : CharacterBase
 
         //スクリプト取得
         uiStage = GameObject.FindWithTag("UI").GetComponent<UIStage>();
+        seManager = GameObject.Find("SEManager").GetComponent<SEManager>();
 
         //ステータス設定
         for (int i = (int)StatusName.STR; i <= ((int)StatusName.LUK); i++)
@@ -60,6 +70,8 @@ public class PlayerController : CharacterBase
             if (i == (int)StatusName.AGI)
                 agent.speed = status[i];
         }
+        //初回はスキルを即座に使えるようにする
+        reSelectSkillTimer = reSelectSkillLimit;
 
         //攻撃対象をEnemyに設定
         weapon.enemyTag = "Enemy";
@@ -162,7 +174,7 @@ public class PlayerController : CharacterBase
     //通常攻撃
     protected virtual void UseBasicAttack()
     {
-        if (!basicAttack)
+        if (!basicAttack && !spSkill) 
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -178,47 +190,39 @@ public class PlayerController : CharacterBase
     //特殊攻撃使用
     protected virtual void UseSpSkill()
     {
-        if (!attackInput[1])
+        //スキル選択画面を表示
+        //一時停止中は入力を受け付けない
+        //使用後、再度選択できるようになるまで少し時間を空ける
+        if (reSelectSkillTimer >= reSelectSkillLimit)
         {
-            if (!spSkill)
+            if (Input.GetKey(KeyCode.R) && uiStage.isGame && !basicAttack)
             {
-                //特殊攻撃使用
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    spSkill = true;
-                    attackInput[1] = true;
-                }
+                spSkill = true;
             }
-            else
+            else if (!Input.GetKey(KeyCode.R))
             {
-                //インターバル設定
-                if (IntervalTimer[1] >= IntervalLimit[1])
-                {
-                    if (!Input.GetKeyDown(KeyCode.R))
-                    {
-                        spSkill = false;
-                        IntervalTimer[1] = 0;
-                    }
-                }
-                else
-                {
-                    //次の攻撃までのインターバルを計測
-                    IntervalTimer[1] += Time.deltaTime;
-                }
-
-                //使用中にもう一度入力すると中止
-                if (Input.GetKeyDown(KeyCode.R))
-                {
-                    spSkill = false;
-                    IntervalTimer[1] = 0;
-                    attackInput[1] = true;
-                }
+                spSkill = false;
             }
         }
-        //再入力可能
-        if (Input.GetKeyUp(KeyCode.R))
+        else
         {
-            attackInput[1] = false;
+            //時間計測
+            reSelectSkillTimer += Time.deltaTime;
+        }
+        //選択スキルの番号を保存
+        selectSkill = uiStage.currentSelectSkill;
+        //スキル使用
+        //左クリックで使用
+        if (Input.GetMouseButtonDown(0) && spSkill && !isUseSkill[selectSkill])
+        {
+            //スキルを使用中にする
+            isUseSkill[selectSkill] = true;
+            //使用音を鳴らす
+            seManager.seSource.PlayOneShot(useSkillSE);
+            //選択画面を閉じる
+            spSkill = false;
+            //タイマーをリセット
+            reSelectSkillTimer = 0;
         }
     }
 

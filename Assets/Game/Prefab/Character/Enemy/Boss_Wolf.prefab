@@ -529,8 +529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af38f667bb485dc46b01b57f767c9890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 5000
-  currentHp: 0
+  maxHp: 0
+  currentHp: 2500
   originStatus: 00000000000000000000000000000000
   status: c8000000640000004b00000046000000
   critical: 0
@@ -578,6 +578,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   searchChanger: 0
+  isDie: 0
   isChase: 0
   normalAttackDistance: 10
 --- !u!54 &5088025458911602440

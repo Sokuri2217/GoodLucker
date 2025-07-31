@@ -23,14 +23,5 @@ public class KnightController : PlayerController
     protected override void UseSpSkill()
     {
         base.UseSpSkill();
-
-        if (spSkill)
-        {
-            
-        }
-        else
-        {
-           
-        }
     }
 }

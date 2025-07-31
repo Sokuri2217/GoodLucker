@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5a0d885acb2d23f4d8a98363aaf7bafc
+guid: 849af3a35fe03564bacd1a4b7b7b5ebf
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -95,12 +95,100 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: HP_Boss_Image_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 860
+        width: 1920
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31184b65413c85440893fc1ebb57a58a
+      internalID: 1677525088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HP_Boss_Image_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 627
+        width: 1920
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc7bcb4bee7dd5b4dad7df4106ac288f
+      internalID: -1178719008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HP_Boss_Image_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 363
+        width: 1920
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ea1aee8ae96c6b47a0347750a643f70
+      internalID: 1485253622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HP_Boss_Image_3
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 3
+        width: 311
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2133ddc80bece043a6c06fd2025b60b
+      internalID: -1449352610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 0eec56be35a4e4143937a5368682e992
     internalID: 0
     vertices: []
     indices: 
@@ -109,7 +197,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      HP_Boss_Image_0: 1677525088
+      HP_Boss_Image_1: -1178719008
+      HP_Boss_Image_2: 1485253622
+      HP_Boss_Image_3: -1449352610
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

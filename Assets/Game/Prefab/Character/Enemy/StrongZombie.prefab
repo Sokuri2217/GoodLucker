@@ -810,10 +810,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f536fd4898f81734ca5cf7445841a783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 2500
-  currentHp: 0
+  maxHp: 0
+  currentHp: 1750
   originStatus: 00000000000000000000000000000000
-  status: 4600000050000000280000000a000000
+  status: 96000000640000005000000032000000
   critical: 0
   addStatus:
   - 1
@@ -837,7 +837,7 @@ MonoBehaviour:
   animatorName: StrongZombieMove
   dashSpeed: 1.2
   viewAngle: 120
-  searchRange: 0
+  searchRange: 50
   moveRadius: 100
   moveLimit: 5
   moveTimer: 0
@@ -854,7 +854,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   weapon: {fileID: 6096521014216935637}
   isChase: 0
-  attackDistance: 5
+  attackDistance: 4
   bossName: Boss_Necromancer
   boss: {fileID: 0}
   deleteLimit: 60

@@ -8,6 +8,7 @@ public class BossController : EnemyBase
     public float rayRange;                 //Rayの距離
     public LayerMask changerlayerMasks;    //レイヤー指定
     public bool searchChanger;             //変化オブジェクトを見つけたかどうか
+    public bool isDie;                     //死亡フラグ
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -24,10 +25,9 @@ public class BossController : EnemyBase
         //searchChanger = SearchChanger();
 
         //死亡処理
-        if (currentHp <= 0) 
+        if (currentHp <= 0 && !isDie)  
         {
-            //体力が0以下になったら死亡アニメーションを再生
-            animator.SetTrigger("Die");
+            DeleteObject();
         }
     }
 

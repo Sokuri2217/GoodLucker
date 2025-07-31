@@ -22,6 +22,9 @@ public class NecromancerController : BossController
     protected override void Start()
     {
         base.Start();
+
+        //初回は中ボス生成を可能にする
+        createTimer[1] = createLimit[1];
     }
 
     // Update is called once per frame
@@ -64,7 +67,7 @@ public class NecromancerController : BossController
     public void CreateEnemy()
     {
         //雑魚敵
-        if (createEnemyCount[0] >= createEnemyLimit[0])  
+        if (createEnemyCount[0] < createEnemyLimit[0])  
         {
             createTimer[0] = 0;
             // 自身を中心としたランダムな位置を取得（XZ平面）
@@ -85,7 +88,7 @@ public class NecromancerController : BossController
             createTimer[0] += Time.deltaTime;
         }
         //中ボス
-        if(createEnemyCount[1] >= createEnemyLimit[1])
+        if(createEnemyCount[1] < createEnemyLimit[1])
         {
             //逃亡中に生成できる
             if (createStrong)
@@ -113,6 +116,13 @@ public class NecromancerController : BossController
             {
                 //時間経過で再度生成可能
                 createTimer[1] += Time.deltaTime;
+                if(createTimer[1] >= createEnemyLimit[1])
+                {
+                    //タイマーをリセット
+                    createTimer[1] = 0;
+                    //中ボスを再生成可能にする
+                    createStrong = true;
+                }
             }
         }
     }

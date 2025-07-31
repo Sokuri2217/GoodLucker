@@ -51,7 +51,7 @@ public class CharacterBase : MonoBehaviour
 
         //ステータス設定
         //体力
-        currentHp = maxHp;
+        maxHp = currentHp;
 
         //タイマー設定
         for (int i = (int)StatusName.STR; i <= (int)StatusName.LUK; i++)
@@ -157,7 +157,8 @@ public class CharacterBase : MonoBehaviour
             {
                 //防御力を基にダメージ量を計算
                 float defence = ((float)status[(int)StatusName.DEF] / 200.0f);
-                int acitveDamage = (int)(damage * (1.0f - defence));
+                float damageCut = (1.0f - defence);
+                int acitveDamage = (int)(damage * damageCut);
                 currentHp -= acitveDamage;
             }
             else

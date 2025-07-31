@@ -8,15 +8,25 @@ public class UIStage : UIBase
     public string currentSceneName;
     [Header("ゲーム状態")]
     public bool isStop;
+    [Header("スキル選択")]
+    public bool isSelectSkillInput;                    //スキル選択画面用
+    public int currentSelectSkill;                     //選択中のスキル番号
+    public int skillNum;                               //スキルの種類数
+    public float slideSkillSpeed;                      //選択中スキル画像をスライドさせる速度
+    public float slideSkillLimit;                      //選択中スキル画像をスライドさせる距離
+    private Vector3[] originSkillPos = new Vector3[4];  //選択中スキル画像の初期座標
+    private Vector3[] currentSkillPos = new Vector3[4]; //選択中スキル画像の現在の座標
     [Header("パネル")]
     public GameObject mainPanel;     //基本UI
+    public GameObject spSkillPanel;  //特殊攻撃UI
     public GameObject gameStopPanel; //一時停止
     public GameObject reallyPanel;   //最終確認
-    public GameObject clearPanel;   //ゲームクリア
-    public GameObject overPanel;   //ゲームオーバー
+    public GameObject clearPanel;    //ゲームクリア
+    public GameObject overPanel;     //ゲームオーバー
     [Header("GUI")]
-    public GameObject[] status = new GameObject[4];   //ステータス変化の制限時間
-    public GameObject changeInput;                    //入力キー
+    public GameObject[] skill = new GameObject[4];  //各スキル選択
+    public GameObject[] status = new GameObject[4]; //ステータス変化の制限時間
+    public GameObject changeInput;                  //入力キー
     [Header("離脱理由(リタイア・リトライ)")]
     public bool[] exit = new bool[2];
     [Header("オブジェクト生成上限")]
@@ -24,12 +34,16 @@ public class UIStage : UIBase
     public int[] createCount=new int[4]; //集計用
     [Header("コンポーネント参照")]
     public Image hp;                        //体力ゲージ
+    public Image[] bossHp;                  //ボスの体力ゲージ
     public Image[] change = new Image[4];   //ステータスの変化状態
     public Sprite[] upDown = new Sprite[3]; //増減
+    public AudioClip selectSkillSE;         //スキル選択SE
     public AudioClip clearBGM;              //クリアBGM
     public AudioClip overBGM;               //ゲームオーバーBGM
     [Header("スクリプト参照")]
     public PlayerController playerController;
+    public BossController bossController;
+    public SEManager seManager;
     [Header("ゲーム状態")]
     public bool isGame;    //プレイ可能
     public bool gameClear; //ゲームクリア
@@ -37,6 +51,7 @@ public class UIStage : UIBase
     [Header("クリア条件")]
     public int clearkillCount; //クリアに必要なボスの討伐数
     public int killBossCount;  //倒したボスの数
+    public string bossName;    //ボスの名前
 
     //長押し防止用
     private bool isInput; 
@@ -46,16 +61,25 @@ public class UIStage : UIBase
     {
         base.Start();
 
+        //スクリプト取得
+        seManager = GameObject.Find("SEManager").GetComponent<SEManager>();
         //ゲーム状態の設定
         gameClear = false;
         gameOver = false;
         isGame = true;
         //オブジェクトを非表示
+        //選択中スキル画像の初期座標を設定
         for (int i = 0; i < 4; i++) 
         {
             status[i].SetActive(false);
+            Transform skillImagePos = skill[i].transform;
+            originSkillPos[i] = skillImagePos.position;
+            currentSkillPos[i] = originSkillPos[i];
         }
+        //初期スキルを設定
+        currentSelectSkill = 0;
         //パネルを非表示
+        spSkillPanel.SetActive(false);
         gameStopPanel.SetActive(false);
         reallyPanel.SetActive(false);
         clearPanel.SetActive(false);
@@ -71,10 +95,17 @@ public class UIStage : UIBase
     {
         base.Update();
 
-        //スクリプト取得
-        if (playerController == null)
+        if(isGame)
         {
-            playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            //スクリプト取得
+            if (playerController == null)
+            {
+                playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            }
+            if (bossController == null)
+            {
+                bossController = GameObject.Find(bossName).GetComponent<BossController>();
+            }
         }
 
         //HPゲージ
@@ -85,42 +116,46 @@ public class UIStage : UIBase
         {
             CheckStatusState();
         }
-        //Escapeを押したとき
+        //決着がついていない状態だけ処理する
+        if (!gameClear && !gameOver)
         {
-            if (!gameClear && !gameOver) 
+            //Escapeを押したとき＆スキル選択中じゃないとき
+            if (Input.GetKeyDown(KeyCode.Escape) && !playerController.spSkill && !isInput) 
             {
-                if (Input.GetKeyDown(KeyCode.Escape) && !isInput)
+                isInput = true;
+                //確認画面が出ているときは動かさない
+                if (!reallyPanel.activeSelf)
                 {
-                    isInput = true;
-                    //確認画面が出ているときは動かさない
-                    if (!reallyPanel.activeSelf)
-                    {
-                        CheckGameState();
-                    }
-                }
-
-                //再入力出来るようにする
-                if (Input.GetKeyUp(KeyCode.Escape))
-                {
-                    isInput = false;
+                    CheckGameState();
                 }
             }
+            //再入力出来るようにする
+            if (Input.GetKeyUp(KeyCode.Escape))
+            {
+                isInput = false;
+            }
+
+            //スキルUIの表示
+            spSkillPanel.SetActive(playerController.spSkill);
+            //選択処理
+            SelectSpSkill();
+
         }
         //プレイ結果
         {
-            //ゲームクリア条件
-            if (killBossCount >= clearkillCount) 
-            {
-                gameClear = true;
-            }
-            //ゲームオーバー条件
-            if (playerController.currentHp <= 0 && !gameOver)   
-            {
-                gameOver = true;
-            }
-
             if(isGame)
             {
+                //ゲームクリア条件
+                if (killBossCount >= clearkillCount && !gameClear)
+                {
+                    gameClear = true;
+                }
+                //ゲームオーバー条件
+                if (playerController.currentHp <= 0 && !gameOver)
+                {
+                    gameOver = true;
+                }
+
                 CheckResultState();
             }
         }
@@ -131,25 +166,52 @@ public class UIStage : UIBase
     public void CheckHpState()
     {
         //プレイヤーの残り体力に応じて描画
-        hp.fillAmount = (float)playerController.currentHp / (float)playerController.maxHp;
-        //残り割合に応じて、色を変化
-        Color color = hp.color;
-        //赤
-        if (hp.fillAmount <= 0.2f)
         {
-            color = new Color32(255, 0, 0, 255);
+            hp.fillAmount = (float)playerController.currentHp / (float)playerController.maxHp;
+            //残り割合に応じて、色を変化
+            Color color = hp.color;
+            //赤
+            if (hp.fillAmount <= 0.2f)
+            {
+                color = new Color32(255, 0, 0, 255);
+            }
+            //黄
+            else if (hp.fillAmount <= 0.6f)
+            {
+                color = new Color32(255, 255, 0, 255);
+            }
+            //白
+            else
+            {
+                color = new Color32(229, 229, 229, 255);
+            }
+            hp.color = color;
         }
-        //黄
-        else if (hp.fillAmount <= 0.6f)
+        //ボスの残り体力に応じて描画
         {
-            color = new Color32(255, 255, 0, 255);
+            for(int i=0;i<clearkillCount;i++)
+            {
+                bossHp[i].fillAmount = (float)bossController.currentHp / (float)bossController.maxHp;
+                //残り割合に応じて、色を変化
+                Color color = bossHp[i].color;
+                //赤
+                if (bossHp[i].fillAmount <= 0.2f)
+                {
+                    color = new Color32(255, 0, 0, 255);
+                }
+                //黄
+                else if (bossHp[i].fillAmount <= 0.6f)
+                {
+                    color = new Color32(255, 255, 0, 255);
+                }
+                //白
+                else
+                {
+                    color = new Color32(229, 229, 229, 255);
+                }
+                bossHp[i].color = color;
+            }
         }
-        //白
-        else
-        {
-            color = new Color32(229, 229, 229, 255);
-        }
-        hp.color = color;
     }
 
     //ステータス
@@ -189,6 +251,94 @@ public class UIStage : UIBase
 
         //入力キーの表示
         changeInput.SetActive(playerController.useChanger);
+    }
+
+    //スキル選択
+    public void SelectSpSkill()
+    {
+        //選択処理
+        if (playerController.spSkill) 
+        {
+            Time.timeScale = 0.0f;
+            //入力
+            if (Input.GetKeyDown(KeyCode.W) && !isSelectSkillInput)
+            {
+                isSelectSkillInput = true;
+                currentSelectSkill--;
+                //選択がループするようにする
+                if (currentSelectSkill < 0)
+                {
+                    currentSelectSkill = (skillNum - 1);
+                }
+                //選択音を鳴らす
+                seManager.seSource.PlayOneShot(selectSkillSE);
+            }
+            else if (Input.GetKeyDown(KeyCode.S) && !isSelectSkillInput) 
+            {
+                isSelectSkillInput= true;
+                currentSelectSkill++;
+                //選択がループするようにする
+                if (currentSelectSkill >= skillNum)
+                {
+                    currentSelectSkill = 0;
+                }
+                //選択音を鳴らす
+                seManager.seSource.PlayOneShot(selectSkillSE);
+            }
+            //選択に必要なキーの入力が全てなくなった時
+            if(!Input.GetKey(KeyCode.W)&& !Input.GetKey(KeyCode.S))
+            {
+                isSelectSkillInput = false;
+            }
+
+            //GUIの反映
+            for (int i = 0; i < skillNum; i++)
+            {
+                //選択中のスキルを少し前にスライドする
+                if (i == currentSelectSkill)
+                {
+                    if (currentSkillPos[i].x >= (originSkillPos[i].x - slideSkillLimit))
+                    {
+                        currentSkillPos[i].x -= slideSkillSpeed;
+                    }
+                }
+                //選択されていないスキルは初期位置のままにする
+                else
+                {
+                    currentSkillPos[i] = originSkillPos[i];
+                }
+                skill[i].transform.position = currentSkillPos[i];
+            }
+        }
+        else if(isGame)
+        {
+            Time.timeScale = 1.0f;
+        }
+
+        for (int i = 0; i < skillNum; i++)
+        {
+            //クールタイム処理
+            Image image = skill[i].GetComponent<Image>();
+            Color color = image.color;
+            if (playerController.isUseSkill[i])
+            {
+                //使用中かつクールタイム中
+                color = Color.black;
+                //クールタイムの計測
+                playerController.reUseSkillTimer[i] += Time.deltaTime;
+                //一定時間経過で再使用可能
+                if (playerController.reUseSkillTimer[i] >= playerController.reUseSkillLimit[i])
+                {
+                    playerController.isUseSkill[i] = false;
+                }
+            }
+            else
+            {
+                //使用可能
+                color = Color.white;
+            }
+            image.color = color;
+        }  
     }
 
     //ゲームの状態をチェック
