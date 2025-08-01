@@ -6,10 +6,8 @@ public class PlayerController : CharacterBase
 {
     [Header("ステータス")]
     public float dashSpeed;                      //ダッシュ倍率
-    public float avoidDistance;                  //回避処理
-    public float avoidSecond;                    //回避時に何秒かけて移動するか
 
-    [Header("攻撃")]
+    [Header("戦闘")]
     public float[] IntervalLimit = new float[2];   //各攻撃のクールダウン(通常・特殊)
     public float[] IntervalTimer = new float[2];   //計測用(通常・特殊)
     public int selectSkill;                        //使用中のスキル
@@ -18,7 +16,11 @@ public class PlayerController : CharacterBase
     public float[] reUseSkillLimit = new float[4]; //スキルのクールタイム
     public float[] reUseSkillTimer = new float[4]; //計測用
     public bool[] isUseSkill = new bool[4];        //使用中のスキル
-
+    public bool[] activeSkill = new bool[4];       //適応中のスキル
+    public float[] activeSkillLimit = new float[4];//スキルの効果時間
+    public float[] activeSkillTimer = new float[4];//計測用
+    public int beforeHp;                           //Hpの保存
+    public bool badStatus;                         //ステータスチェンジャー使用時にデバフにかかるかどうか
 
     [Header("アイテム取得")]
     public string changerLayerName; //Layer名
@@ -26,7 +28,6 @@ public class PlayerController : CharacterBase
     public LayerMask layerMasks;    //レイヤー指定
 
     [Header("フラグ")]
-    public bool isAvoid;                     //回避中
     public bool basicAttack;                 //通常攻撃
     public bool spSkill;                     //特殊攻撃
     public bool[] attackInput = new bool[2]; //各攻撃入力中
@@ -39,7 +40,8 @@ public class PlayerController : CharacterBase
     [Header("回転")]
     public float rotationSpeed; //速度
     [Header("音")]
-    public AudioClip useSkillSE; //スキル使用SE
+    public AudioClip useSkillSE;         //スキル使用SE
+    public AudioClip useStatusChangerSE; //ステータスチェンジャー使用SE
     [Header("スクリプト参照")]
     public WeaponBase weapon;                    //武器
     protected CameraController cameraController; //カメラ
@@ -69,6 +71,10 @@ public class PlayerController : CharacterBase
             //NavMeshAgentの設定
             if (i == (int)StatusName.AGI)
                 agent.speed = status[i];
+
+            //スキル関連の初期設定
+            //効果時間
+            activeSkillTimer[i] = activeSkillLimit[i];
         }
         //初回はスキルを即座に使えるようにする
         reSelectSkillTimer = reSelectSkillLimit;
@@ -86,13 +92,8 @@ public class PlayerController : CharacterBase
         {
             if (!basicAttack && !spSkill) 
             {
-                if(!isAvoid)
-                {
-                    //水平方向
-                    Move3D();
-                }
-                //回避
-                Avoid3D();
+                //水平方向
+                Move3D();
             }
             //プレイヤーが浮くのを防止
             Vector3 playerPos = transform.position;
@@ -110,6 +111,7 @@ public class PlayerController : CharacterBase
             {
                 UseBasicAttack();  //通常
                 UseSpSkill();      //特殊
+                ActiveSkill();     //特殊行動の効果適応
             }
         }
     }
@@ -158,19 +160,6 @@ public class PlayerController : CharacterBase
         animator.SetFloat(animatorName, animaSetNum);
     }
 
-    //ジャンプ
-    public void Avoid3D()
-    {
-        //Spaceを押したときにジャンプする
-        if (Input.GetKeyDown(KeyCode.Space) && !isAvoid) 
-        {
-            //アニメーション再生
-            animator.SetTrigger("Avoid");
-            //移動させる
-            StartCoroutine(AvoidMove());
-        }
-    }
-
     //通常攻撃
     protected virtual void UseBasicAttack()
     {
@@ -187,7 +176,7 @@ public class PlayerController : CharacterBase
         }
     }
 
-    //特殊攻撃使用
+    //特殊行動使用
     protected virtual void UseSpSkill()
     {
         //スキル選択画面を表示
@@ -223,6 +212,104 @@ public class PlayerController : CharacterBase
             spSkill = false;
             //タイマーをリセット
             reSelectSkillTimer = 0;
+        }
+    }
+
+    //特殊行動の効果
+    public void ActiveSkill()
+    {
+        for (int i = (int)StatusName.STR; i <= (int)StatusName.LUK; i++) 
+        {
+            //スキル使用フラグがtrueのとき
+            if (isUseSkill[i] && activeSkillTimer[i] >= activeSkillLimit[i]) 
+            {
+                //効果が適応されていない場合
+                if (!activeSkill[i])
+                {
+                    //効果適応処理
+                    switch (i)
+                    {
+                        case (int)StatusName.STR:
+                            originStatus[i] *= 3;       //攻撃力を上昇
+                            originStatus[(i + 1)] /= 2; //防御力を減少
+                            break;
+                        case (int)StatusName.DEF:
+                            criticalGuard = true; //クリティカルを受けないようにする
+                            beforeHp = currentHp; //スキル使用前の体力を保存
+                            originStatus[i] *= 2; //防御力を上昇
+                            break;
+                        case (int)StatusName.AGI:
+                            addBasicCritical += (float)(status[i] / 100); //クリティカル倍率を上昇
+                            randomAvoid += 30;                            //無効化確率が30%上昇 
+                            break;
+                        case (int)StatusName.LUK:
+                            badStatus = false; //デバフにかからないようにする
+                            //自身のLUKの基礎値の半分を他のステータスの基礎値に加算
+                            for(int j=(int)StatusName.STR;j<= (int)StatusName.AGI;j++)
+                            {
+                                originStatus[j] += (originStatus[i] / 2);
+                            }
+                            break;
+                    }
+                    //変更後のステータスを適応
+                    status[i] = originStatus[i];
+                    //効果適応済みにする
+                    activeSkill[i] = true;
+                }
+            }
+
+            //有効中のスキル処理
+            if (activeSkill[i])
+            {
+                //効果時間の計測
+                activeSkillTimer[i] -= Time.deltaTime;
+                if (activeSkillTimer[i] <= 0.0f)
+                {
+                    //スキルを解除する
+                    activeSkill[i] = false;
+                    //スキル解除時に効果のあるスキルの処理
+                    //変更されたステータス等を元に戻す
+                    switch (i)
+                    {
+                        case (int)StatusName.STR:
+                            originStatus[i] /= 3;       //攻撃力を元に戻す
+                            originStatus[(i + 1)] *= 2; //防御力を元に戻す
+                            break;
+                        case (int)StatusName.DEF:
+                            criticalGuard = false;                                         //クリティカルを受けるようにする
+                            currentHp += (((beforeHp - currentHp) + originStatus[i] * 3)); //スキル使用後から減った体力+防御力依存の値を回復
+                            originStatus[i] /= 2;                                          //防御力を元に戻す
+                            break;
+                        case (int)StatusName.AGI:
+                            addBasicCritical -= (float)(status[i] / 100); //クリティカル倍率を元に戻す
+                            randomAvoid -= 30;                            //無効化確率を元に戻す
+                            break;
+                        case (int)StatusName.LUK:
+                            badStatus = true; //デバフにかかるようにする
+                            //ステータスを元に戻す
+                            for (int j = (int)StatusName.STR; j <= (int)StatusName.AGI; j++)
+                            {
+                                originStatus[j] -= (originStatus[i] / 2);
+                            }
+                            break;
+                    }
+                    //変更後のステータスを適応
+                    status[i] = originStatus[i];
+                }
+            }
+            //効果が切れた後のクールタイム処理
+            else if (!activeSkill[i] && isUseSkill[i])
+            {
+                reUseSkillTimer[i] += Time.deltaTime;
+                if (reUseSkillTimer[i] >= reUseSkillLimit[i])
+                {
+                    //タイマーをリセット
+                    activeSkillTimer[i] = activeSkillLimit[i];
+                    reUseSkillTimer[i] = 0.0f;
+                    //クールタイムを終了し、再度使用可能にする
+                    isUseSkill[i] = false;
+                }
+            }
         }
     }
 
@@ -262,6 +349,8 @@ public class PlayerController : CharacterBase
                         default:
                             break;
                     }
+                    //使用音を鳴らす
+                    seManager.seSource.PlayOneShot(useStatusChangerSE);
                 }
             }
         }
@@ -270,42 +359,6 @@ public class PlayerController : CharacterBase
             changerLayerName = "";
             useChanger = false;
         }
-    }
-
-    //回避処理
-    private IEnumerator AvoidMove()
-    {
-        //回避中フラグを立てる
-        isAvoid = true;
-        //NavMeshAgentを無効化
-        agent.enabled = false;
-        //Kinematicを無効化
-        rb.isKinematic = false;
-
-        //初期座標と回避後の最終座標を設定
-        Vector3 startPos = transform.position;
-        Vector3 targetPos = startPos + transform.forward * avoidDistance;
-
-        //計測用
-        float avoidTimer = 0.0f;
-
-        //移動処理
-        while (avoidTimer < avoidSecond) 
-        {
-            //avoidSecond分の時間をかけて移動
-            transform.position = Vector3.Lerp(startPos, targetPos, avoidTimer / avoidSecond);
-            avoidTimer += Time.deltaTime;
-            yield return null;
-        }
-
-        //最終地点をtargetPosにする
-        transform.position = targetPos;
-        //再入力可能
-        isAvoid = false;
-        //NavMeshAgentを有効化
-        agent.enabled = true;
-        //Kinematicを有効化
-        rb.isKinematic = true;
     }
 
     //攻撃判定の有効化

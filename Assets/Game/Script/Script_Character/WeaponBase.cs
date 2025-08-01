@@ -54,7 +54,7 @@ public class WeaponBase : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         character = other.GetComponentInParent<CharacterBase>();
-        if (other.gameObject.CompareTag(enemyTag) && !character.invincible) 
+        if (other.gameObject.CompareTag(enemyTag) && !character.invincible && !character.skillAvoid)  
         {
             if(character.critical)
             {

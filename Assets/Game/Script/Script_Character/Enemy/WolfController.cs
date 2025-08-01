@@ -38,7 +38,7 @@ public class WolfController : BossController
     public void UniqueEnemyMove()
     {
         //追跡
-        if ((isChase && !isWalk) || invincible)
+        if (((isChase && !isWalk) || invincible) && currentHp > 0) 
         {
             if (!isAttack)
             {

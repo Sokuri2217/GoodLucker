@@ -700,6 +700,12 @@ MonoBehaviour:
   originStatus: 00000000000000000000000000000000
   status: 00000000000000000000000000000000
   critical: 0
+  criticalGuard: 0
+  downHp: 0
+  addCritical: 0
+  addBasicCritical: 0
+  skillAvoid: 0
+  randomAvoid: 0
   addStatus:
   - 1
   - 1
@@ -721,8 +727,6 @@ MonoBehaviour:
   inviTimer: 0
   animatorName: WarriorMove
   dashSpeed: 1.2
-  avoidDistance: 4
-  avoidSecond: 1
   IntervalLimit:
   - 1.3
   - 20
@@ -743,12 +747,24 @@ MonoBehaviour:
   - 0
   - 0
   isUseSkill: 00000000
+  activeSkill: 00000000
+  activeSkillLimit:
+  - 30
+  - 30
+  - 30
+  - 30
+  activeSkillTimer:
+  - 0
+  - 0
+  - 0
+  - 0
+  beforeHp: 0
+  badStatus: 0
   changerLayerName: 
   rayRange: 3
   layerMasks:
     serializedVersion: 2
     m_Bits: 960
-  isAvoid: 0
   basicAttack: 0
   spSkill: 0
   attackInput: 0000
@@ -757,6 +773,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 0}
   rotationSpeed: 50
   useSkillSE: {fileID: 8300000, guid: 59d9d3a2f4cf948438c54a642b40a413, type: 3}
+  useStatusChangerSE: {fileID: 8300000, guid: fb32d6ddf117d394a9f1937108968a4a, type: 3}
   weapon: {fileID: 8292056354211725749}
 --- !u!195 &6617696746502988326
 NavMeshAgent:

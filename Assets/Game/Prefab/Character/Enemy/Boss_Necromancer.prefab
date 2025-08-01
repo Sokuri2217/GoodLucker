@@ -511,10 +511,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 0
-  currentHp: 3500
+  currentHp: 100
   originStatus: 00000000000000000000000000000000
   status: 320000002c0100003c00000050000000
   critical: 0
+  criticalGuard: 0
+  downHp: 0
+  addCritical: 0
+  addBasicCritical: 0
+  skillAvoid: 0
+  randomAvoid: 0
   addStatus:
   - 1
   - 1

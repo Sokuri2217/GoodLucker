@@ -67,20 +67,23 @@ public class NecromancerController : BossController
     public void CreateEnemy()
     {
         //雑魚敵
-        if (createEnemyCount[0] < createEnemyLimit[0])  
+        if (createTimer[0] >= createLimit[0])
         {
-            createTimer[0] = 0;
-            // 自身を中心としたランダムな位置を取得（XZ平面）
-            Vector3 randomDirection = Random.insideUnitCircle * (createRadius * 10);
-            Vector3 randomPosition = transform.position + new Vector3(randomDirection.x, 0, randomDirection.y);
-
-            // NavMesh上の位置をサンプルする
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(randomPosition, out hit, 5.0f, NavMesh.AllAreas))
+            if (createEnemyCount[0] < createEnemyLimit[0])
             {
-                // 有効な位置が見つかったら、そこでオブジェクトを生成
-                createEnemyCount[0]++;
-                Instantiate(zombie[0], hit.position, Quaternion.identity);
+                createTimer[0] = 0;
+                // 自身を中心としたランダムな位置を取得（XZ平面）
+                Vector3 randomDirection = Random.insideUnitCircle * (createRadius * 10);
+                Vector3 randomPosition = transform.position + new Vector3(randomDirection.x, 0, randomDirection.y);
+
+                // NavMesh上の位置をサンプルする
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(randomPosition, out hit, 5.0f, NavMesh.AllAreas))
+                {
+                    // 有効な位置が見つかったら、そこでオブジェクトを生成
+                    createEnemyCount[0]++;
+                    Instantiate(zombie[0], hit.position, Quaternion.identity);
+                }
             }
         }
         else

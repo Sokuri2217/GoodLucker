@@ -128,7 +128,6 @@ public class BossController : EnemyBase
     public void DeleteObject()
     {
         uiStage.killBossCount++;
-        Destroy(gameObject);
     }
 }
 

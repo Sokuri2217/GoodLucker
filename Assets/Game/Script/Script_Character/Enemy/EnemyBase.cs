@@ -48,13 +48,18 @@ public class EnemyBase : CharacterBase
     {
         base.Update();
 
-        if( playerController==null)
+        if (!uiStage.isGame) return;
+
+        if (uiStage.isGame)
         {
-            playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        }
-        if (playerPos == null)
-        {
-            playerPos = GameObject.FindWithTag("Player").GetComponent<Transform>();
+            if (playerController == null)
+            {
+                playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            }
+            if (playerPos == null)
+            {
+                playerPos = GameObject.FindWithTag("Player").GetComponent<Transform>();
+            }
         }
 
         //œpœj

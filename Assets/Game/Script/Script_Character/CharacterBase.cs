@@ -10,6 +10,12 @@ public class CharacterBase : MonoBehaviour
     public int[] originStatus = new int[4]; //初期ステータス
     public int[] status = new int[4];       //ステータス
     public bool critical;                   //クリティカル判定
+    public bool criticalGuard ;             //クリティカルを受けないようにする
+    public int downHp;                      //減った体力量
+    public float addCritical;               //クリティカル倍率 
+    public float addBasicCritical;          //基礎クリティカル倍率 
+    public bool skillAvoid;                 //攻撃の無効化
+    public int randomAvoid;                 //無効化確率
     [Header("上昇率(攻撃・防御・速度・運)")]
     public float[] addStatus = new float[4];
     [Header("ステータス変化の持続時間(攻撃・防御・速度・運)")]
@@ -52,6 +58,8 @@ public class CharacterBase : MonoBehaviour
         //ステータス設定
         //体力
         maxHp = currentHp;
+        //クリティカルの基礎倍率
+        addBasicCritical = 1.0f;
 
         //タイマー設定
         for (int i = (int)StatusName.STR; i <= (int)StatusName.LUK; i++)
@@ -151,28 +159,49 @@ public class CharacterBase : MonoBehaviour
     public int TakeDamage(int damage)
     {
         //無敵ではないときにダメージを通す
-        if(!invincible)
+        if (!invincible && uiStage.isGame) 
         {
-            if(!critical)
+            //確率抽選
+            int avoidNum = Random.Range(0, 100);
+            //無効化確率
+            randomAvoid = (status[(int)StatusName.AGI] / 10);
+            //攻撃無効に用いるAGIが1未満にならないようにする
+            if (randomAvoid < 1)
             {
-                //防御力を基にダメージ量を計算
-                float defence = ((float)status[(int)StatusName.DEF] / 200.0f);
-                float damageCut = (1.0f - defence);
-                int acitveDamage = (int)(damage * damageCut);
-                currentHp -= acitveDamage;
+                randomAvoid = 1;
+            }
+            if (avoidNum <= randomAvoid) 
+                skillAvoid = true;
+            //攻撃が無効化されていないとき
+            if (!skillAvoid) 
+            {
+                if (!critical || criticalGuard)
+                {
+                    //防御力を基にダメージ量を計算
+                    float defence = ((float)status[(int)StatusName.DEF] / 500.0f);
+                    float damageCut = (1.0f - defence);
+                    int acitveDamage = (int)(damage * damageCut);
+                    currentHp -= acitveDamage;
+                }
+                else
+                {
+                    //相手の防御力を無視し、さらに攻撃力を上げる
+                    //キャラクターのAGIの値に応じて倍率を変える
+                    addCritical = (addBasicCritical + ((float)status[(int)StatusName.AGI] / 200.0f));
+                    int activeDamage = (int)(damage * addCritical);
+                    currentHp -= activeDamage;
+                }
+                //無敵状態にする
+                invincible = true;
             }
             else
             {
-                //相手の防御力を無視し、さらに攻撃力を上げる
-                //キャラクターのAGIの値に応じて倍率を変える
-                float addCritical = (1.0f + ((float)status[(int)StatusName.AGI] / 200.0f));
-                int activeDamage = (int)(damage * addCritical);
-                currentHp -= activeDamage;
+                Debug.Log("無効化しました");
             }
-            //無敵状態にする
-            invincible = true;
             //クリティカル判定をリセット
             critical = false;
+            //無効化判定をリセット
+            skillAvoid = false;
         }
 
         return currentHp;

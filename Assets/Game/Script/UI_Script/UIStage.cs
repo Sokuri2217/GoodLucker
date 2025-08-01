@@ -24,9 +24,10 @@ public class UIStage : UIBase
     public GameObject clearPanel;    //ゲームクリア
     public GameObject overPanel;     //ゲームオーバー
     [Header("GUI")]
-    public GameObject[] skill = new GameObject[4];  //各スキル選択
-    public GameObject[] status = new GameObject[4]; //ステータス変化の制限時間
-    public GameObject changeInput;                  //入力キー
+    public GameObject[] skill = new GameObject[4];      //各スキル選択
+    public GameObject[] skillTimer = new GameObject[4]; //各スキルのタイマー
+    public GameObject[] status = new GameObject[4];     //ステータス変化の制限時間
+    public GameObject changeInput;                      //入力キー
     [Header("離脱理由(リタイア・リトライ)")]
     public bool[] exit = new bool[2];
     [Header("オブジェクト生成上限")]
@@ -67,11 +68,12 @@ public class UIStage : UIBase
         gameClear = false;
         gameOver = false;
         isGame = true;
-        //オブジェクトを非表示
-        //選択中スキル画像の初期座標を設定
         for (int i = 0; i < 4; i++) 
         {
+            //オブジェクトを非表示
             status[i].SetActive(false);
+            skillTimer[i].SetActive(false);
+            //選択中スキル画像の初期座標を設定
             Transform skillImagePos = skill[i].transform;
             originSkillPos[i] = skillImagePos.position;
             currentSkillPos[i] = originSkillPos[i];
@@ -95,17 +97,14 @@ public class UIStage : UIBase
     {
         base.Update();
 
-        if(isGame)
+        //スクリプト取得
+        if (playerController == null)
         {
-            //スクリプト取得
-            if (playerController == null)
-            {
-                playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-            }
-            if (bossController == null)
-            {
-                bossController = GameObject.Find(bossName).GetComponent<BossController>();
-            }
+            playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        }
+        if (bossController == null)
+        {
+            bossController = GameObject.Find(bossName).GetComponent<BossController>();
         }
 
         //HPゲージ
@@ -139,27 +138,29 @@ public class UIStage : UIBase
             spSkillPanel.SetActive(playerController.spSkill);
             //選択処理
             SelectSpSkill();
+            //スキルGUI
+            SkillTimerUI();
 
         }
         //プレイ結果
         {
-            if(isGame)
+            //ゲームクリア条件
+            if (killBossCount >= clearkillCount && !gameClear)
             {
-                //ゲームクリア条件
-                if (killBossCount >= clearkillCount && !gameClear)
-                {
-                    gameClear = true;
-                }
-                //ゲームオーバー条件
-                if (playerController.currentHp <= 0 && !gameOver)
-                {
-                    gameOver = true;
-                }
+                gameClear = true;
+            }
+            //ゲームオーバー条件
+            if (playerController.currentHp <= 0 && !gameOver)
+            {
+                gameOver = true;
+            }
 
+            //各結果パネル表示
+            if (isGame)
+            {
                 CheckResultState();
             }
         }
-       
     }
 
     //HP
@@ -324,13 +325,6 @@ public class UIStage : UIBase
             {
                 //使用中かつクールタイム中
                 color = Color.black;
-                //クールタイムの計測
-                playerController.reUseSkillTimer[i] += Time.deltaTime;
-                //一定時間経過で再使用可能
-                if (playerController.reUseSkillTimer[i] >= playerController.reUseSkillLimit[i])
-                {
-                    playerController.isUseSkill[i] = false;
-                }
             }
             else
             {
@@ -339,6 +333,29 @@ public class UIStage : UIBase
             }
             image.color = color;
         }  
+    }
+
+    //スキルGUI
+    public void SkillTimerUI()
+    {
+        for(int i = 0;i < skillNum;i++)
+        {
+            //有効中のスキルがあるとき
+            if (playerController.activeSkill[i]) 
+            {
+                //タイマーを表示
+                skillTimer[i].SetActive(true);
+                //コンポーネント取得
+                Image timerImage = skillTimer[i].GetComponent<Image>();
+                //描画
+                timerImage.fillAmount = playerController.activeSkillTimer[i] / playerController.activeSkillLimit[i];
+            }
+            else
+            {
+                //タイマーを非表示にする
+                skillTimer[i].SetActive(false);
+            }
+        }
     }
 
     //ゲームの状態をチェック

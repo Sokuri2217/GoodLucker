@@ -28,26 +28,29 @@ public class ZakoController : EnemyBase
     {
         base.Update();
 
-        if (!uiStage.gameClear && !uiStage.gameOver) 
+        if(boss!=null)
         {
-            //移動
-            UniqueEnemyMove();
-        }
-        //死亡処理
-        if (currentHp <= 0)
-        {
-            //体力が0以下になったらオブジェクトを削除
-            Destroy(gameObject);
-        }
+            if (!uiStage.gameClear && !uiStage.gameOver)
+            {
+                //移動
+                UniqueEnemyMove();
+            }
+            //死亡処理
+            if (currentHp <= 0)
+            {
+                //体力が0以下になったらオブジェクトを削除
+                Destroy(gameObject);
+            }
 
-        //徘徊中でないときは追跡
-        if (isWalk)
-        {
-            isChase = false;
-        }
-        else
-        {
-            isChase = true;
+            //徘徊中でないときは追跡
+            if (isWalk)
+            {
+                isChase = false;
+            }
+            else
+            {
+                isChase = true;
+            }
         }
     }
 

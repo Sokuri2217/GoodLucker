@@ -26,12 +26,16 @@ public class ZombieController : ZakoController
     protected override void Update()
     {
         base.Update();
-        //‹­‰»ˆ—
-        PowerUpEnemy();
-        //EŠQˆ—
-        PlayerKill();
-        //©‘RÁ–Å‚Ìˆ—
-        HealingBoss();
+
+        if (necromancer != null)
+        {
+            //‹­‰»ˆ—
+            PowerUpEnemy();
+            //EŠQˆ—
+            PlayerKill();
+            //©‘RÁ–Å‚Ìˆ—
+            HealingBoss();
+        }
     }
 
     //‹­‰»ˆ—
