@@ -559,10 +559,10 @@ PrefabInstance:
       addedObject: {fileID: 7677566094998733014}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 914575807dad0e5469b0ed5d1f64a708, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8559704520615346534}
+      addedObject: {fileID: 2345853125284376557}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 914575807dad0e5469b0ed5d1f64a708, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -7683585379248108113}
+      addedObject: {fileID: 7123336313781795179}
     - targetCorrespondingSourceObject: {fileID: -6170625038081293824, guid: 914575807dad0e5469b0ed5d1f64a708, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1859603062009398639}
@@ -666,7 +666,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
---- !u!114 &8559704520615346534
+--- !u!114 &2345853125284376557
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -675,7 +675,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2935217623910909302}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2aae05fe5be87244a47d82d615986ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 13ec79c420ebe6a459f2b0406364f705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 0
@@ -689,6 +689,7 @@ MonoBehaviour:
   addBasicCritical: 1
   skillAvoid: 0
   randomAvoid: 0
+  badStatus: 0
   addStatus:
   - 1
   - 1
@@ -711,8 +712,8 @@ MonoBehaviour:
   animatorName: KnightMove
   dashSpeed: 1.2
   IntervalLimit:
-  - 1.2
-  - 20
+  - 1
+  - 0
   IntervalTimer:
   - 0
   - 0
@@ -742,7 +743,6 @@ MonoBehaviour:
   - 0
   - 0
   beforeHp: 0
-  badStatus: 0
   changerLayerName: 
   rayRange: 3
   layerMasks:
@@ -758,7 +758,7 @@ MonoBehaviour:
   useSkillSE: {fileID: 8300000, guid: 59d9d3a2f4cf948438c54a642b40a413, type: 3}
   useStatusChangerSE: {fileID: 8300000, guid: fb32d6ddf117d394a9f1937108968a4a, type: 3}
   weapon: {fileID: 4927462825895864552}
---- !u!195 &-7683585379248108113
+--- !u!195 &7123336313781795179
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -767,7 +767,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 2935217623910909302}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.25
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -776,7 +776,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1.75
+  m_Height: 1.76
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4

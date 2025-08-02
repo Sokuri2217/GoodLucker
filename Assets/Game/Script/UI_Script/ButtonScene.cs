@@ -31,7 +31,7 @@ public class ButtonScene : ButtonBase
         //Fî•ñ‚ğæ“¾
         Color color = fadeImage.color;
 
-        while (fadeTimer<delay)
+        while (fadeTimer < delay) 
         {
             //™X‚ÉfadeImage‚Ì“§–¾“x‚ğ‰º‚°‚é
             color.a = Mathf.Lerp(0.0f, 1.0f, fadeTimer / delay);

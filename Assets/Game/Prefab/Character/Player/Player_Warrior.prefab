@@ -628,10 +628,10 @@ PrefabInstance:
       addedObject: {fileID: 4323768885690761525}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77c41038a3eeb0444af71f86d4b02368, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6616478058883010904}
+      addedObject: {fileID: 6617696746502988326}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 77c41038a3eeb0444af71f86d4b02368, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6617696746502988326}
+      addedObject: {fileID: 4036924922134726593}
     - targetCorrespondingSourceObject: {fileID: -6170625038081293824, guid: 77c41038a3eeb0444af71f86d4b02368, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4501137786427639749}
@@ -683,7 +683,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
---- !u!114 &6616478058883010904
+--- !u!195 &6617696746502988326
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 384203054413737422}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.3
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2.1
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &4036924922134726593
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -692,7 +714,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 384203054413737422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af371071539c6bc49b820ffbadd8dcd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 13ec79c420ebe6a459f2b0406364f705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 0
@@ -703,9 +725,10 @@ MonoBehaviour:
   criticalGuard: 0
   downHp: 0
   addCritical: 0
-  addBasicCritical: 0
+  addBasicCritical: 1
   skillAvoid: 0
   randomAvoid: 0
+  badStatus: 0
   addStatus:
   - 1
   - 1
@@ -759,7 +782,6 @@ MonoBehaviour:
   - 0
   - 0
   beforeHp: 0
-  badStatus: 0
   changerLayerName: 
   rayRange: 3
   layerMasks:
@@ -775,28 +797,6 @@ MonoBehaviour:
   useSkillSE: {fileID: 8300000, guid: 59d9d3a2f4cf948438c54a642b40a413, type: 3}
   useStatusChangerSE: {fileID: 8300000, guid: fb32d6ddf117d394a9f1937108968a4a, type: 3}
   weapon: {fileID: 8292056354211725749}
---- !u!195 &6617696746502988326
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 384203054413737422}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.3
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2.1
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!4 &1161985603027709783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 77c41038a3eeb0444af71f86d4b02368, type: 3}

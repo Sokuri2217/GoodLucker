@@ -25,6 +25,7 @@ public class UIStage : UIBase
     public GameObject overPanel;     //ゲームオーバー
     [Header("GUI")]
     public GameObject[] skill = new GameObject[4];      //各スキル選択
+    public GameObject[] explaSkill = new GameObject[4]; //各スキル説明
     public GameObject[] skillTimer = new GameObject[4]; //各スキルのタイマー
     public GameObject[] status = new GameObject[4];     //ステータス変化の制限時間
     public GameObject changeInput;                      //入力キー
@@ -42,9 +43,9 @@ public class UIStage : UIBase
     public AudioClip clearBGM;              //クリアBGM
     public AudioClip overBGM;               //ゲームオーバーBGM
     [Header("スクリプト参照")]
-    public PlayerController playerController;
-    public BossController bossController;
-    public SEManager seManager;
+    protected PlayerController playerController;
+    protected BossController bossController;
+    protected SEManager seManager;
     [Header("ゲーム状態")]
     public bool isGame;    //プレイ可能
     public bool gameClear; //ゲームクリア
@@ -63,6 +64,7 @@ public class UIStage : UIBase
         base.Start();
 
         //スクリプト取得
+        bossController = GameObject.Find(bossName).GetComponent<BossController>();
         seManager = GameObject.Find("SEManager").GetComponent<SEManager>();
         //ゲーム状態の設定
         gameClear = false;
@@ -97,15 +99,7 @@ public class UIStage : UIBase
     {
         base.Update();
 
-        //スクリプト取得
-        if (playerController == null)
-        {
-            playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        }
-        if (bossController == null)
-        {
-            bossController = GameObject.Find(bossName).GetComponent<BossController>();
-        }
+        if (gameClear || gameOver) return;
 
         //HPゲージ
         {
@@ -190,7 +184,7 @@ public class UIStage : UIBase
         }
         //ボスの残り体力に応じて描画
         {
-            for(int i=0;i<clearkillCount;i++)
+            for (int i = 0; i < clearkillCount; i++) 
             {
                 bossHp[i].fillAmount = (float)bossController.currentHp / (float)bossController.maxHp;
                 //残り割合に応じて、色を変化
@@ -309,6 +303,12 @@ public class UIStage : UIBase
                     currentSkillPos[i] = originSkillPos[i];
                 }
                 skill[i].transform.position = currentSkillPos[i];
+
+                //スキル説明
+                //一度全て非表示にする
+                explaSkill[i].SetActive(false);
+                //選択中にスキルの説明文のみ表示する
+                explaSkill[currentSelectSkill].SetActive(true);
             }
         }
         else if(isGame)
@@ -419,5 +419,11 @@ public class UIStage : UIBase
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0.0f;
         }
+    }
+
+    //プレイヤー読み込み
+    public void LoadPlayer(GameObject player)
+    {
+        playerController = player.GetComponent<PlayerController>();
     }
 }

@@ -746,10 +746,10 @@ PrefabInstance:
       addedObject: {fileID: 4371210446110754011}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d7ba2a0403e10bb40b755fcffe4016e9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3950562897075154590}
+      addedObject: {fileID: -2479914721611796433}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d7ba2a0403e10bb40b755fcffe4016e9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -2479914721611796433}
+      addedObject: {fileID: 7095477076808609313}
     - targetCorrespondingSourceObject: {fileID: -6170625038081293824, guid: d7ba2a0403e10bb40b755fcffe4016e9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6287035114232939287}
@@ -910,7 +910,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 1
---- !u!114 &3950562897075154590
+--- !u!195 &-2479914721611796433
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577444966087327928}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.3
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &7095477076808609313
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -919,7 +941,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6577444966087327928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 991fa4e18555b384e9482cca5d1bf1b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 13ec79c420ebe6a459f2b0406364f705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 0
@@ -933,6 +955,7 @@ MonoBehaviour:
   addBasicCritical: 1
   skillAvoid: 0
   randomAvoid: 0
+  badStatus: 0
   addStatus:
   - 1
   - 1
@@ -956,7 +979,7 @@ MonoBehaviour:
   dashSpeed: 1.2
   IntervalLimit:
   - 1.2
-  - 20
+  - 0
   IntervalTimer:
   - 0
   - 0
@@ -976,17 +999,16 @@ MonoBehaviour:
   isUseSkill: 00000000
   activeSkill: 00000000
   activeSkillLimit:
-  - 0
-  - 0
-  - 0
-  - 0
+  - 30
+  - 30
+  - 30
+  - 30
   activeSkillTimer:
-  - 30
-  - 30
-  - 30
-  - 30
+  - 0
+  - 0
+  - 0
+  - 0
   beforeHp: 0
-  badStatus: 0
   changerLayerName: 
   rayRange: 3
   layerMasks:
@@ -1002,28 +1024,6 @@ MonoBehaviour:
   useSkillSE: {fileID: 8300000, guid: 59d9d3a2f4cf948438c54a642b40a413, type: 3}
   useStatusChangerSE: {fileID: 8300000, guid: fb32d6ddf117d394a9f1937108968a4a, type: 3}
   weapon: {fileID: 8588180804728103074}
---- !u!195 &-2479914721611796433
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6577444966087327928}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.3
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &7010912015573739682 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3948933247560734027, guid: d7ba2a0403e10bb40b755fcffe4016e9, type: 3}

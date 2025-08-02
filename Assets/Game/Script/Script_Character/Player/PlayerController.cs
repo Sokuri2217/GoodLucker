@@ -20,7 +20,6 @@ public class PlayerController : CharacterBase
     public float[] activeSkillLimit = new float[4];//スキルの効果時間
     public float[] activeSkillTimer = new float[4];//計測用
     public int beforeHp;                           //Hpの保存
-    public bool badStatus;                         //ステータスチェンジャー使用時にデバフにかかるかどうか
 
     [Header("アイテム取得")]
     public string changerLayerName; //Layer名
@@ -46,11 +45,15 @@ public class PlayerController : CharacterBase
     public WeaponBase weapon;                    //武器
     protected CameraController cameraController; //カメラ
     protected SEManager seManager;               //SE
+    protected StatusChangerManager statusChanger;//昇降台
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
     {
         base.Start();
+
+        //UIに自身の情報を渡す
+        uiStage.LoadPlayer(this.gameObject);
 
         //カメラの情報を取得
         GameObject cameraObj = GameObject.Find(cameraName);
@@ -78,6 +81,8 @@ public class PlayerController : CharacterBase
         }
         //初回はスキルを即座に使えるようにする
         reSelectSkillTimer = reSelectSkillLimit;
+        //昇降台でステータスが低下するようにする
+        badStatus = true;
 
         //攻撃対象をEnemyに設定
         weapon.enemyTag = "Enemy";
@@ -325,9 +330,9 @@ public class PlayerController : CharacterBase
             //layer名を保存
             changerLayerName = LayerMask.LayerToName(hit.collider.gameObject.layer);
             //スクリプト情報を取得
-            StatusChangerManager statusChangerManager = hit.collider.gameObject.GetComponent<StatusChangerManager>();
+            statusChanger = hit.collider.gameObject.GetComponent<StatusChangerManager>();
             //ステータスを変化させる処理
-            if (changerLayerName != null && !statusChangerManager.isActive) 
+            if (changerLayerName != null && !statusChanger.isActive) 
             {
                 useChanger = true;
                 if (Input.GetKeyDown(KeyCode.E))
@@ -335,16 +340,16 @@ public class PlayerController : CharacterBase
                     switch (changerLayerName)
                     {
                         case "Attack":
-                            addStatus[(int)StatusName.STR] = statusChangerManager.RandomStatusChange(addStatus[(int)StatusName.STR], (int)StatusName.STR);
+                            addStatus[(int)StatusName.STR] = statusChanger.RandomStatusChange(addStatus[(int)StatusName.STR], (int)StatusName.STR, this.gameObject);
                             break;
                         case "Defence":
-                            addStatus[(int)StatusName.DEF] = statusChangerManager.RandomStatusChange(addStatus[(int)StatusName.DEF], (int)StatusName.DEF);
+                            addStatus[(int)StatusName.DEF] = statusChanger.RandomStatusChange(addStatus[(int)StatusName.DEF], (int)StatusName.DEF, this.gameObject);
                             break;
                         case "Speed":
-                            addStatus[(int)StatusName.AGI] = statusChangerManager.RandomStatusChange(addStatus[(int)StatusName.AGI], (int)StatusName.AGI);
+                            addStatus[(int)StatusName.AGI] = statusChanger.RandomStatusChange(addStatus[(int)StatusName.AGI], (int)StatusName.AGI, this.gameObject);
                             break;
                         case "Luck":
-                            addStatus[(int)StatusName.LUK] = statusChangerManager.RandomStatusChange(addStatus[(int)StatusName.LUK], (int)StatusName.LUK);
+                            addStatus[(int)StatusName.LUK] = statusChanger.RandomStatusChange(addStatus[(int)StatusName.LUK], (int)StatusName.LUK, this.gameObject);
                             break;
                         default:
                             break;
@@ -357,6 +362,7 @@ public class PlayerController : CharacterBase
         else
         {
             changerLayerName = "";
+            statusChanger = null;
             useChanger = false;
         }
     }

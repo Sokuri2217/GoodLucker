@@ -16,6 +16,7 @@ public class CharacterBase : MonoBehaviour
     public float addBasicCritical;          //基礎クリティカル倍率 
     public bool skillAvoid;                 //攻撃の無効化
     public int randomAvoid;                 //無効化確率
+    public bool badStatus;                  //昇降台使用時にデバフにかかるかどうか
     [Header("上昇率(攻撃・防御・速度・運)")]
     public float[] addStatus = new float[4];
     [Header("ステータス変化の持続時間(攻撃・防御・速度・運)")]
@@ -193,10 +194,6 @@ public class CharacterBase : MonoBehaviour
                 }
                 //無敵状態にする
                 invincible = true;
-            }
-            else
-            {
-                Debug.Log("無効化しました");
             }
             //クリティカル判定をリセット
             critical = false;

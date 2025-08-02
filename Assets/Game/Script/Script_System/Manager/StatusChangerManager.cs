@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class StatusChangerManager : MonoBehaviour
@@ -12,14 +13,13 @@ public class StatusChangerManager : MonoBehaviour
     [Header("コンポーネント参照")]
     public MeshRenderer meshRenderer; //描画
     [Header("スクリプト参照")]
-    public CharacterBase character; //キャラクター
+    protected PlayerController playerController; //キャラクター
+
 
     public void Start()
     {
         //コンポーネント取得
         meshRenderer = GetComponent<MeshRenderer>();
-        //スクリプト取得
-        character = GameObject.FindWithTag("Player").GetComponent<CharacterBase>();
     }
 
     public void Update()
@@ -41,21 +41,22 @@ public class StatusChangerManager : MonoBehaviour
         }
     }
 
-    public float RandomStatusChange(float add, int statusName)
+    public float RandomStatusChange(float add, int statusName,GameObject player)
     {
+        playerController = player.GetComponent<PlayerController>();
         //倍率をリセット
         add = 1.0f;
         //ステータス倍率の抽選(7割:上昇,3割:減少)
         int random = Random.Range(0,100);
         //上昇
-        if (random < 70) 
+        if (random < 70 || !playerController.badStatus)  
         {
-            add += (float)character.status[statusName] / 100;
+            add += (float)playerController.status[statusName] / 100;
         }
         //減少
         else
         {
-            add = (float)character.status[statusName] / 100;
+            add = (float)playerController.status[statusName] / 100;
         }
 
         //クールタイムに入る

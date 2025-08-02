@@ -125,4 +125,4 @@ MonoBehaviour:
   defaultTexture: {fileID: 5874639415424179301, guid: 5e93a4901638422458e81d7f7127deb2, type: 3}
   coolDownTexture: {fileID: -876546973899608171, guid: 57b83fc616f8f554ab73ed311a28fe6c, type: 3}
   meshRenderer: {fileID: 0}
-  character: {fileID: 0}
+  playerController: {fileID: 0}
