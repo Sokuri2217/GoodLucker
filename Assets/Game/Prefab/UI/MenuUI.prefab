@@ -1995,14 +1995,14 @@ RectTransform:
   m_GameObject: {fileID: 2065581209659783667}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1705402801747911370}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -210, y: 161}
+  m_AnchoredPosition: {x: -147, y: 112}
   m_SizeDelta: {x: 800, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2382444162193563687
@@ -2033,7 +2033,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 29b3fb0069b2bdc41b7c21deeeacb09a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4405,9 +4405,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c380611388263144e81768d9423259a2, type: 3}
   - {fileID: 21300000, guid: 3ea61e166bcbb9e4689af6172e5ac7cc, type: 3}
   stageExpla:
-  - {fileID: 21300000, guid: bd63ee3c21cf04247bb30c5e4cb3977c, type: 3}
-  - {fileID: 21300000, guid: 5b70f664123f24c488f5c3ec6bc90ba0, type: 3}
-  - {fileID: 21300000, guid: c380611388263144e81768d9423259a2, type: 3}
+  - {fileID: 21300000, guid: 29b3fb0069b2bdc41b7c21deeeacb09a, type: 3}
+  - {fileID: 21300000, guid: f4e1df0c6037c2d4ca4aea1a34be8e91, type: 3}
   selectPanel:
   - {fileID: 2681033601156635633}
   - {fileID: 2111568519998931930}

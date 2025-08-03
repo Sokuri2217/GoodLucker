@@ -61,6 +61,8 @@ public class StatusChangerManager : MonoBehaviour
 
         //クールタイムに入る
         isActive = true;
+        //タイマーを再設定
+        playerController.addStatusTimer[statusName] = playerController.addStatusLimit[statusName];
 
         return add;
     }
