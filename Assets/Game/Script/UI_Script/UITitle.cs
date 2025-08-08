@@ -10,8 +10,8 @@ public class UITitle : UIBase
     }
 
     // Update is called once per frame
-    protected override void Update()
+    public void Update()
     {
-        base.Update();
+        
     }
 }

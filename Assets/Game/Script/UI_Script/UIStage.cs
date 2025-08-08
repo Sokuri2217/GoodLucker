@@ -95,10 +95,8 @@ public class UIStage : UIBase
     }
 
     // Update is called once per frame
-    protected override void Update()
+    public void Update()
     {
-        base.Update();
-
         if (gameClear || gameOver) return;
 
         //HPÉQÅ[ÉW

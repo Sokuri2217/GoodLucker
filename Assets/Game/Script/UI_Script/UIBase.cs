@@ -33,12 +33,6 @@ public class UIBase : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    protected virtual void Update()
-    {
-        
-    }
-
     protected IEnumerator StartGame()
     {
         //フェード用タイマー

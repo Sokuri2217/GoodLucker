@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ButtonOptionSelect : ButtonBase
+public class ButtonMenu : ButtonBase
 {
     [Header("”Ô†İ’è")]
     public int selectCharacter; //g—pƒLƒƒƒ‰

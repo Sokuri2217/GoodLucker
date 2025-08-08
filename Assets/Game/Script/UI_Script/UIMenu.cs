@@ -66,10 +66,8 @@ public class UIMenu : UIBase
     }
 
     // Update is called once per frame
-    protected override void Update()
+    public void Update()
     {
-        base.Update();
-
         //‘I‘ğó‘Ô‚ğ‰Â‹‰»
         ChangeSprite();
         //ƒV[ƒ“İ’è
